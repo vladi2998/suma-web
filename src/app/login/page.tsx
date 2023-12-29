@@ -5,6 +5,7 @@ import ForwardButton from '@/components/buttons/forwardButton';
 import { useForm } from 'react-hook-form';
 import InputField from '@/components/forms/inputField';
 import sumateLogo from '../../../public/sumate.png';
+import { getUser } from '@/utils/auth';
 
 export default function LoginPage() {
 	const { register, handleSubmit } = useForm();
@@ -48,7 +49,7 @@ export default function LoginPage() {
 					/>
 					<ForwardButton
 						text="Iniciar Sesión"
-						callback={handleSubmit((data) => console.log(data))}
+						callback={handleSubmit(() => getUser())}
 					/>
 				</div>
 			</form>
