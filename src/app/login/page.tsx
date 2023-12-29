@@ -11,6 +11,9 @@ export default function LoginPage() {
 	return (
 		<>
 			<div
+				className='absolute w-full h-full bg-green-700 opacity-50 z-0'
+			/>
+			<div
 				style={{
 					zIndex: -1,
 					position: 'fixed',
@@ -24,8 +27,8 @@ export default function LoginPage() {
 					objectFit="cover"
 				/>
 			</div>
-			<form className="w-full flex items-center justify-center my-auto">
-				<div className="bg-white w-1/3 h-auto flex flex-col items-center justify-around py-12 px-24 rounded-3xl space-y-12">
+			<form className="w-full flex items-center justify-center my-auto z-10">
+				<div className="bg-white w-1/2 lg:w-1/3 h-auto flex flex-col items-center justify-around py-12 px-6 md:px-12 2xl:px-24 rounded-3xl space-y-12">
 					<Image
 						src={sumateLogo}
 						width={200}
