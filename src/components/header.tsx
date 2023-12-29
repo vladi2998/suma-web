@@ -1,5 +1,7 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
+import sumateLogo from '../../public/sumate.png';
 
 export default function HeaderComponent({
 	selected_route,
@@ -7,12 +9,21 @@ export default function HeaderComponent({
 	selected_route: number;
 }) {
 	const defaultNavStyle =
-		'hover:bg-lime-100 hover:rounded-t-lg hover:scale-105 transform transition duration-500 cursor-pointer px-2 py-1 text-black';
-	const selectedNavSyle = 'border-b-4 border-lime-900';
+		'hover:text-light-green hover:scale-110 transform transition duration-300 h-full x-full flex justify-center items-center cursor-pointer px-2 text-black';
+	const selectedNavSyle = 'text-dark-green font-bold scale-110';
 
 	return (
-		<nav className="w-full h-24 bg-white flex flex-row justify-between border-t-8 border-lime-900">
-			<div className="w-1/3"></div>
+		<nav className="w-full h-24 bg-white flex flex-row justify-between border-t-8 border-dark-green">
+			<div className="w-1/3 flex flex-row justify-center items-center">
+				<Link href="/">
+					<Image
+						src={sumateLogo}
+						width={200}
+						height={200}
+						alt="Picture of the author"
+					/>
+				</Link>
+			</div>
 			<div className="w-2/3 flex flex-row justify-around items-center">
 				<Link
 					href="/"
