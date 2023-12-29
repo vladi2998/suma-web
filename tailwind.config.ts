@@ -16,6 +16,8 @@ const config: Config = {
 			colors: {
 				'dark-green': 'rgb(20 83 45)',
 				'light-green': 'rgb(74 222 128)',
+				'dark-gray': 'rgb(51 65 85)',
+				'light-gray': 'rgb(203 213 225)',
 			},
 		},
 	},
