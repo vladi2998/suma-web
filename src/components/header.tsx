@@ -7,7 +7,7 @@ export default function HeaderComponent({
 	selected_route: number;
 }) {
 	const defaultNavStyle =
-		'hover:bg-lime-100 hover:rounded-t-lg hover:scale-105 transform transition duration-500 cursor-pointer px-2 text-black py-2';
+		'hover:bg-lime-100 hover:rounded-t-lg hover:scale-105 transform transition duration-500 cursor-pointer px-2 py-1 text-black';
 	const selectedNavSyle = 'border-b-4 border-lime-900';
 
 	return (
