@@ -8,8 +8,14 @@ import sumateLogo from '../../../public/sumate.png';
 import { getUser } from '@/utils/auth';
 import PasswordField from '@/components/forms/passwordField';
 
-export default function LoginPage() {
-	const { register, handleSubmit } = useForm();
+export default function RegisterPage() {
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+		getValues,
+	} = useForm({});
+
 	return (
 		<>
 			<div className="absolute w-full h-full bg-green-700 opacity-50 z-0" />
@@ -27,7 +33,9 @@ export default function LoginPage() {
 					objectFit="cover"
 				/>
 			</div>
-			<form className="w-full flex items-center justify-center my-auto z-10">
+			<form
+				className="w-full flex items-center justify-center my-auto z-10"
+				onSubmit={(e) => e.preventDefault()}>
 				<div className="bg-white w-1/2 lg:w-1/3 h-auto flex flex-col items-center justify-around py-12 px-6 md:px-12 2xl:px-24 rounded-3xl space-y-12">
 					<Image
 						src={sumateLogo}
@@ -45,10 +53,28 @@ export default function LoginPage() {
 						register={register}
 						label="password"
 						placeholder="Contraseña"
-						errors={{}}
+						validation={{
+							required: 'Por favor elige una contraseña',
+							minLength: {
+								value: 8,
+								message: 'La contraseña debe tener al menos 8 carácteres',
+							},
+						}}
+						errors={errors}
+					/>
+					<PasswordField
+						register={register}
+						label="repeated_password"
+						placeholder="Repite tu Contraseña"
+						errors={errors}
+						validation={{
+							validate: (value) =>
+								value === getValues('password') ||
+								'Las contraseñas deben ser iguales',
+						}}
 					/>
 					<ForwardButton
-						text="Iniciar Sesión"
+						text="Registrarse"
 						callback={handleSubmit(() => getUser())}
 					/>
 				</div>
