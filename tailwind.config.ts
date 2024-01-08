@@ -53,7 +53,7 @@ const config = {
 					foreground: 'hsl(var(--card-foreground))',
 				},
 				'dark-green': 'rgb(20 83 45)',
-				'light-green': 'rgb(74 222 128)',
+				'light-green': 'rgb(54 110 20)',
 				'dark-gray': 'rgb(51 65 85)',
 				'light-gray': 'rgb(203 213 225)',
 			},
