@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import sumateLogo from '../../public/sumate.png';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid';
+import { useEffect, useState } from 'react';
 
 export default function HeaderComponent({
 	selected_route,
@@ -9,13 +11,47 @@ export default function HeaderComponent({
 	selected_route: number;
 }) {
 	const defaultNavStyle =
-		'hover:text-light-green hover:scale-110 transform transition duration-300 h-full x-full flex justify-center items-center cursor-pointer px-2 text-black';
+		'hover:text-light-green hover:scale-110 text-xs sm:text-sm md:text-base text-center transform transition duration-300 h-full w-full flex justify-center items-center cursor-pointer px-1 md:px-2 text-black';
 	const selectedNavSyle = 'text-dark-green font-bold scale-110';
+	const [showHamburguerMenu, setshowHamburguerMenu] = useState<boolean>(false);
+
+	const handleHamburguerMenu = () => setshowHamburguerMenu(!showHamburguerMenu);
+
+	const handleResize = () =>
+		window.innerWidth >= 768 ? setshowHamburguerMenu(false) : null;
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+	});
 
 	return (
-		<nav className="w-full h-24 bg-white flex flex-row justify-between border-t-8 border-dark-green">
-			<div className="w-1/3 flex flex-row justify-center items-center">
-				<Link href="/">
+		<nav
+			className={`w-full ${
+				showHamburguerMenu ? 'h-32' : 'h-24'
+			} bg-white flex flex-col md:flex-row justify-around border-t-8 border-dark-green transition-all duration-300`}>
+			<div className="w-full md:w-1/3 flex flex-row justify-between md:justify-center items-center">
+				<div className="w-1/5 flex items-center justify-center md:hidden">
+					{showHamburguerMenu ? (
+						<XMarkIcon
+							className="cursor-pointer"
+							color="rgb(20 83 45)"
+							width={40}
+							height={40}
+							onClick={handleHamburguerMenu}
+						/>
+					) : (
+						<Bars3Icon
+							className="cursor-pointer"
+							color="rgb(20 83 45)"
+							width={40}
+							height={40}
+							onClick={handleHamburguerMenu}
+						/>
+					)}
+				</div>
+				<Link
+					href="/"
+					className="">
 					<Image
 						src={sumateLogo}
 						width={200}
@@ -24,7 +60,10 @@ export default function HeaderComponent({
 					/>
 				</Link>
 			</div>
-			<div className="w-2/3 flex flex-row justify-around items-center">
+			<div
+				className={`${
+					showHamburguerMenu ? 'flex mb-2 h-12' : 'hidden'
+				} md:w-2/3 md:flex flex-row justify-around items-center`}>
 				<Link
 					href="/"
 					className={`${defaultNavStyle} ${
