@@ -41,7 +41,7 @@ export default function AddingSection() {
 	return (
 		<Card>
 			<CardContent className="flex flex-col items-center justify-around text-center h-auto py-4">
-				<h1 className="w-full text-6xl my-2">Sumemos</h1>
+				<h1 className="w-full text-6xl mt-2 mb-4">Sumemos</h1>
 				<div className="w-full h-auto flex justify-around items-center space-x-2">
 					{addingSectionList.map((item, idx) => (
 						<AddingItem {...item} />
