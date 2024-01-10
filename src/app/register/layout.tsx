@@ -6,5 +6,5 @@ export default function LoginLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return <PagesLayout>{children}</PagesLayout>;
+	return <PagesLayout footer={false}>{children}</PagesLayout>;
 }
