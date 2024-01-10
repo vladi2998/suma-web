@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import sumateLogo from '../../public/sumate.png';
+import sumateLogo from '../../public/PNG/sumados-logo.png';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid';
 import { useEffect, useState } from 'react';
 
@@ -27,9 +27,9 @@ export default function HeaderComponent({
 	return (
 		<nav
 			className={`w-full ${
-				showHamburguerMenu ? 'h-32' : 'h-24'
-			} bg-white flex flex-col md:flex-row justify-around border-t-8 border-dark-green transition-all duration-300`}>
-			<div className="w-full md:w-1/3 flex flex-row justify-between md:justify-center items-center">
+				showHamburguerMenu ? 'h-32' : 'h-20'
+			} bg-white flex flex-col md:flex-row justify-around items-end border-t-8 border-dark-green transition-all duration-300`}>
+			<div className="w-full h-full md:w-1/3 flex flex-row justify-between md:justify-center items-center">
 				<div className="w-1/5 flex items-center justify-center md:hidden">
 					{showHamburguerMenu ? (
 						<XMarkIcon
@@ -51,11 +51,11 @@ export default function HeaderComponent({
 				</div>
 				<Link
 					href="/"
-					className="">
+					className="mt-4">
 					<Image
 						src={sumateLogo}
-						width={200}
-						height={200}
+						width={300}
+						height={300}
 						alt="Picture of the author"
 					/>
 				</Link>
