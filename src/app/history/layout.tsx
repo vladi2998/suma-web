@@ -8,11 +8,8 @@ export default function HistoryLayout({
 }) {
 	return (
 		<PagesLayout>
-			<HeaderComponent selected_route={1}/>
-			<section>
-				<nav></nav>
-				{children}
-			</section>
+			<HeaderComponent selected_route={1} />
+			{children}
 		</PagesLayout>
 	);
 }
