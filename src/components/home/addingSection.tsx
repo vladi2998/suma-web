@@ -1,9 +1,6 @@
 'use client';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
-import Image from 'next/image';
-import HstySectionImg from '../../../public/histotrySectionImg.webp';
-import { Button } from '../ui/button';
 import AddingItem from './addingItem';
 import H1 from '../H1';
 import ForwardButton from '../buttons/forwardButton';
@@ -53,9 +50,9 @@ export default function AddingSection() {
 					))}
 				</div>
 				<div className="w-full flex justify-end my-2">
-					<div className="w-96 flex items-center justify-center">
+					<Link href='/connect/' className="w-96 flex items-center justify-center">
 						<ForwardButton text="Ver más" />
-					</div>
+					</Link>
 				</div>
 			</CardContent>
 		</Card>
