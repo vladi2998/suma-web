@@ -2,7 +2,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
-import HstySectionImg from '../../../public/histotrySectionImg.webp';
+import HstySectionImg from '../../../public/WEBP/historyImg.webp';
 import { Button } from '../ui/button';
 import H1 from '../H1';
 
@@ -31,7 +31,7 @@ export default function HistorySection() {
 				<div className="w-full md:w-1/3 flex items-center justify-center">
 					<Image
 						src={HstySectionImg}
-						className="w-128 h-auto my-2 rounded-6xl"
+						className="w-128 h-auto my-2 rounded-8xl"
 						alt={`history-section-img`}
 						sizes="120vw"
 					/>

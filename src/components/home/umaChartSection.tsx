@@ -26,8 +26,7 @@ export default function UmaChartSection() {
 	];
 
 	return (
-		<div className="w-full h-auto flex flex-col items-center bg-light-green py-8 space-y-8">
-			<H1 className='text-white ml-10'>Cuadros UMA</H1>
+		<div className="w-full h-auto flex flex-col items-center bg-gradient-to-r from-dark-green to-light-green py-12 space-y-8">
 			<div className="w-full h-auto flex flex-wrap md:flex-row justify-around items-center">
 				{umaItems.map((item, idx) => (
 					<UmaChartItem
@@ -36,6 +35,7 @@ export default function UmaChartSection() {
 					/>
 				))}
 			</div>
+			<H1 className="text-white ml-20">Cuadros UMA</H1>
 		</div>
 	);
 }
