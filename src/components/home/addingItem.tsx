@@ -21,7 +21,7 @@ export default function AddingItem({
 }: AddingProps) {
 	return (
 		<Card>
-			<div className="flex flex-col w-auto h-auto space-y-12 mb-8">
+			<div className="flex flex-col w-auto md:w-96 h-auto space-y-12 mb-8">
 				<div className="w-full h-6/12 relative">
 					<Image
 						src={addingItemImg}

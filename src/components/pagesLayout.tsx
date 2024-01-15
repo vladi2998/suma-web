@@ -8,7 +8,7 @@ export default function PagesLayout({
 	footer?: boolean;
 }) {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between space-y-4">
+		<main className="flex max-w-screen min-h-screen flex-col items-center justify-between space-y-4">
 			{children}
 			{footer && <FooterComponent />}
 		</main>

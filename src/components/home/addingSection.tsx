@@ -5,6 +5,8 @@ import Image from 'next/image';
 import HstySectionImg from '../../../public/histotrySectionImg.webp';
 import { Button } from '../ui/button';
 import AddingItem from './addingItem';
+import H1 from '../H1';
+import ForwardButton from '../buttons/forwardButton';
 
 export default function AddingSection() {
 	const addingSectionList = [
@@ -41,14 +43,19 @@ export default function AddingSection() {
 	return (
 		<Card>
 			<CardContent className="flex flex-col items-center justify-around text-center h-auto py-4">
-				<h1 className="w-full text-6xl mt-2 mb-4">Sumemos</h1>
-				<div className="w-full h-auto flex justify-around items-center space-x-2">
+				<H1>Sumemos</H1>
+				<div className="w-full h-auto flex-wrap my-2 md:flex md:flex-row justify-around items-center md:space-x-2 space-y-4">
 					{addingSectionList.map((item, idx) => (
 						<AddingItem
 							{...item}
 							key={idx}
 						/>
 					))}
+				</div>
+				<div className="w-full flex justify-end my-2">
+					<div className="w-96 flex items-center justify-center">
+						<ForwardButton text="Ver más" />
+					</div>
 				</div>
 			</CardContent>
 		</Card>

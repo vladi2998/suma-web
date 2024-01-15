@@ -1,5 +1,6 @@
 'use client';
 
+import H1 from '../H1';
 import UmaChartItem from './umaChartItem';
 
 export default function UmaChartSection() {
@@ -26,7 +27,7 @@ export default function UmaChartSection() {
 
 	return (
 		<div className="w-full h-auto flex flex-col items-center bg-light-green py-8 space-y-8">
-			<p className="text-white text-6xl">Cuadros UMA</p>
+			<H1 className='text-white ml-10'>Cuadros UMA</H1>
 			<div className="w-full h-auto flex flex-wrap md:flex-row justify-around items-center">
 				{umaItems.map((item, idx) => (
 					<UmaChartItem

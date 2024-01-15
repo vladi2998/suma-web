@@ -4,25 +4,23 @@ import Link from 'next/link';
 import Image from 'next/image';
 import HstySectionImg from '../../../public/histotrySectionImg.webp';
 import { Button } from '../ui/button';
+import H1 from '../H1';
 
 export default function HistorySection() {
 	return (
 		<Card>
-			<CardContent className="flex flex-col sm:flex-row items-center justify-around h-auto py-4">
-				<div className="w-3/5 h-full flex flex-col justify-around space-y-12">
-					<h1 className="text-6xl">Un poco de historia</h1>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
-						vestibulum interdum malesuada. Ut sagittis sed ipsum nec convallis.
-						Sed condimentum eros justo, eget fringilla dolor volutpat sed. Sed
-						iaculis arcu felis, vel lacinia mauris lobortis a. Cras hendrerit
-						purus metus, nec mattis elit maximus vehicula. Ut id hendrerit eros,
-						ac sagittis odio. Maecenas consectetur diam in pharetra egestas.
-						Etiam varius mi lacus, sit amet vestibulum felis vulputate at. Nam
-						dolor turpis, egestas non magna eu, porta scelerisque arcu. Aliquam
-						dignissim egestas interdum. Maecenas dapibus a lacus nec volutpat.
-						Praesent vestibulum ac nibh ac condimentum. Suspendisse cursus
-						dictum metus quis rhoncus. Sed quis mauris eu ex interdum fermentum.
+			<CardContent className="flex flex-col md:flex-row items-center justify-around h-auto py-20">
+				<div className="w-full md:w-3/5 h-full flex flex-col justify-around space-y-12">
+					<H1>¿Para qué sirve Sumados?</H1>
+					<p className="text-xl md:text-2xl">
+						Sumados es una plataforma digital de networking destinada a
+						estudiantes y egresados de la Universidad Monteávila. Se enmarca en
+						el proceso de revitalización de la Asociación de Egresados de la
+						Universidad Monteávila, nuestra plataforma tiene como objetivo
+						facilitar el intercambio de conocimientos y mantener el contacto
+						entre sus miembros. La meta es promover la comunicación constante y
+						beneficiosa entre nuestra comunidad, preservando las relaciones
+						valiosas construidas durante la experiencia universitaria.
 					</p>
 					<div className="w-1/4">
 						<Link href="/history/">
@@ -30,12 +28,12 @@ export default function HistorySection() {
 						</Link>
 					</div>
 				</div>
-				<div className="w-1/3 flex items-center justify-center">
+				<div className="w-full md:w-1/3 flex items-center justify-center">
 					<Image
 						src={HstySectionImg}
-						className="w-96 h-auto my-2"
+						className="w-128 h-auto my-2 rounded-6xl"
 						alt={`history-section-img`}
-						sizes="100vw"
+						sizes="120vw"
 					/>
 				</div>
 			</CardContent>

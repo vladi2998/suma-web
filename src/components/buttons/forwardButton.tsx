@@ -1,4 +1,5 @@
-import { ArrowRightIcon } from '@heroicons/react/16/solid';
+import plusIcon from '../../../public/PNG/plus-icon.png';
+import Image from 'next/image';
 
 export default function ForwardButton({
 	text,
@@ -10,11 +11,14 @@ export default function ForwardButton({
 	return (
 		<div
 			onClick={callback}
-			className="text-sm md:text-base hover:cursor-pointer hover:scale-105 transform transition duration-300 w-full h-auto bg-dark-green flex flex-row items-center justify-between px-4 py-4 rounded-l-full rounded-r-full">
-			<p className="pl-2 w-3/4 font-bold text-white">{text}</p>
-			<ArrowRightIcon
-				color="rgb(20 83 45)"
-				className="w-10 p-2 flex justify-center items-center rounded-full bg-white"
+			className="text-sm md:text-base hover:cursor-pointer hover:scale-105 transform transition duration-300 w-full h-auto bg-gradient-to-r from-dark-green to-light-green flex flex-row items-center justify-between px-4 py-4 rounded-l-full rounded-r-full">
+			<p className="pl-2 w-3/4 font-bold text-white text-start text- md:text-xl">
+				{text}
+			</p>
+			<Image
+				className="bg-white rounded-full p-1 w-10 h-10"
+				src={plusIcon}
+				alt="Picture of the author"
 			/>
 		</div>
 	);

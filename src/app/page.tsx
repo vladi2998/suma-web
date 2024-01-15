@@ -10,10 +10,10 @@ export default function Page() {
 	return (
 		<PagesLayout>
 			<HeaderComponent selected_route={0} />
-			<BannerBackground />
-			<div className="w-full px-4">
+			<div className="w-full px-4 my-2">
 				<HistorySection />
 			</div>
+			<BannerBackground />
 			<div className="w-full px-4">
 				<AddingSection />
 			</div>

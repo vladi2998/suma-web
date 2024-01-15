@@ -34,8 +34,8 @@ export default function BannerBackground() {
 	];
 
 	return (
-		<div className="w-full h-full hidden md:flex items-center justify-center">
-			<p className="text-white font-bold text-8xl m-auto absolute">Sumados</p>
+		<div className="w-full h-full hidden md:flex items-start justify-center">
+			<p className="text-white font-bold text-6xl mx-auto my-2 absolute">¡La UMA son sus egresados!</p>
 			<Carousel
 				className="w-full max-w-full relative -z-10"
 				plugins={[plugin.current]}>
