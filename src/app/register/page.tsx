@@ -1,10 +1,11 @@
 'use client';
 import Image from 'next/image';
 import bgImageLogin from '../../../public/img-bg.webp';
+import bgMountains from '../../../public/PNG/mountains.png';
+import sumateLogo from '../../../public/PNG/sumados-logo.png';
 import ForwardButton from '@/components/buttons/forwardButton';
 import { useForm } from 'react-hook-form';
 import InputField from '@/components/forms/inputField';
-import sumateLogo from '../../../public/PNG/sumados-logo.png';
 import { getUser } from '@/utils/auth';
 import PasswordField from '@/components/forms/passwordField';
 
@@ -28,6 +29,13 @@ export default function RegisterPage() {
 				<Image
 					src={bgImageLogin}
 					alt="image-bg"
+					layout="fill"
+					objectFit="cover"
+				/>
+				<Image
+					src={bgMountains}
+					className='z-10'
+					alt="image-mountains-bg"
 					layout="fill"
 					objectFit="cover"
 				/>
