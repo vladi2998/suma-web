@@ -34,12 +34,12 @@ export default function RegisterPage() {
 				/>
 				<Image
 					src={bgMountains}
-					className='z-10'
+					className="z-10"
 					alt="image-mountains-bg"
 					layout="fill"
 					objectFit="cover"
 				/>
-				<div className="absolute w-full h-full bg-green-700 opacity-50 z-0" />
+				<div className="absolute w-full h-full bg-light-green opacity-50 z-0" />
 			</div>
 			<form
 				className="w-full h-screen flex items-center justify-center z-10 overflow-y-hidden"

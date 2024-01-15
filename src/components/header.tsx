@@ -54,8 +54,8 @@ export default function HeaderComponent({
 					className="mt-4">
 					<Image
 						src={sumateLogo}
-						width={400}
-						height={400}
+						width={300}
+						height={300}
 						alt="sumados-logo"
 					/>
 				</Link>

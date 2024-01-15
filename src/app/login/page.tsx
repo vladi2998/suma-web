@@ -28,7 +28,7 @@ export default function LoginPage() {
 				/>
 				<Image
 					src={bgMountains}
-					className='z-10'
+					className="z-10"
 					alt="image-mountains-bg"
 					layout="fill"
 					objectFit="cover"
