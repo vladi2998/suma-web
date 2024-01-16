@@ -41,7 +41,7 @@ export default function UmaChartItem({
 				<Image
 					src={umaChartItemImg}
 					alt={`adding-img-${name}`}
-					className="w-full rounded-lg"
+					className="w-full h-full rounded-[8rem]"
 				/>
 			</div>
 			<div className="w-full h-3/12 flex flex-col">

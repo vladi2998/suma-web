@@ -83,7 +83,7 @@ export default function HeaderComponent({
 					className={`${defaultNavStyle} ${
 						selected_route === 2 ? selectedNavSyle : ''
 					}`}>
-					Conectemos
+					Sumemos
 				</Link>
 				<Link
 					href="/working/"
