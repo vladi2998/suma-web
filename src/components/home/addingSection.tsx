@@ -8,31 +8,39 @@ import ForwardButton from '../buttons/forwardButton';
 export default function AddingSection() {
 	const addingSectionList = [
 		{
-			name: 'Sasha Bograd',
-			career: 'Lic. Comunicacion Social',
-			master: 'Master en Neuromarketing',
-			specialist: 'Especialista en diseño Gráfico',
+			name: 'José De Oliveira',
+			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
-			name: 'Sasha Bograd',
-			career: 'Lic. Comunicacion Social',
-			master: 'Master en Neuromarketing',
-			specialist: 'Especialista en diseño Gráfico',
+			name: 'José De Oliveira',
+			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
-			name: 'Sasha Bograd',
-			career: 'Lic. Comunicacion Social',
-			master: 'Master en Neuromarketing',
-			specialist: 'Especialista en diseño Gráfico',
+			name: 'José De Oliveira',
+			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
-			name: 'Sasha Bograd',
-			career: 'Lic. Comunicacion Social',
-			master: 'Master en Neuromarketing',
-			specialist: 'Especialista en diseño Gráfico',
+			name: 'José De Oliveira',
+			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			specialist: 'Project Manager',
+			href: '/',
+		},
+		{
+			name: 'José De Oliveira',
+			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			specialist: 'Project Manager',
+			href: '/',
+		},
+		{
+			name: 'José De Oliveira',
+			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			specialist: 'Project Manager',
 			href: '/',
 		},
 	];
@@ -41,7 +49,7 @@ export default function AddingSection() {
 		<Card>
 			<CardContent className="flex flex-col items-center justify-around text-center h-auto py-4">
 				<H1>Sumemos</H1>
-				<div className="w-full h-auto flex-wrap my-2 md:flex md:flex-row justify-around items-center md:space-x-2 space-y-4">
+				<div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 place-items-center">
 					{addingSectionList.map((item, idx) => (
 						<AddingItem
 							{...item}
@@ -50,7 +58,9 @@ export default function AddingSection() {
 					))}
 				</div>
 				<div className="w-full flex justify-end my-2">
-					<Link href='/connect/' className="w-96 flex items-center justify-center">
+					<Link
+						href="/connect/"
+						className="w-96 flex items-center justify-center">
 						<ForwardButton text="Ver más" />
 					</Link>
 				</div>

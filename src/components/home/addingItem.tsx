@@ -3,14 +3,14 @@ import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '../ui/button';
-import addingItemImg from '../../../public/addingItemImg.webp';
+import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
 import ForwardButton from '../buttons/forwardButton';
 
 type AddingProps = {
 	name: string;
 	career: string;
-	master: string;
-	specialist: string;
+	master?: string;
+	specialist?: string;
 	href: string;
 };
 export default function AddingItem({
@@ -21,7 +21,7 @@ export default function AddingItem({
 	href,
 }: AddingProps) {
 	return (
-		<div className="flex flex-col w-auto md:w-96 h-auto space-y-12 mb-8">
+		<div className="flex flex-col w-80 lg:w-96 h-auto space-y-12 mb-8">
 			<div className="w-full h-6/12 relative">
 				<Image
 					src={addingItemImg}
@@ -38,7 +38,7 @@ export default function AddingItem({
 			<div className="w-full h-1/12 flex items-center justify-center">
 				<Link
 					href={href}
-					className="w-3/5">
+					className="w-4/5">
 					<ForwardButton text="Sumemos" />
 				</Link>
 			</div>
