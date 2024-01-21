@@ -11,8 +11,9 @@ export default function HeaderComponent({
 	selected_route: number;
 }) {
 	const defaultNavStyle =
-		'hover:text-light-green hover:scale-110 text-xs sm:text-sm md:text-base text-center transform transition duration-300 h-full w-full flex justify-center items-center cursor-pointer px-1 md:px-2 text-black';
-	const selectedNavSyle = 'text-dark-green font-bold scale-110';
+		'relative text-xs text-center md:text-base w-fit block after:block after:content-full after:absolute after:h-[3px] after:bg-dark-green after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center';
+	const selectedNavSyle =
+		'block text-dark-green font-bold border-b-[3px] border-dark-green h-auto';
 	const [showHamburguerMenu, setshowHamburguerMenu] = useState<boolean>(false);
 
 	const handleHamburguerMenu = () => setshowHamburguerMenu(!showHamburguerMenu);
@@ -26,9 +27,9 @@ export default function HeaderComponent({
 
 	return (
 		<nav
-			className={`w-full ${
+			className={`w-full max-w-full z-10 ${
 				showHamburguerMenu ? 'h-32' : 'h-20'
-			} bg-white flex flex-col md:flex-row justify-around items-end border-t-8 border-dark-green transition-all duration-300`}>
+			} bg-white flex flex-col md:flex-row justify-around items-end border-t-8 border-dark-green`}>
 			<div className="w-full h-full md:w-1/3 flex flex-row justify-between md:justify-center items-center">
 				<div className="w-1/5 flex items-center justify-center md:hidden">
 					{showHamburguerMenu ? (
@@ -62,7 +63,7 @@ export default function HeaderComponent({
 			</div>
 			<div
 				className={`${
-					showHamburguerMenu ? 'flex mb-2 h-12' : 'hidden'
+					showHamburguerMenu ? 'flex mb-2 h-12 w-full' : 'hidden'
 				} md:w-2/3 md:flex flex-row justify-around items-center`}>
 				<Link
 					href="/"
