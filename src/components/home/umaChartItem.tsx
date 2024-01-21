@@ -1,9 +1,6 @@
 'use client';
-import { Card } from '@/components/ui/card';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from '../ui/button';
-import umaChartItemImg from '../../../public/umaChartItemImg.webp';
+import umaChartItemImg from '../../../public/WEBP/umaChartItemImg.webp';
 import { StarIcon } from '@heroicons/react/16/solid';
 
 type AddingProps = {
@@ -11,17 +8,21 @@ type AddingProps = {
 	name: string;
 	position: string;
 	role: string;
+	main?: boolean;
 };
 export default function UmaChartItem({
 	stars,
 	name,
 	position,
 	role,
+	main,
 }: AddingProps) {
 	const _stars = Array.from({ length: 5 });
 	return (
-		<div className="flex flex-col items-start w-auto h-auto space-y-4">
-			<div className="w-full h-1/12 flex items-center justify-start">
+		<div
+			className={`flex flex-col items-center justify-center w-auto h-auto space-y-4`}>
+			{/* Stars section */}
+			{/* <div className="w-full h-1/12 flex items-center justify-start">
 				{_stars.map((_, idx) => {
 					return idx < stars ? (
 						<StarIcon
@@ -36,19 +37,19 @@ export default function UmaChartItem({
 						/>
 					);
 				})}
-			</div>
-			<div className="w-96 h-6/12 relative">
+			</div> */}
+			<div className={`relative ${main ? 'w-96' : 'w-80'}`}>
 				<Image
 					src={umaChartItemImg}
 					alt={`adding-img-${name}`}
-					className="w-full h-full rounded-[8rem]"
+					className="w-full h-full rounded-[6rem]"
 				/>
 			</div>
-			<div className="w-full h-3/12 flex flex-col">
+			<div
+				className={`w-full flex flex-col items-center justify-center text-center`}>
 				<h1 className="text-2xl text-white font-bold">{name}</h1>
-				<p className="text-white">
-					{position}/{role}
-				</p>
+				<p className="text-white max-w-full">{position}</p>
+				<p className="text-white max-w-full">{role}</p>
 			</div>
 		</div>
 	);
