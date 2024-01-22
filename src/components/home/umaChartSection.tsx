@@ -33,7 +33,7 @@ export default function UmaChartSection() {
 
 	return (
 		<div className="w-full h-auto flex flex-col items-center bg-gradient-to-r from-dark-green to-light-green py-12 space-y-8">
-			<div className="w-full h-auto flex flex-wrap md:flex-row justify-center items-center md:space-x-12">
+			<div className="w-full h-auto flex flex-col lg:flex-row justify-center items-center lg:space-x-8">
 				{umaItems.map((item, idx) => (
 					<UmaChartItem
 						{...item}

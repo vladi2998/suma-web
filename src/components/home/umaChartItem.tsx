@@ -38,7 +38,7 @@ export default function UmaChartItem({
 					);
 				})}
 			</div> */}
-			<div className={`relative ${main ? 'w-96' : 'w-80'}`}>
+			<div className={`relative ${main ? 'w-80' : 'w-72'}`}>
 				<Image
 					src={umaChartItemImg}
 					alt={`adding-img-${name}`}
