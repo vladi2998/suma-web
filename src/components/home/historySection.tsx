@@ -5,6 +5,7 @@ import Image from 'next/image';
 import HstySectionImg from '../../../public/WEBP/historyImg.webp';
 import { Button } from '../ui/button';
 import H1 from '../H1';
+import ForwardButton from '../buttons/forwardButton';
 
 export default function HistorySection() {
 	return (
@@ -22,9 +23,9 @@ export default function HistorySection() {
 						beneficiosa entre nuestra comunidad, preservando las relaciones
 						valiosas construidas durante la experiencia universitaria.
 					</p>
-					<div className="w-1/4">
+					<div className="w-1/2">
 						<Link href="/history/">
-							<Button variant="default">Conocer más</Button>
+							<ForwardButton text="Conocer más" />
 						</Link>
 					</div>
 				</div>

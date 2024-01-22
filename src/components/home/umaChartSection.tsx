@@ -41,7 +41,9 @@ export default function UmaChartSection() {
 					/>
 				))}
 			</div>
-			<H1 className="text-white ml-20">Cuadros UMA</H1>
+			<div className="w-full flex items-start">
+				<H1 className="text-white ml-20">Cuadros UMA</H1>
+			</div>
 		</div>
 	);
 }

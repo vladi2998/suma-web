@@ -23,7 +23,7 @@ export default function BannerBackground() {
 
 	return (
 		<div className="w-full h-full hidden md:flex items-start justify-center relative">
-			<p className="text-white font-bold text-6xl mx-auto my-2 absolute z-10">
+			<p className="text-white font-bold text-5xl mx-auto my-4 absolute z-10">
 				¡La UMA son sus egresados!
 			</p>
 			<Carousel
