@@ -6,6 +6,7 @@ import HistorySection from '@/components/home/historySection';
 import UmaChartSection from '@/components/home/umaChartSection';
 import PagesLayout from '@/components/pagesLayout';
 import MyRouteSection from '@/components/home/myRouteSection';
+import WorkingSection from '@/components/home/workingSection';
 
 export default function Page() {
 	return (
@@ -19,6 +20,7 @@ export default function Page() {
 			<div className="w-full px-4">
 				<AddingSection />
 			</div>
+			<WorkingSection />
 			<UmaChartSection />
 		</PagesLayout>
 	);
