@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import bgImageLogin from '../../../public/img-bg.webp';
-import bgMountains from '../../../public/PNG/mountains.png';
+import bgMountains from '../../../public/PNG/mountainsBackgroundFHD.png';
 import sumateLogo from '../../../public/PNG/sumados-logo.png';
 import ForwardButton from '@/components/buttons/forwardButton';
 import { useForm } from 'react-hook-form';
