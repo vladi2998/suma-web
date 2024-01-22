@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import H1 from '../H1';
-import bgMountains from '../../../public/PNG/mountains.png';
+import bgMountains from '../../../public/PNG/mountains-fhd.png';
 
 export default function ChargesSection() {
 	return (
