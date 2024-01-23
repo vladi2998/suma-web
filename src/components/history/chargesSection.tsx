@@ -1,19 +1,56 @@
 import Image from 'next/image';
-import H1 from '../H1';
-import bgMountains from '../../../public/PNG/mountains-fhd.png';
+import bgMountains from '../../../public/PNG/mountainsBackgroundFHD.png';
+import ChargesItem from './chargesItem';
 
 export default function ChargesSection() {
+	const chargesSectionList = [
+		{
+			name: 'Guillermo Fariñas Contreras',
+			role: 'Rector y Presidente',
+		},
+		{
+			name: 'Alesia Santacroce',
+			role: 'Vicepresidente',
+		},
+		{
+			name: 'Marianna Moreno',
+			role: 'Vocal Internacional',
+		},
+		{
+			name: 'José Antonio de Oliveira',
+			role: 'José Antonio de Oliveira',
+		},
+		{
+			name: 'Rodrigo Farías',
+			role: '',
+		},
+		{
+			name: 'José Ignacio Arcaya',
+			role: '',
+		},
+	];
+
 	return (
-		<div className="w-full h-[42rem] relative">
-			<h1 className="w-full text-4xl md:text-7xl font-bold text-center">
-				¿Quiénes están a cargo?
-			</h1>
+		<div className="relative w-screen h-auto bg-light-gray">
 			<Image
 				src={bgMountains}
-				className="object-fill"
+				className="hidden object-fill lg:block"
 				alt="image-mountains-bg"
 				layout="fill"
 			/>
+			<div className="w-full h-full flex flex-col items-center py-8 space-y-4">
+				<h1 className="w-full text-4xl md:text-7xl font-bold text-center">
+					Junta Directiva
+				</h1>
+				<div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 place-items-center">
+					{chargesSectionList.map((item, idx) => (
+						<ChargesItem
+							{...item}
+							key={idx}
+						/>
+					))}
+				</div>
+			</div>
 		</div>
 	);
 }
