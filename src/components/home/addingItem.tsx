@@ -21,7 +21,7 @@ export default function AddingItem({
 	href,
 }: AddingProps) {
 	return (
-		<div className="flex flex-col w-80 lg:w-96 h-auto space-y-12 mb-8">
+		<div className="flex flex-col w-80 xl:w-96 h-auto space-y-12 mb-8">
 			<div className="w-full h-6/12 relative">
 				<Image
 					src={addingItemImg}

@@ -1,3 +1,9 @@
+import AddingSection from '@/components/home/addingSection';
+
 export default function ConnectPage() {
-	return <p>Conecta con nosotros</p>;
+	return (
+		<div className="w-screen px-4">
+			<AddingSection showActionButton={false}/>
+		</div>
+	);
 }
