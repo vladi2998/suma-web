@@ -13,12 +13,12 @@ export default function ChargesSection() {
 			role: 'Vicepresidente',
 		},
 		{
-			name: 'Marianna Moreno',
-			role: 'Vocal Internacional',
+			name: 'José Antonio de Oliveira',
+			role: 'Vocal Nacional',
 		},
 		{
-			name: 'José Antonio de Oliveira',
-			role: 'José Antonio de Oliveira',
+			name: 'Marianna Moreno',
+			role: 'Vocal Internacional',
 		},
 		{
 			name: 'Rodrigo Farías',
@@ -42,7 +42,7 @@ export default function ChargesSection() {
 				<h1 className="w-full text-4xl md:text-7xl font-bold text-center">
 					Junta Directiva
 				</h1>
-				<div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 place-items-center">
+				<div className="w-full h-auto z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 place-items-center">
 					{chargesSectionList.map((item, idx) => (
 						<ChargesItem
 							{...item}
