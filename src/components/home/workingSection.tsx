@@ -5,7 +5,12 @@ import H1 from '../H1';
 import WorkingSectionItem from './workingItem';
 import bgMountains from '../../../public/PNG/workingBackgroundFHD.png';
 
-export default function workingSection() {
+type WorkingSectionProps = {
+	showTitle?: boolean;
+};
+export default function WorkingSection({
+	showTitle = true,
+}: WorkingSectionProps) {
 	return (
 		<>
 			<div className="relative w-screen h-auto">
@@ -17,23 +22,31 @@ export default function workingSection() {
 					objectFit="cover"
 				/>
 				<div className="w-full h-full flex flex-col items-center py-4 space-y-4">
-					<div className="w-full flex items-start">
-						<H1 className="ml-20">Trabajemos</H1>
-					</div>
+					{showTitle && (
+						<div className="w-full flex items-start">
+							<H1 className="ml-20">Trabajemos</H1>
+						</div>
+					)}
 					<div className="w-full flex flex-col space-y-12 items-center justify-around lg:flex-row">
 						<div className="w-3/4 lg:w-2/5 flex flex-col items-center justify-center space-y-12">
 							<WorkingSectionItem
-								title="Dirección de arte"
+								title="Community Manager"
+								place="Lugar"
+								agency="Agencia"
 								iconColor="rgb(54 110 20)"
 								description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi."
 							/>
 							<WorkingSectionItem
 								title="Dirección de arte"
+								place="Lugar"
+								agency="Agencia"
 								iconColor="rgb(165 180 252)"
 								description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi."
 							/>
 							<WorkingSectionItem
 								title="Dirección de arte"
+								place="Lugar"
+								agency="Agencia"
 								description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi."
 							/>
 						</div>

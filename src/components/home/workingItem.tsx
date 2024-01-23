@@ -5,6 +5,8 @@ import ForwardButton from '../buttons/forwardButton';
 
 type WorkingItemsProps = {
 	title: string;
+	place?: string;
+	agency?: string;
 	description: string;
 	colunm?: boolean;
 	iconColor?: string;
@@ -12,6 +14,8 @@ type WorkingItemsProps = {
 
 export default function WorkingSectionItem({
 	title,
+	place,
+	agency,
 	description,
 	colunm = false,
 	iconColor = 'rgb(203 213 225)',
@@ -36,6 +40,8 @@ export default function WorkingSectionItem({
 					<h1 className="w-full text-2xl font-bold text-light-green">
 						{title}
 					</h1>
+					{place && <p className="w-full text-xl">{place}</p>}
+					{agency && <p className="w-full text-xl">{agency}</p>}
 					<p className="w-full text-xl">{description}</p>
 					{colunm && (
 						<div className="w-2/3 mx-auto">
