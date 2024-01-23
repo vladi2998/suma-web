@@ -7,6 +7,7 @@ type AddingProps = {
 	stars: number;
 	name: string;
 	position: string;
+	master?: string;
 	role: string;
 	main?: boolean;
 };
@@ -14,6 +15,7 @@ export default function UmaChartItem({
 	stars,
 	name,
 	position,
+	master,
 	role,
 	main,
 }: AddingProps) {
@@ -49,6 +51,7 @@ export default function UmaChartItem({
 				className={`w-full flex flex-col items-center justify-center text-center`}>
 				<h1 className="text-2xl text-white font-bold">{name}</h1>
 				<p className="text-white max-w-full">{position}</p>
+				{master && <p className="text-white max-w-full">{master}</p>}
 				<p className="text-white max-w-full">{role}</p>
 			</div>
 		</div>

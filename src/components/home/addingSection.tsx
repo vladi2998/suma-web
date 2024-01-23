@@ -14,37 +14,43 @@ export default function AddingSection({
 	const addingSectionList = [
 		{
 			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
 			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
 			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
 			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
 			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
 		},
 		{
 			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
 		},
@@ -54,7 +60,7 @@ export default function AddingSection({
 		<Card>
 			<CardContent className="flex flex-col items-center justify-around text-center h-auto py-4">
 				<H1 className="ml-20">Sumemos</H1>
-				<div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 place-items-center">
+				<div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 place-items-center">
 					{addingSectionList.map((item, idx) => (
 						<AddingItem
 							{...item}

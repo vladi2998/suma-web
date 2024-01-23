@@ -8,24 +8,24 @@ export default function UmaChartSection() {
 		{
 			stars: 3,
 			name: 'José De Oliveira',
-			position:
-				'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			position: 'Lic en Comunicación Social ',
+			// master: 'Maestrando en Innovación Educativa',
 			role: 'Project Manager',
 			main: false,
 		},
 		{
 			stars: 4,
 			name: 'José De Oliveira',
-			position:
-				'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			position: 'Lic en Comunicación Social',
+			// master: 'Maestrando en Innovación Educativa',
 			role: 'Project Manager',
 			main: true,
 		},
 		{
 			stars: 5,
 			name: 'José De Oliveira',
-			position:
-				'Lic en Comunicación Social Maestrando en Innovación Educativa ',
+			position: 'Lic en Comunicación Social',
+			// master: 'Maestrando en Innovación Educativa',
 			role: 'Project Manager',
 			main: false,
 		},
@@ -33,7 +33,7 @@ export default function UmaChartSection() {
 
 	return (
 		<div className="w-full h-auto flex flex-col items-center bg-gradient-to-r from-dark-green to-light-green py-12 space-y-8">
-			<div className="w-full h-auto flex flex-col lg:flex-row justify-center items-center lg:space-x-8">
+			<div className="w-full h-auto flex flex-col lg:flex-row justify-center items-center lg:space-x-12">
 				{umaItems.map((item, idx) => (
 					<UmaChartItem
 						{...item}
