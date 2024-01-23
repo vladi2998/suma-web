@@ -5,7 +5,7 @@ export default function WorkingPage() {
 	return (
 		<>
 			<TitleWorkingSection />
-			<WorkingSection showTitle={false}/>
+			<WorkingSection showTitle={false} />
 		</>
 	);
 }
