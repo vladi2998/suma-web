@@ -24,7 +24,7 @@ export default function UmaChartItem({
 		<div
 			className={`flex flex-col items-center justify-center w-auto h-auto space-y-4`}>
 			{/* Stars section */}
-			{/* <div className="w-full h-1/12 flex items-center justify-start">
+			<div className="w-full h-1/12 flex items-center justify-start">
 				{_stars.map((_, idx) => {
 					return idx < stars ? (
 						<StarIcon
@@ -39,7 +39,7 @@ export default function UmaChartItem({
 						/>
 					);
 				})}
-			</div> */}
+			</div>
 			<div className={`relative ${main ? 'w-80' : 'w-72'}`}>
 				<Image
 					src={umaChartItemImg}
