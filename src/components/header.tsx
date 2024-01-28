@@ -11,7 +11,7 @@ export default function HeaderComponent({
 	selected_route: number;
 }) {
 	const defaultNavStyle =
-		'relative text-xs text-center md:text-base w-fit block after:block after:content-full after:absolute after:h-[3px] after:bg-dark-green after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center';
+		'relative text-xxs text-center md:text-base w-fit block after:block after:content-full after:absolute after:h-[3px] after:bg-dark-green after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center';
 	const selectedNavSyle =
 		'block text-dark-green font-bold border-b-[3px] border-dark-green h-auto';
 	const [showHamburguerMenu, setshowHamburguerMenu] = useState<boolean>(false);

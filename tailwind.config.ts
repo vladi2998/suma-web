@@ -87,6 +87,9 @@ const config = {
 				'132': '42rem',
 				'160': '46rem',
 			},
+			fontSize: {
+				xxs: ['0.65rem', '0.7rem'],
+			},
 		},
 	},
 	plugins: [require('tailwindcss-animate')],
