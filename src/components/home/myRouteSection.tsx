@@ -5,6 +5,7 @@ import H1 from '../H1';
 import backgroundGirls from '../../../public/PNG/background-girls.png';
 import ForwardButton from '../buttons/forwardButton';
 import Link from 'next/link';
+import SearchBar from '../searchbar';
 
 export default function MyRouteSection() {
 	return (
@@ -25,11 +26,7 @@ export default function MyRouteSection() {
 			/>
 
 			<div className="absolute w-72 md:w-96 lg:w-132 flex justify-start bottom-4 lg:bottom-24 left-4 lg:left-24">
-				<Link
-					href="/my-route/"
-					className="w-full flex items-center justify-center">
-					<ForwardButton text="Mi ruta" />
-				</Link>
+				<SearchBar />
 			</div>
 		</div>
 	);
