@@ -1,5 +1,7 @@
 import Image from 'next/image';
-import bgMountains from '../../../public/PNG/mountainsBackgroundFHD.png';
+
+import bgMountainsTablet from '../../../public/PNG/mountainsBackgroundTablet.png';
+import bgMountainsMobile from '../../../public/PNG/mountainsBackgroundFHD.png';
 import ChargesItem from './chargesItem';
 
 export default function ChargesSection() {
@@ -13,7 +15,7 @@ export default function ChargesSection() {
 			role: 'Vicepresidente',
 		},
 		{
-			name: 'José Antonio de Oliveira',
+			name: 'José Antonio De Oliveira',
 			role: 'Vocal Nacional',
 		},
 		{
@@ -33,8 +35,14 @@ export default function ChargesSection() {
 	return (
 		<div className="relative w-screen h-auto bg-light-gray">
 			<Image
-				src={bgMountains}
-				className="hidden object-fill lg:block"
+				src={bgMountainsMobile}
+				className="object-fill md:hidden"
+				alt="image-mountains-bg"
+				layout="fill"
+			/>
+			<Image
+				src={bgMountainsTablet}
+				className="hidden object-fill md:block"
 				alt="image-mountains-bg"
 				layout="fill"
 			/>
