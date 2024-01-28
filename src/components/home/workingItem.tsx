@@ -44,7 +44,7 @@ export default function WorkingSectionItem({
 					{agency && <p className="w-full text-xl">{agency}</p>}
 					<p className="w-full text-xl">{description}</p>
 					{colunm && (
-						<div className="w-2/3 mx-auto">
+						<div className="w-full md:w-2/3 mx-auto">
 							<Link href="/working">
 								<ForwardButton text="Ver más" />
 							</Link>
