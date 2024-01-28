@@ -9,11 +9,13 @@ import Link from 'next/link';
 export default function MyRouteSection() {
 	return (
 		<div className="w-full h-72 md:h-96 lg:h-132 xl:h-screen md:flex items-start justify-center relative mt-2">
-			<div className="absolute top-24 left-4 lg:left-24 w-96 lg:w-132 z-10">
+			<div className="absolute top-8 w-auto md:top-24 left-4 lg:left-24 md:w-96 lg:w-132 z-10">
 				<h1 className="w-full text-xl md:text-4xl lg:text-8xl font-bold text-start">
 					Plataforma de Networking
 				</h1>
-				<p>para estudiantes y egresados de la universidad Monteávila</p>
+				<p className="w-full text-start">
+					para estudiantes y egresados de la universidad Monteávila
+				</p>
 			</div>
 			<Image
 				src={backgroundGirls}
