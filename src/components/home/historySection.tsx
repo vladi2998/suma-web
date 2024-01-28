@@ -24,7 +24,7 @@ export default function HistorySection() {
 						valiosas construidas durante la experiencia universitaria.
 					</p>
 					<div className="w-full md:w-3/4 lg:w-1/2">
-						<Link href="/history/">
+						<Link href="/us/">
 							<ForwardButton text="Conocer más" />
 						</Link>
 					</div>

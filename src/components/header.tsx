@@ -73,11 +73,11 @@ export default function HeaderComponent({
 					Inicio
 				</Link>
 				<Link
-					href="/history/"
+					href="/us/"
 					className={`${defaultNavStyle} ${
 						selected_route === 1 ? selectedNavSyle : ''
 					}`}>
-					Historia
+					Nosotros
 				</Link>
 				<Link
 					href="/connect/"
