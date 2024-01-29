@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import InputField from '@/components/forms/inputField';
 import { getUser } from '@/utils/auth';
 import PasswordField from '@/components/forms/passwordField';
+import SelectField from '@/components/forms/inputSelect';
 
 export default function RegisterPage() {
 	const {
@@ -16,6 +17,8 @@ export default function RegisterPage() {
 		handleSubmit,
 		getValues,
 	} = useForm({});
+
+	const userType = [{value: 0, label: "Estudiante/Egresado"}, {value:1, label: "Profesor"}]
 
 	return (
 		<>
@@ -81,6 +84,7 @@ export default function RegisterPage() {
 								'Las contraseñas deben ser iguales',
 						}}
 					/>
+					<SelectField register={register} label='Tipo de Usuario' errors={errors} values={userType} />
 					<ForwardButton
 						text="Registrarse"
 						callback={handleSubmit(() => getUser())}
