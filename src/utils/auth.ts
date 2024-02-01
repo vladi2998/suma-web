@@ -1,7 +1,7 @@
 import axiosConfigInstance from "@/config/axiosCofig";
 import { log } from "console";
 
-export const getUser = async (data) => {
+export const getUser = async (data: any) => {
   try {
     const request = await axiosConfigInstance.post("/token/", data);
     return request;
@@ -10,7 +10,7 @@ export const getUser = async (data) => {
   }
 };
 
-export const registerStudent = async (data) => {
+export const registerStudent = async (data: any) => {
   try {
     const request = await axiosConfigInstance.post("/register/student/", data);
     return request;
