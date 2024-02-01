@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosConfigInstance = axios.create({
-	baseURL: 'https://sumate-backend.fly.dev',
+	baseURL: 'https://sumate-backend.fly.dev/api',
 });
 
 // Request interceptor
