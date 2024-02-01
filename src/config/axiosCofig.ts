@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosConfigInstance = axios.create({
-	baseURL: 'https://random-data-api.com',
+	baseURL: 'https://sumate-backend.fly.dev',
 });
 
 // Request interceptor
@@ -11,7 +11,7 @@ axiosConfigInstance.interceptors.request.use(
 		const accessToken = true;
 		// If token is present add it to request's Authorization Header
 		if (accessToken) {
-			if (config.headers) config.headers.token = accessToken;
+			if (config.headers) config.headers.Authorization = `Bearer ${accessToken}`;
 		}
 		return config;
 	},

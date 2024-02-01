@@ -46,7 +46,7 @@ export default function LoginPage() {
 
 					<InputField
 						register={register}
-						label="user"
+						label="username"
 						placeholder="Usuario"
 					/>
 					<PasswordField
@@ -57,7 +57,7 @@ export default function LoginPage() {
 					/>
 					<ForwardButton
 						text="Iniciar Sesión"
-						callback={handleSubmit(() => getUser())}
+						callback={handleSubmit((values) => getUser(values))}
 					/>
 				</div>
 			</form>

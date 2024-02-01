@@ -1,10 +1,10 @@
 import axiosConfigInstance from '@/config/axiosCofig';
+import { log } from 'console';
 
-export const getUser = async () => {
+export const getUser = async (data) => {
 	try {
-		const data = await axiosConfigInstance.get('/api/users/random_user');
-		console.log('data', data);
-		return data;
+		const request = await axiosConfigInstance.post('/api/token/', data);
+		return request;
 	} catch (err) {
 		console.log('error: ', err);
 	}
