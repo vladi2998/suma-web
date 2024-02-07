@@ -8,11 +8,8 @@ export default function ChartsLayout({
 }) {
 	return (
 		<PagesLayout>
-			<HeaderComponent selected_route={4}/>
-			<section>
-				<nav></nav>
-				{children}
-			</section>
+			<HeaderComponent selected_route={4} />
+			{children}
 		</PagesLayout>
 	);
 }

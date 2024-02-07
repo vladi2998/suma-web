@@ -1,3 +1,9 @@
+import UmaChartSection from '@/components/home/umaChartSection';
+
 export default function ChartsPage() {
-	return <p>Cuadros UMA</p>;
+	return (
+		<>
+			<UmaChartSection isPage/>
+		</>
+	);
 }

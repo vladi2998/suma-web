@@ -57,6 +57,9 @@ const config = {
 				'dark-gray': 'rgb(51 65 85)',
 				'light-gray': 'rgb(226 232 240)',
 				'light-purple': 'rgb(165 180 252)',
+				yellow: 'rgb(250 204 21)',
+				blue: 'rgb(3 105 161)',
+				red: 'rgb(239 68 68)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
