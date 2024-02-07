@@ -10,9 +10,33 @@ export const getUser = async (data: any) => {
   }
 };
 
-export const registerStudent = async (data: any) => {
+export const registerUndergraduateStudent = async (data: any) => {
   try {
-    const request = await axiosConfigInstance.post("/register/student/", data);
+    const request = await axiosConfigInstance.post(
+      "/register/undergraduate_student/",
+      data
+    );
+    return request;
+  } catch (err) {
+    console.log("error: ", err);
+  }
+};
+
+export const registerPostGraduateStudent = async (data: any) => {
+  try {
+    const request = await axiosConfigInstance.post(
+      "/register/postgraduate_student/",
+      data
+    );
+    return request;
+  } catch (err) {
+    console.log("error: ", err);
+  }
+};
+
+export const registerTeacher = async (data: any) => {
+  try {
+    const request = await axiosConfigInstance.post("/register/teacher/", data);
     return request;
   } catch (err) {
     console.log("error: ", err);

@@ -6,9 +6,16 @@ import sumateLogo from "../../../public/PNG/sumados-logo.png";
 import ForwardButton from "@/components/buttons/forwardButton";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/forms/inputField";
-import { registerStudent } from "@/utils/auth";
+import {
+  registerUndergraduateStudent,
+  registerPostGraduateStudent,
+  registerTeacher,
+} from "@/utils/auth";
 import PasswordField from "@/components/forms/passwordField";
-import SelectField from "@/components/forms/inputSelect";
+import SelectField, { ItemValue } from "@/components/forms/inputSelect";
+import { ChangeEvent, useEffect, useState } from "react";
+
+type SelectChangeEvent = ChangeEvent<HTMLSelectElement>;
 
 export default function RegisterPage() {
   const {
@@ -16,12 +23,70 @@ export default function RegisterPage() {
     formState: { errors },
     handleSubmit,
     getValues,
-  } = useForm({});
+  } = useForm();
 
-  const userType = [
-    { value: 0, label: "Estudiante/Egresado" },
-    { value: 1, label: "Profesor" },
+  const userType: ItemValue[] = [
+    { value: 0, label: "Pregrado" },
+    { value: 1, label: "Postgrado" },
+    { value: 2, label: "Profesor" },
   ];
+
+  const pregraduates_faculties: ItemValue[] = [
+    { value: 0, label: "Ciencias de la Comunicación e Información" },
+    { value: 1, label: "Ciencias de la Educación" },
+    { value: 2, label: "Ciencias Económicas y Administrativas" },
+    { value: 3, label: "Ciencias Jurídicas y Políticas" },
+  ];
+
+  const pregraduates_careers: ItemValue[] = [
+    { value: 0, label: "Comunicación Social" },
+    { value: 2, label: "Educación" },
+    { value: 5, label: "Derecho" },
+    { value: 6, label: "Ciencias Administrativas" },
+  ];
+
+  const postgraduates_carreers: ItemValue[] = [
+    { value: 0, label: "Esp. Atención Psicoeducativa del Autismo" },
+    { value: 1, label: "Esp. Evaluación Educativa" },
+    {
+      value: 2,
+      label: "Esp. Planificación, Desarrollo y Gestión de Proyectos",
+    },
+    { value: 3, label: "Esp. Derecho Procesal Constitucional" },
+    { value: 4, label: "Esp. Derecho de la Economía" },
+    { value: 5, label: "Esp. Propiedad Intelectual" },
+    { value: 6, label: "Esp. Periodismo Digital" },
+    { value: 7, label: "Esp. Proyectos Educativos Comunitarios" },
+  ];
+
+  const [selectedType, setSelectedType] = useState<ItemValue | null>(null);
+  const [isPostGraduate, setIsPostGraduate] = useState(false);
+  const [isUnderGraduate, setIsUnderGraduate] = useState(false);
+  const [isTeacher, setIsTeacher] = useState(false);
+
+  useEffect(() => {
+    if (selectedType && selectedType.label === "Postgrado") {
+      setIsPostGraduate(true);
+      setIsUnderGraduate(false);
+      setIsTeacher(false);
+    } else if (selectedType && selectedType.label === "Pregrado") {
+      setIsPostGraduate(false);
+      setIsUnderGraduate(true);
+      setIsTeacher(false);
+    } else {
+      setIsPostGraduate(false);
+      setIsUnderGraduate(false);
+      setIsTeacher(true);
+    }
+  }, [selectedType]);
+
+  const handleSelectChange = (event: SelectChangeEvent) => {
+    const selectedValue = Number(event.target.value);
+    const selectedOption = userType.find(
+      (option) => option.value === selectedValue
+    );
+    setSelectedType(selectedOption || null);
+  };
 
   return (
     <>
@@ -67,11 +132,6 @@ export default function RegisterPage() {
           />
           <InputField
             register={register}
-            label="username"
-            placeholder="Nombre de Usuario"
-          />
-          <InputField
-            register={register}
             label="document_id"
             placeholder="Documento de Identidad"
           />
@@ -104,11 +164,57 @@ export default function RegisterPage() {
                 "Las contraseñas deben ser iguales",
             }}
           />
-          {/* <SelectField register={register} label='Tipo de Usuario' errors={errors} values={userType} /> */}
+          <SelectField
+            register={register}
+            label="Tipo de Usuario"
+            errors={errors}
+            values={userType}
+            onChange={handleSelectChange}
+          />
+          {isPostGraduate && (
+            <>
+              <SelectField
+                register={register}
+                label="career"
+                errors={errors}
+                values={postgraduates_carreers}
+              />
+              <label>
+                <input {...register("is_currently_enrolled")} type="checkbox" />
+                Sigo cursando
+              </label>
+            </>
+          )}
+          {isUnderGraduate && (
+            <>
+              <SelectField
+                register={register}
+                label="faculty"
+                errors={errors}
+                values={pregraduates_faculties}
+                placeholder="Facultad"
+              />
+              <SelectField
+                register={register}
+                label="career"
+                errors={errors}
+                values={pregraduates_careers}
+                placeholder="Carrera"
+              />
+            </>
+          )}
 
           <ForwardButton
             text="Registrarse"
-            callback={handleSubmit((values) => registerStudent(values))}
+            callback={handleSubmit((values) => {
+              if (isUnderGraduate) {
+                registerUndergraduateStudent(values);
+              } else if (isPostGraduate) {
+                registerPostGraduateStudent(values);
+              } else if (isTeacher) {
+                registerTeacher(values);
+              }
+            })}
           />
         </div>
       </form>
