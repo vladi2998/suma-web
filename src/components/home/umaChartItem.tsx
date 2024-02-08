@@ -1,6 +1,9 @@
 'use client';
 import Image from 'next/image';
 import umaChartItemImg from '../../../public/WEBP/umaChartItemImg.webp';
+import yellowRoundedImg from '../../../public/WEBP/yellow-rounded.webp';
+import blueRoundedImg from '../../../public/WEBP/blue-rounded.webp';
+import redRoundedImg from '../../../public/WEBP/red-rounded.webp';
 import { StarIcon } from '@heroicons/react/16/solid';
 
 type UmaChartItemProps = {
@@ -49,7 +52,7 @@ export default function UmaChartItem({
 				</div>
 			)}
 			<div
-				className={`relative ${
+				className={`relative z-10 ${
 					main
 						? isPage
 							? 'w-80 xl:w-96'
@@ -63,20 +66,29 @@ export default function UmaChartItem({
 					alt={`adding-img-${name}`}
 					className="w-full h-full rounded-[6rem]"
 				/>
-				{/* {isPage && (
-					<div
-						className={`absolute rounded-full -left-16 ${
-							place === 1
-								? 'bg-blue -top-12 p-32'
-								: place === 2
-								? 'bg-yellow -top-8 p-24'
-								: 'bg-red -bottom-8 p-24'
-						}`}
-					/>
-				)} */}
 			</div>
+			{isPage &&
+				(place === 2 ? (
+					<Image
+						src={yellowRoundedImg}
+						alt={`rounded-img-${name}`}
+						className="absolute -top-24 -left-24 z-0"
+					/>
+				) : place === 1 ? (
+					<Image
+						src={blueRoundedImg}
+						alt={`rounded-img-${name}`}
+						className="absolute -top-24 -left-24 z-0"
+					/>
+				) : (
+					<Image
+						src={redRoundedImg}
+						alt={`rounded-img-${name}`}
+						className="absolute -left-24 z-0"
+					/>
+				))}
 			<div
-				className={`w-full flex flex-col items-center justify-center text-center`}>
+				className={`w-full flex flex-col items-center justify-center text-center z-10`}>
 				{isPage && (
 					<h1 className="text-6xl text-white font-bold my-0 md:my-4 lg:my-8">
 						{place}
