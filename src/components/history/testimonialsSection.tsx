@@ -22,8 +22,15 @@ export default function TestimonialsSection() {
 					<h1 className="w-full text-4xl md:text-7xl font-bold text-center">
 						Testimonios
 					</h1>
-					<div className='w-full flex flex-col space-y-12'>{testimonialsList.map((item, idx) => <TestimonialsItem {...item} index={idx
-					}/>)}</div>
+					<div className="w-full flex flex-col space-y-12">
+						{testimonialsList.map((item, idx) => (
+							<TestimonialsItem
+								{...item}
+								index={idx}
+								key={idx}
+							/>
+						))}
+					</div>
 				</div>
 			</CardContent>
 		</Card>
