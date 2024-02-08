@@ -28,7 +28,7 @@ export default function UmaChartItem({
 	const _stars = Array.from({ length: 5 });
 	return (
 		<div
-			className={`relative flex flex-col items-center justify-center w-auto h-auto space-y-4`}>
+			className={`relative flex flex-col items-center justify-center h-auto space-y-4`}>
 			{/* Stars section */}
 			{!isPage && (
 				<div className="w-full h-1/12 flex items-center justify-start">
@@ -52,10 +52,10 @@ export default function UmaChartItem({
 				className={`relative ${
 					main
 						? isPage
-							? 'w-80 md:w-96'
+							? 'w-80 xl:w-96'
 							: 'w-80'
 						: isPage
-						? 'w-72 md:w-[20rem]'
+						? 'w-72 xl:w-[20rem]'
 						: 'w-72'
 				}`}>
 				<Image
@@ -87,7 +87,7 @@ export default function UmaChartItem({
 				{master && <p className="text-white max-w-full">{master}</p>}
 				<p className="text-white max-w-full ">{role}</p>
 				{isPage && (
-					<p className={`text-white max-w-auto w-80 md:w-96`}>{about}</p>
+					<p className={`text-white max-w-auto w-80 lg:max-w-full`}>{about}</p>
 				)}
 			</div>
 		</div>
