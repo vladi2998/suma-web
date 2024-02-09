@@ -9,7 +9,8 @@ import ForwardButton from '../buttons/forwardButton';
 
 export default function ProfileSection() {
 	return (
-		<Card>
+		<Card className='border-none'>
+			<H1 className='ml-8'>Mi Ruta</H1>
 			<CardContent className="flex flex-col md:flex-row items-center justify-around h-auto py-20">
 				<div className="w-full mt-2 md:mt-0 md:w-1/3 flex items-center justify-center">
 					<Image
