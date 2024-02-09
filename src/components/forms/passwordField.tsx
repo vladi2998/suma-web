@@ -28,7 +28,7 @@ export default function PasswordField({
 	return (
 		<div className="w-full flex flex-col relative">
 			<input
-				className="text-sm md:text-base hover:cursor-pointer hover:scale-105 transform transition duration-300 w-full h-auto bg-light-gray flex flex-row items-center justify-between px-4 py-6 rounded-l-full rounded-r-full"
+				className="text-sm md:text-base hover:cursor-pointer hover:bg-light-gray transform transition duration-300 w-full h-auto bg-slate-300 flex flex-row items-center justify-between px-4 py-6 rounded-l-full rounded-r-full"
 				type={type}
 				{...register(label, validation)}
 				placeholder={placeholder}
@@ -36,13 +36,13 @@ export default function PasswordField({
 			{hide ? (
 				<EyeIcon
 					color="rgb(20 83 45)"
-					className="hover:cursor-pointer absolute h-10 top-4 right-4 hover:scale-105 transform transition duration-300"
+					className="hover:cursor-pointer absolute h-10 top-4 right-4 transform transition duration-300"
 					onClick={handleHidePassword}
 				/>
 			) : (
 				<EyeSlashIcon
 					color="rgb(20 83 45)"
-					className="hover:cursor-pointer absolute h-10 top-4 right-4 hover:scale-105 transform transition duration-300"
+					className="hover:cursor-pointer absolute h-10 top-4 right-4 transform transition duration-300"
 					onClick={handleHidePassword}
 				/>
 			)}

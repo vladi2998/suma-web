@@ -14,7 +14,7 @@ export default function InputField({
 }: InputProps) {
 	return (
 		<input
-			className="text-sm md:text-base hover:cursor-pointer hover:scale-105 transform transition duration-300 w-full h-auto bg-light-gray flex flex-row items-center justify-between px-4 py-6 rounded-l-full rounded-r-full"
+			className="text-sm md:text-base hover:cursor-pointer hover:bg-light-gray transform transition duration-300 w-full h-auto bg-slate-300 flex flex-row items-center justify-between px-4 py-6 rounded-l-full rounded-r-full"
 			{...register(label, { required })}
 			placeholder={placeholder}
 		/>
