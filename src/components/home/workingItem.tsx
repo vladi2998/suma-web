@@ -8,7 +8,7 @@ type WorkingItemsProps = {
 	place?: string;
 	agency?: string;
 	description: string;
-	colunm?: boolean;
+	column?: boolean;
 	iconColor?: string;
 };
 
@@ -17,15 +17,15 @@ export default function WorkingSectionItem({
 	place,
 	agency,
 	description,
-	colunm = false,
+	column = false,
 	iconColor = 'rgb(203 213 225)',
 }: WorkingItemsProps) {
-	const iconSize = colunm ? 132 : 72;
+	const iconSize = column ? 132 : 72;
 	return (
 		<Card className="rounded-4xl">
 			<CardContent
 				className={`bg-slate-200 flex items-center rounded-4xl p-8 ${
-					colunm
+					column
 						? 'flex-col h-128 justify-around'
 						: 'flex-row space-x-4 justify-between'
 				}`}>
@@ -35,7 +35,7 @@ export default function WorkingSectionItem({
 				/>
 				<div
 					className={`w-full flex flex-col items-start justify-start ${
-						colunm ? 'space-y-8' : 'space-y-4'
+						column ? 'space-y-8' : 'space-y-4'
 					}`}>
 					<h1 className="w-full text-2xl font-bold text-light-green">
 						{title}
@@ -43,7 +43,7 @@ export default function WorkingSectionItem({
 					{place && <p className="w-full text-xl">{place}</p>}
 					{agency && <p className="w-full text-xl">{agency}</p>}
 					<p className="w-full text-xl">{description}</p>
-					{colunm && (
+					{column && (
 						<div className="w-full md:w-2/3 mx-auto">
 							<Link href="/working">
 								<ForwardButton text="Ver más" />

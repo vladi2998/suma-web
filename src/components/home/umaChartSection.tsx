@@ -57,7 +57,7 @@ export default function UmaChartSection({
 
 			<div
 				className={`w-full h-auto flex flex-col lg:flex-row ${
-					isPage ? 'justify-around' : 'justify-center lg:space-x-12'
+					isPage ? 'justify-around space-y-12' : 'justify-center lg:space-x-12'
 				} items-center`}>
 				{umaItems.map((item, idx) => (
 					<UmaChartItem

@@ -4,7 +4,7 @@ import ProfileSection from '@/components/my-route/profileSection';
 
 export default function MyRoutePage() {
 	return (
-		<>
+		<div className='w-full space-y-4 pb-12'>
 			<div className="w-full px-4 my-4">
 				<ProfileSection />
 			</div>
@@ -14,6 +14,6 @@ export default function MyRoutePage() {
 			<div className="w-full px-4 my-4">
 				<MyLearningRouteSection />
 			</div>
-		</>
+		</div>
 	);
 }

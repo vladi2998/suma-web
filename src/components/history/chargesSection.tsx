@@ -36,7 +36,7 @@ export default function ChargesSection() {
 		<div className="relative w-screen h-auto bg-light-gray">
 			<Image
 				src={bgMountainsMobile}
-				className="object-fill md:hidden"
+				className="object-fill hidden lg:block"
 				alt="image-mountains-bg"
 				layout="fill"
 			/>

@@ -37,7 +37,7 @@ export function ProfileDataCard() {
 	return (
 		<Tabs
 			defaultValue="account"
-			className="w-full h-screen">
+			className="relative w-full h-screen">
 			<TabsList className="grid w-full grid-cols-2">
 				<TabsTrigger value="account">Cuenta</TabsTrigger>
 				<TabsTrigger value="credentials">Credenciales</TabsTrigger>

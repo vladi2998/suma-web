@@ -23,7 +23,7 @@ export default function ProfileSection() {
 				<div className="w-full md:w-3/5 h-full flex flex-col justify-around space-y-4 md:space-y-12">
 					<div className="w-full flex flex-col md:flex-row items-center justify-between space-y-4">
 						<div className="w-full md:w-1/2 text-center md:text-start">
-							<h1 className="text-3xl font-bold">Juan Pérez</h1>
+							<h1 className="text-3xl font-bold">Carolina López</h1>
 							<h2 className="text-2xl">Abogado</h2>
 						</div>
 						<div className="w-full md:w-1/2">
