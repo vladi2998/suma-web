@@ -1,3 +1,4 @@
+'use client';
 import { StarIcon } from '@heroicons/react/16/solid';
 import { Card, CardContent } from '../ui/card';
 import Link from 'next/link';
@@ -20,7 +21,6 @@ export default function WorkingSectionItem({
 	column = false,
 	iconColor = 'rgb(203 213 225)',
 }: WorkingItemsProps) {
-	const iconSize = column ? 132 : 72;
 	return (
 		<Card className="rounded-4xl">
 			<CardContent
@@ -30,7 +30,7 @@ export default function WorkingSectionItem({
 						: 'flex-row space-x-4 justify-between'
 				}`}>
 				<StarIcon
-					height={iconSize}
+					className="w-32 lg:42"
 					color={iconColor}
 				/>
 				<div

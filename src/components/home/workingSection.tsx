@@ -5,6 +5,7 @@ import H1 from '../H1';
 import WorkingSectionItem from './workingItem';
 import bgMountains from '../../../public/PNG/workingBackgroundFHD.png';
 import useWindowDimensions from '@/hooks/useWindowsDimensions';
+import { useEffect, useState } from 'react';
 
 type WorkingSectionProps = {
 	showTitle?: boolean;
@@ -12,7 +13,11 @@ type WorkingSectionProps = {
 export default function WorkingSection({
 	showTitle = true,
 }: WorkingSectionProps) {
-	const { width } = useWindowDimensions();
+	const [width, setWidth] = useState(1024);
+	const handleResize = () => setWidth(window.innerWidth);
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+	});
 
 	return (
 		<>
@@ -38,7 +43,7 @@ export default function WorkingSection({
 								agency="Agencia"
 								iconColor="rgb(54 110 20)"
 								description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi."
-								column={width >= 1024 ? false : true}
+								column={width && width >= 1024 ? false : true}
 							/>
 							<WorkingSectionItem
 								title="Dirección de arte"
@@ -46,14 +51,14 @@ export default function WorkingSection({
 								agency="Agencia"
 								iconColor="rgb(165 180 252)"
 								description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi."
-								column={width >= 1024 ? false : true}
+								column={width && width >= 1024 ? false : true}
 							/>
 							<WorkingSectionItem
 								title="Dirección de arte"
 								place="Lugar"
 								agency="Agencia"
 								description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi."
-								column={width >= 1024 ? false : true}
+								column={width && width >= 1024 ? false : true}
 							/>
 						</div>
 						<div className="w-3/4 lg:w-2/5 flex flex-col items-center justify-center">
