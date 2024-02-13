@@ -171,20 +171,6 @@ export default function RegisterPage() {
             values={userType}
             onChange={handleSelectChange}
           />
-          {isPostGraduate && (
-            <>
-              <SelectField
-                register={register}
-                label="career"
-                errors={errors}
-                values={postgraduates_carreers}
-              />
-              <label>
-                <input {...register("is_currently_enrolled")} type="checkbox" />
-                Sigo cursando
-              </label>
-            </>
-          )}
           {isUnderGraduate && (
             <>
               <SelectField
@@ -203,6 +189,20 @@ export default function RegisterPage() {
               />
             </>
           )}
+          {isPostGraduate && (
+            <SelectField
+              register={register}
+              label="career"
+              errors={errors}
+              values={postgraduates_carreers}
+            />
+          )}
+          {isPostGraduate || isUnderGraduate ? (
+            <label>
+              <input {...register("is_currently_enrolled")} type="checkbox" />
+              Sigo cursando
+            </label>
+          ) : null}
 
           <ForwardButton
             text="Registrarse"
