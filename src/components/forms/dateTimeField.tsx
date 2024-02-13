@@ -1,20 +1,6 @@
 'use client';
+import { Path, UseFormRegister } from 'react-hook-form';
 
-import { format } from 'date-fns';
-
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from '@/components/ui/popover';
-import { CalendarDaysIcon } from '@heroicons/react/16/solid';
-
-import { Path, UseFormRegister, useFormContext } from 'react-hook-form';
-import { useState } from 'react';
 
 type InputProps = {
 	label: Path<any>;
