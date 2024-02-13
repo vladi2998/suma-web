@@ -46,8 +46,8 @@ export default function LoginPage() {
 
 					<InputField
 						register={register}
-						label="username"
-						placeholder="Usuario"
+						label="email"
+						placeholder="Correo Electrónico"
 					/>
 					<PasswordField
 						register={register}
