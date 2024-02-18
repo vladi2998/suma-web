@@ -26,7 +26,7 @@ export default function WorkingSectionItem({
 			<CardContent
 				className={`bg-slate-200 flex items-center rounded-4xl p-8 ${
 					column
-						? 'flex-col h-128 justify-around'
+						? 'flex-col h-auto sm:h-128 justify-around'
 						: 'flex-row space-x-4 justify-between'
 				}`}>
 				<StarIcon
@@ -43,13 +43,12 @@ export default function WorkingSectionItem({
 					{place && <p className="w-full text-xl">{place}</p>}
 					{agency && <p className="w-full text-xl">{agency}</p>}
 					<p className="w-full text-xl">{description}</p>
-					{column && (
-						<div className="w-full md:w-2/3 mx-auto">
-							<Link href="/working">
-								<ForwardButton text="Ver más" />
-							</Link>
-						</div>
-					)}
+
+					<div className="w-full mx-auto">
+						<Link href="/working">
+							<ForwardButton text="Ver más" />
+						</Link>
+					</div>
 				</div>
 			</CardContent>
 		</Card>

@@ -20,7 +20,7 @@ export default function Page() {
 			<div className="w-full px-4">
 				<AddingSection />
 			</div>
-			<WorkingSection />
+			<WorkingSection showTitle={true} />
 			<UmaChartSection />
 		</PagesLayout>
 	);

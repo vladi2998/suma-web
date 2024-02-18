@@ -11,7 +11,7 @@ export default function FooterComponent() {
 	const logoSize = 40;
 	return (
 		<div className="relative w-full h-20 bg-white flex flex-row justify-center items-center border-b-8 border-dark-green">
-			<div className="w-1/2 md:w-1/5 flex flex-row justify-around items-center">
+			<div className="w-full sm:w-1/2 flex flex-row justify-around items-center">
 				<Link href="https://www.facebook.com/UnivMonteavila/?locale=es_LA">
 					<Image
 						src={facebookLogo}

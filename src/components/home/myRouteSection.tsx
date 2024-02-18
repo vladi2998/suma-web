@@ -11,7 +11,7 @@ export default function MyRouteSection() {
 				<h1 className="w-full text-xl md:text-4xl lg:text-8xl font-bold text-start">
 					Plataforma de Networking
 				</h1>
-				<p className="w-full text-start">
+				<p className="w-full text-start text-sm sm:text-xl">
 					para estudiantes y egresados de la universidad Monteávila
 				</p>
 			</div>

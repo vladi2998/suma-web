@@ -5,7 +5,7 @@ import { CameraIcon } from '@heroicons/react/16/solid';
 
 export default function MyLearningRouteSection() {
 	return (
-		<div className="relative w-full h-72 md:h-96 lg:h-132 xl:h-screen md:flex items-start justify-center mt-2">
+		<div className="relative w-full h-auto sm:h-72 md:h-96 lg:h-132 xl:h-screen md:flex items-start justify-center mt-2">
 			<H1 className="ml-8 mb-8">Ruta de Aprendizaje</H1>
 			<div className="w-full hidden md:block">
 				<Image

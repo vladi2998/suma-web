@@ -7,7 +7,7 @@ export default function UmaInfoSection() {
 		<Card>
 			<CardContent className="flex flex-col md:flex-row items-center justify-around h-auto py-20">
 				<div className="w-full md:w-3/5 h-full flex flex-col justify-around space-y-12">
-					<H1>Universidad Monteávila</H1>
+					<H1>¿Para qué sirve Sumados?</H1>
 					<p className="text-xl md:text-2xl">
 						Sumados es una plataforma digital de networking destinada a
 						estudiantes y egresados de la Universidad Monteávila. Se enmarca en

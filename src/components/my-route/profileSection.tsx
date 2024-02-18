@@ -28,7 +28,7 @@ export default function ProfileSection() {
 						</div>
 						<div className="w-full md:w-1/2">
 							<Link href="/connect/">
-								<ForwardButton text="Conocectar" />
+								<ForwardButton text="Editar mi ruta" />
 							</Link>
 						</div>
 					</div>

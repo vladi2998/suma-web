@@ -13,12 +13,12 @@ export default function HistoryPage() {
 				<UmaInfoSection />
 			</div>
 			<ChargesSection />
-			<div className="w-full px-4 my-2">
+			{/* <div className="w-full px-4 my-2">
 				<SumadosInfoSection />
-			</div>
-			<div className="w-full px-4 my-2">
+			</div> */}
+			{/* <div className="w-full px-4 my-2">
 				<SocialMediaSection />
-			</div>
+			</div> */}
 			<TestimonialsSection />
 		</>
 	);
