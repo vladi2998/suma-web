@@ -1,10 +1,15 @@
+'use client';
 import BrandingSection from '@/components/my-route/brandingSection';
 import MyLearningRouteSection from '@/components/my-route/myLearningRouteSection';
 import ProfileSection from '@/components/my-route/profileSection';
+import { UploadFileModal } from '@/components/my-route/uploadFileModal';
 
 export default function MyRoutePage() {
 	return (
-		<div className='w-full space-y-4 pb-12'>
+		<div className="w-full space-y-4 pb-12">
+			<div className="w-full px-4 my-4">
+				<UploadFileModal />
+			</div>
 			<div className="w-full px-4 my-4">
 				<ProfileSection />
 			</div>
