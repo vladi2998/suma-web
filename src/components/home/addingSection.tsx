@@ -4,6 +4,8 @@ import Link from 'next/link';
 import AddingItem from './addingItem';
 import H1 from '../H1';
 import ForwardButton from '../buttons/forwardButton';
+import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
+import emptyAddingImg from '../../../public/PNG/profile_bg.png';
 
 type AddingSectionProps = {
 	showActionButton?: boolean;
@@ -18,41 +20,31 @@ export default function AddingSection({
 			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
+			img: addingItemImg,
 		},
 		{
-			name: 'José De Oliveira',
+			name: 'Pedro Pérez',
 			career: 'Lic en Comunicación Social',
 			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
+			img: emptyAddingImg,
 		},
 		{
-			name: 'José De Oliveira',
+			name: 'María Martínez',
 			career: 'Lic en Comunicación Social',
 			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
+			img: emptyAddingImg,
 		},
 		{
-			name: 'José De Oliveira',
+			name: 'Luis Lagos',
 			career: 'Lic en Comunicación Social',
 			master: 'Maestrando en Innovación Educativa',
 			specialist: 'Project Manager',
 			href: '/',
-		},
-		{
-			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social',
-			master: 'Maestrando en Innovación Educativa',
-			specialist: 'Project Manager',
-			href: '/',
-		},
-		{
-			name: 'José De Oliveira',
-			career: 'Lic en Comunicación Social',
-			master: 'Maestrando en Innovación Educativa',
-			specialist: 'Project Manager',
-			href: '/',
+			img: emptyAddingImg,
 		},
 	];
 

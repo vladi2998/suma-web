@@ -1,10 +1,7 @@
 'use client';
-import { Card, CardContent } from '@/components/ui/card';
-import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from '../ui/button';
-import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
-import ForwardButton from '../buttons/forwardButton';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { UserProfileModal } from '../connect/userProfileModal';
 
 type AddingProps = {
 	name: string;
@@ -12,6 +9,7 @@ type AddingProps = {
 	master?: string;
 	specialist?: string;
 	href: string;
+	img: string | StaticImport;
 };
 export default function AddingItem({
 	name,
@@ -19,12 +17,13 @@ export default function AddingItem({
 	master,
 	specialist,
 	href,
+	img
 }: AddingProps) {
 	return (
 		<div className="flex flex-col w-80 xl:w-96 h-auto space-y-12 mb-8">
 			<div className="w-full h-6/12 relative">
 				<Image
-					src={addingItemImg}
+					src={img}
 					alt={`adding-img-${name}`}
 					className="w-full h-full rounded-[8rem]"
 				/>
@@ -36,11 +35,7 @@ export default function AddingItem({
 				<p>{specialist}</p>
 			</div>
 			<div className="w-full h-1/12 flex items-center justify-center">
-				<Link
-					href={href}
-					className="w-4/5">
-					<ForwardButton text="Sumemos" />
-				</Link>
+				<UserProfileModal />
 			</div>
 		</div>
 	);
