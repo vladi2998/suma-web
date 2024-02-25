@@ -1,5 +1,6 @@
 import plusIcon from '../../../public/PNG/plus-icon.png';
 import Image from 'next/image';
+import { Button } from '../ui/button';
 
 export default function ForwardButton({
 	text,
@@ -9,7 +10,7 @@ export default function ForwardButton({
 	callback?: () => void;
 }) {
 	return (
-		<div
+		<Button
 			onClick={callback}
 			className="text-sm md:text-base hover:cursor-pointer hover:bg-light-green transform transition duration-300 w-full h-auto bg-dark-green flex flex-row items-center justify-between px-4 py-4 rounded-l-full rounded-r-full">
 			<p className="pl-2 w-3/4 font-bold text-white text-start text- md:text-xl">
@@ -20,6 +21,6 @@ export default function ForwardButton({
 				src={plusIcon}
 				alt="Picture of the author"
 			/>
-		</div>
+		</Button>
 	);
 }
