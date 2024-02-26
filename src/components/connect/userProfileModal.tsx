@@ -154,7 +154,7 @@ export function UserProfileModal() {
 						</div>
 						<div className="w-full flex flex-wrap justify-around items-center">
 							{defaultImageRoute.map((item, idx) => (
-								<HoverCard>
+								<HoverCard key={idx}>
 									<HoverCardTrigger asChild>
 										<div
 											className="flex flex-col w-auto items-center justify-center hover:cursor-pointer"
