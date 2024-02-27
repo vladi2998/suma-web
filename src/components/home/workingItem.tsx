@@ -3,14 +3,18 @@ import { StarIcon } from '@heroicons/react/16/solid';
 import { Card, CardContent } from '../ui/card';
 import Link from 'next/link';
 import ForwardButton from '../buttons/forwardButton';
+import { useState } from 'react';
 
 type WorkingItemsProps = {
 	title: string;
 	place?: string;
 	agency?: string;
 	description: string;
+	extra_info: string;
 	column?: boolean;
 	iconColor?: string;
+	onSelectWork?: any;
+	showExtraInfo?: boolean;
 };
 
 export default function WorkingSectionItem({
@@ -18,15 +22,20 @@ export default function WorkingSectionItem({
 	place,
 	agency,
 	description,
+	extra_info,
 	column = false,
 	iconColor = 'rgb(203 213 225)',
+	onSelectWork,
+	showExtraInfo,
 }: WorkingItemsProps) {
 	return (
 		<Card className="rounded-4xl">
 			<CardContent
 				className={`bg-slate-200 flex items-center rounded-4xl p-8 ${
 					column
-						? 'flex-col h-auto sm:h-128 justify-around'
+						? `flex-col h-auto ${
+								showExtraInfo ? 'h-auto' : 'sm:h-128'
+						  } justify-around`
 						: 'flex-row space-x-4 justify-between'
 				}`}>
 				<StarIcon
@@ -37,17 +46,25 @@ export default function WorkingSectionItem({
 					className={`w-full flex flex-col items-start justify-start ${
 						column ? 'space-y-8' : 'space-y-4'
 					}`}>
-					<h1 className="w-full text-2xl font-bold text-light-green">
+					<h1 className="w-full text-2xl font-bold text-light-green uppercase">
 						{title}
 					</h1>
 					{place && <p className="w-full text-xl">{place}</p>}
 					{agency && <p className="w-full text-xl">{agency}</p>}
 					<p className="w-full text-xl">{description}</p>
+					{showExtraInfo && <p className="w-full text-xl whitespace-break-spaces">{extra_info}</p>}
 
 					<div className="w-full mx-auto">
-						<Link href="/working">
+						{onSelectWork ? (
+							<ForwardButton
+								text="Ver más"
+								callback={() =>
+									onSelectWork({ title, place, agency, description, extra_info, iconColor })
+								}
+							/>
+						) : (
 							<ForwardButton text="Ver más" />
-						</Link>
+						)}
 					</div>
 				</div>
 			</CardContent>
