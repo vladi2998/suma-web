@@ -182,14 +182,16 @@ export default function RegisterPage() {
 						values={userType}
 						onChange={handleSelectChange}
 					/>
+					{(isPostGraduate) &&(
+						<SelectField
+						register={register}
+						label="career"
+						errors={errors}
+						values={postgraduates_carreers}
+					/>
+					)}
 					{(isPostGraduate || isUnderGraduate) && (
 						<>
-							<SelectField
-								register={register}
-								label="career"
-								errors={errors}
-								values={postgraduates_carreers}
-							/>
 							<div className="w-full flex justify-around items-center">
 								<div className="flex items-center justify-around w-1/2">
 									<CheckboxField
