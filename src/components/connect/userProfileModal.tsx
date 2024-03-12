@@ -19,6 +19,7 @@ import {
 	HoverCardContent,
 	HoverCardTrigger,
 } from '../ui/hover-card';
+import plusIcon from '../../../public/PNG/plus-icon.png';
 
 export function UserProfileModal() {
 	const { register, handleSubmit } = useForm({
@@ -68,7 +69,16 @@ export function UserProfileModal() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant="default">Sumemos</Button>
+				<Button variant="suma">
+					<p className="pl-2 w-3/4 font-bold text-white text-start text- md:text-xl">
+						Sumemos
+					</p>
+					<Image
+						className="bg-white rounded-full p-1 w-8 h-8"
+						src={plusIcon}
+						alt="Picture of the author"
+					/>
+				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[1280px] max-h-screen bg-transparent border-none">
 				<div className="flex flex-col w-full h-full overflow-y-scroll max-h-screen no-scrollbar space-y-4">

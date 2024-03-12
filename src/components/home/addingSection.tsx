@@ -46,6 +46,22 @@ export default function AddingSection({
 			href: '/',
 			img: emptyAddingImg,
 		},
+		{
+			name: 'Alejandra Alvarado',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
+			specialist: 'Project Manager',
+			href: '/',
+			img: emptyAddingImg,
+		},
+		{
+			name: 'Carlos Costa',
+			career: 'Lic en Comunicación Social',
+			master: 'Maestrando en Innovación Educativa',
+			specialist: 'Project Manager',
+			href: '/',
+			img: emptyAddingImg,
+		},
 	];
 
 	return (
