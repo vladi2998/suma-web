@@ -1,15 +1,16 @@
 'use client';
 import Image from 'next/image';
-import umaChartItemImg from '../../../public/WEBP/umaChartItemImg.webp';
 import yellowRoundedImg from '../../../public/WEBP/yellow-rounded.webp';
 import blueRoundedImg from '../../../public/WEBP/blue-rounded.webp';
 import redRoundedImg from '../../../public/WEBP/red-rounded.webp';
 import { StarIcon } from '@heroicons/react/16/solid';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 type UmaChartItemProps = {
 	stars: number;
 	name: string;
 	position: string;
+	img: string | StaticImport;
 	master?: string;
 	role: string;
 	main?: boolean;
@@ -21,6 +22,7 @@ export default function UmaChartItem({
 	stars,
 	name,
 	position,
+	img,
 	master,
 	role,
 	main,
@@ -62,7 +64,7 @@ export default function UmaChartItem({
 						: 'w-72'
 				}`}>
 				<Image
-					src={umaChartItemImg}
+					src={img}
 					alt={`adding-img-${name}`}
 					className="w-full h-full rounded-[6rem]"
 				/>

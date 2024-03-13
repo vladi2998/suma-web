@@ -1,5 +1,8 @@
 'use client';
 
+import umaChartItemImg from '../../../public/WEBP/umaChartItemImg.webp';
+import emptyAddingImg from '../../../public/PNG/profile_bg.png';
+
 import H1 from '../H1';
 import UmaChartItem from './umaChartItem';
 
@@ -13,8 +16,9 @@ export default function UmaChartSection({
 	const umaItems = [
 		{
 			stars: 3,
-			name: 'José De Oliveira',
+			name: 'Pedro Pérez',
 			position: 'Lic en Comunicación Social ',
+			img: emptyAddingImg,
 			// master: 'Maestrando en Innovación Educativa',
 			role: 'Project Manager',
 			main: false,
@@ -26,6 +30,7 @@ export default function UmaChartSection({
 			stars: 4,
 			name: 'José De Oliveira',
 			position: 'Lic en Comunicación Social',
+			img: umaChartItemImg,
 			// master: 'Maestrando en Innovación Educativa',
 			role: 'Project Manager',
 			main: true,
@@ -35,8 +40,9 @@ export default function UmaChartSection({
 		},
 		{
 			stars: 5,
-			name: 'José De Oliveira',
+			name: 'María Martínez',
 			position: 'Lic en Comunicación Social',
+			img: emptyAddingImg,
 			// master: 'Maestrando en Innovación Educativa',
 			role: 'Project Manager',
 			main: false,

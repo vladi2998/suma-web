@@ -1,12 +1,13 @@
 'use client';
 import Image from 'next/image';
-import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 type AddingProps = {
 	name: string;
 	role: string;
+	img: string | StaticImport;
 };
-export default function ChargesItem({ name, role }: AddingProps) {
+export default function ChargesItem({ name, role, img }: AddingProps) {
 	return (
 		<div className="flex flex-col w-80 xl:w-96 h-auto space-y-12 mb-8">
 			<div className="w-full h-5/12 flex flex-col items-center text-center">
@@ -15,7 +16,7 @@ export default function ChargesItem({ name, role }: AddingProps) {
 			</div>
 			<div className="w-full h-6/12 relative">
 				<Image
-					src={addingItemImg}
+					src={img}
 					alt={`adding-img-${name}`}
 					className="w-full h-full rounded-[8rem]"
 				/>

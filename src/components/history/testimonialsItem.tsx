@@ -1,19 +1,21 @@
 import Image from 'next/image';
-import H1 from '../H1';
+
 import { Card, CardContent } from '../ui/card';
-import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 type TestimonialsItemProps = {
 	name: string;
 	career: string;
 	testimonial: string;
 	index: number;
+	img: string | StaticImport;
 };
 export default function TestimonialsItem({
 	name,
 	career,
 	testimonial,
 	index,
+	img,
 }: TestimonialsItemProps) {
 	return (
 		<Card className="border-none">
@@ -26,7 +28,7 @@ export default function TestimonialsItem({
 						index % 2 === 0 ? 'justify-start' : 'justify-end'
 					}`}>
 					<Image
-						src={addingItemImg}
+						src={img}
 						className="w-96 h-auto my-2 rounded-8xl"
 						alt={`history-section-img`}
 						sizes="120vw"

@@ -69,8 +69,8 @@ export function UserProfileModal() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant="suma">
-					<p className="pl-2 w-3/4 font-bold text-white text-start text- md:text-xl">
+				<Button variant="custom" size="custom">
+					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
 						Sumemos
 					</p>
 					<Image

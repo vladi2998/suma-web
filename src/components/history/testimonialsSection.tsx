@@ -1,16 +1,21 @@
+import emptyAddingImg from '../../../public/PNG/profile_bg.png';
+
 import { Card, CardContent } from '../ui/card';
 import TestimonialsItem from './testimonialsItem';
+
 export default function TestimonialsSection() {
 	const testimonialsList = [
 		{
 			name: 'Alejandra López',
 			career: 'Lic. Comuniación Social',
+			img: emptyAddingImg,
 			testimonial:
 				'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat',
 		},
 		{
 			name: 'Pedro Pérez',
 			career: 'Lic. Comuniación Social',
+			img: emptyAddingImg,
 			testimonial:
 				'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat',
 		},
