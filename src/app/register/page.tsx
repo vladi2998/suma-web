@@ -30,7 +30,7 @@ export default function RegisterPage() {
 			password: '',
 			user_type: 2,
 			is_currently_enrolled: false,
-			graduate_date: undefined,
+			graduate_year: undefined,
 		},
 	});
 
@@ -100,6 +100,16 @@ export default function RegisterPage() {
 
 	const handleCheckboxChange = () =>
 		setIsCurrentlyEnrrolled(!getValues('is_currently_enrolled'));
+
+	const getListOfYears = () => {
+		const currentYear = new Date().getFullYear();
+		const fundationYearUMA = 1998;
+		const years = [];
+		for (let i = currentYear; i >= fundationYearUMA; i--) {
+			years.push({ value: i, label: `${i}` });
+		}
+		return years;
+	};
 
 	return (
 		<>
@@ -182,13 +192,13 @@ export default function RegisterPage() {
 						values={userType}
 						onChange={handleSelectChange}
 					/>
-					{(isPostGraduate) &&(
+					{isPostGraduate && (
 						<SelectField
-						register={register}
-						label="career"
-						errors={errors}
-						values={postgraduates_carreers}
-					/>
+							register={register}
+							label="career"
+							errors={errors}
+							values={postgraduates_carreers}
+						/>
 					)}
 					{(isPostGraduate || isUnderGraduate) && (
 						<>
@@ -204,11 +214,12 @@ export default function RegisterPage() {
 								</div>
 								{!isCurrentlyEnrrolled && (
 									<div className="w-1/2">
-										<DateTimeField
+										<SelectField
 											register={register}
-											label="graduate_date"
+											label="graduate_year"
 											errors={errors}
-											placeholder="Fecha de Graduacion"
+											values={getListOfYears()}
+											placeholder="Año de Graduacion"
 										/>
 									</div>
 								)}
@@ -237,6 +248,9 @@ export default function RegisterPage() {
 					<ForwardButton
 						text="Registrarse"
 						callback={handleSubmit((values) => {
+							if (values.is_currently_enrolled){
+								values.graduate_year = undefined;
+							};
 							if (isUnderGraduate) {
 								registerUndergraduateStudent(values);
 							} else if (isPostGraduate) {
