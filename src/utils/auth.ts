@@ -1,5 +1,4 @@
 import axiosConfigInstance from '@/config/axiosCofig';
-import { log } from 'console';
 
 export const getUser = async (data: any) => {
 	try {
@@ -9,8 +8,8 @@ export const getUser = async (data: any) => {
 		} else {
 			return null;
 		}
-	} catch (err) {
-		console.log('error: ', err);
+	} catch (err: any) {
+		console.log('error loquesea: ', err.response);
 		return null;
 	}
 };
@@ -22,8 +21,9 @@ export const registerUndergraduateStudent = async (data: any) => {
 			data
 		);
 		return request;
-	} catch (err) {
-		console.log('error: ', err);
+	} catch (err: any) {
+		console.log('error: ', err.response);
+		return Promise.reject(err.response.data);
 	}
 };
 
@@ -34,8 +34,9 @@ export const registerPostGraduateStudent = async (data: any) => {
 			data
 		);
 		return request;
-	} catch (err) {
+	} catch (err: any) {
 		console.log('error: ', err);
+		return Promise.reject(err.response.data);
 	}
 };
 
@@ -43,7 +44,8 @@ export const registerTeacher = async (data: any) => {
 	try {
 		const request = await axiosConfigInstance.post('/register/teacher/', data);
 		return request;
-	} catch (err) {
+	} catch (err: any) {
 		console.log('error: ', err);
+		return Promise.reject(err.response.data);
 	}
 };
