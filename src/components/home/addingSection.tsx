@@ -14,7 +14,7 @@ type AddingSectionProps = {
 export default function AddingSection({
 	showActionButton = true,
 }: AddingSectionProps) {
-	const [addingSectionList, setAddingSectionList] = useState([]);
+	const [addingSectionList, setAddingSectionList] = useState<any[]>([]);
 
 	useEffect(() => {
 		axiosConfigInstance
@@ -22,7 +22,7 @@ export default function AddingSection({
 			.then((response) => {
 				console.log(response);
 
-				const data = response.data.map((teacher) => ({
+				const data = response.data.map((teacher: any) => ({
 					name: teacher.user.first_name,
 					career: teacher.career,
 					master: teacher.master,
