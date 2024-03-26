@@ -6,11 +6,7 @@ import sumateLogo from '../../../public/PNG/sumados-logo.png';
 import ForwardButton from '@/components/buttons/forwardButton';
 import { useForm } from 'react-hook-form';
 import InputField from '@/components/forms/inputField';
-import {
-	registerUndergraduateStudent,
-	registerPostGraduateStudent,
-	registerTeacher,
-} from '@/utils/auth';
+import { registerStudent, registerTeacher } from '@/utils/auth';
 import PasswordField from '@/components/forms/passwordField';
 import SelectField, { ItemValue } from '@/components/forms/inputSelect';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -20,6 +16,7 @@ import { get } from 'http';
 import { set } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import Loader from '@/components/loader';
+import axiosConfigInstance from '@/config/axiosCofig';
 
 type SelectChangeEvent = ChangeEvent<HTMLSelectElement>;
 
@@ -34,9 +31,13 @@ export default function RegisterPage() {
 			user: {
 				password: '',
 				user_type: 0,
-				is_currently_enrolled: false,
 			},
-			graduate_year: undefined,
+			is_currently_enrolled: false,
+			postgraduate_too: false,
+			undergraduate_program: undefined,
+			undergraduate_graduation_date: undefined,
+			postgraduate_program: undefined,
+			postgraduate_graduation_date: undefined,
 		},
 	});
 
@@ -53,26 +54,47 @@ export default function RegisterPage() {
 		{ value: 3, label: 'Ciencias Jurídicas y Políticas' },
 	];
 
-	const pregraduates_careers: ItemValue[] = [
-		{ value: 0, label: 'Comunicación Social' },
-		{ value: 2, label: 'Educación' },
-		{ value: 5, label: 'Derecho' },
-		{ value: 6, label: 'Ciencias Administrativas' },
-	];
+	const [pregraduates_careers, setPregraduatesCareers] = useState<ItemValue[]>(
+		[]
+	);
+	const [postgraduates_carreers, setPostgraduates_carreers] = useState<
+		ItemValue[]
+	>([]);
 
-	const postgraduates_carreers: ItemValue[] = [
-		{ value: 0, label: 'Esp. Atención Psicoeducativa del Autismo' },
-		{ value: 1, label: 'Esp. Evaluación Educativa' },
-		{
-			value: 2,
-			label: 'Esp. Planificación, Desarrollo y Gestión de Proyectos',
-		},
-		{ value: 3, label: 'Esp. Derecho Procesal Constitucional' },
-		{ value: 4, label: 'Esp. Derecho de la Economía' },
-		{ value: 5, label: 'Esp. Propiedad Intelectual' },
-		{ value: 6, label: 'Esp. Periodismo Digital' },
-		{ value: 7, label: 'Esp. Proyectos Educativos Comunitarios' },
-	];
+	useEffect(() => {
+		async function getPregraduatesCareers() {
+			try {
+				const response = await axiosConfigInstance.get(
+					'programs/undergraduate/'
+				);
+				const data: ItemValue[] = response.data.map((item: any) => ({
+					value: item.id,
+					label: item.name,
+				}));
+				setPregraduatesCareers(data);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		async function getPostgraduatesCareers() {
+			try {
+				const response = await axiosConfigInstance.get(
+					'programs/postgraduate/'
+				);
+				const data: ItemValue[] = response.data.map((item: any) => ({
+					value: item.id,
+					label: item.name,
+				}));
+				setPostgraduates_carreers(data);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+
+		getPregraduatesCareers();
+		getPostgraduatesCareers();
+	}, []);
 
 	const [selectedType, setSelectedType] = useState<ItemValue | null>(
 		userType[0]
@@ -111,7 +133,12 @@ export default function RegisterPage() {
 	};
 
 	const handleCheckboxChange = () =>
-		setIsCurrentlyEnrrolled(!getValues('user.is_currently_enrolled'));
+		setIsCurrentlyEnrrolled(!getValues('is_currently_enrolled'));
+
+	const handleCheckboxPostGraduateTooChange = () => {
+		setIsPostGraduate(!isPostGraduate);
+		setIsCurrentlyEnrrolled(!getValues('postgraduate_too'));
+	};
 
 	const getListOfYears = () => {
 		const currentYear = new Date().getFullYear();
@@ -206,42 +233,9 @@ export default function RegisterPage() {
 						values={userType}
 						onChange={handleSelectChange}
 					/>
-					{isPostGraduate && (
-						<SelectField
-							register={register}
-							label="career"
-							errors={errors}
-							values={postgraduates_carreers}
-						/>
-					)}
-					{(isPostGraduate || isUnderGraduate) && (
-						<>
-							<div className="w-full flex justify-around items-center">
-								<div className="flex items-center justify-around w-1/2">
-									<CheckboxField
-										register={register}
-										tag="Sigo Cursando"
-										label="user.is_currently_enrolled"
-										errors={errors}
-										onClick={handleCheckboxChange}
-									/>
-								</div>
-								{!isCurrentlyEnrrolled && (
-									<div className="w-1/2">
-										<SelectField
-											register={register}
-											label="graduate_year"
-											errors={errors}
-											values={getListOfYears()}
-											placeholder="Año de Graduacion"
-										/>
-									</div>
-								)}
-							</div>
-						</>
-					)}
 					{isUnderGraduate && (
 						<>
+							{' '}
 							<SelectField
 								register={register}
 								label="faculty"
@@ -251,11 +245,80 @@ export default function RegisterPage() {
 							/>
 							<SelectField
 								register={register}
-								label="career"
+								label="undergraduate_program"
 								errors={errors}
 								values={pregraduates_careers}
-								placeholder="Carrera"
+								placeholder="Carrera de Pregrado"
 							/>
+							<div className="w-full flex justify-around items-center">
+								{!isPostGraduate && (
+									<div className="flex items-center justify-around w-1/2">
+										<CheckboxField
+											register={register}
+											tag="Sigo Cursando"
+											label="is_currently_enrolled"
+											errors={errors}
+											onClick={handleCheckboxChange}
+										/>
+									</div>
+								)}
+								{(!isCurrentlyEnrrolled || isPostGraduate) && (
+									<div className={`w-1/2 ${isPostGraduate ? 'w-2/3' : ''}`}>
+										<SelectField
+											register={register}
+											label="undergraduate_graduation_date"
+											errors={errors}
+											values={getListOfYears()}
+											placeholder="Año de Graduación de Pregrado"
+										/>
+									</div>
+								)}
+							</div>
+							<div className="w-full flex justify-around items-center">
+								<div className="flex items-center justify-around">
+									<CheckboxField
+										register={register}
+										tag="También soy estudiante de postgrado"
+										label="user.postgraduate_too"
+										errors={errors}
+										onClick={handleCheckboxPostGraduateTooChange}
+									/>
+								</div>
+							</div>
+						</>
+					)}
+
+					{isPostGraduate && (
+						<>
+							<SelectField
+								register={register}
+								label="postgraduate_program"
+								errors={errors}
+								values={postgraduates_carreers}
+								placeholder="Carrera de Postgrado"
+							/>
+							<div className="w-full flex justify-around items-center">
+								<div className="flex items-center justify-around w-1/2">
+									<CheckboxField
+										register={register}
+										tag="Sigo Cursando"
+										label="is_currently_enrolled"
+										errors={errors}
+										onClick={handleCheckboxChange}
+									/>
+								</div>
+								{!isCurrentlyEnrrolled && (
+									<div className="w-1/2">
+										<SelectField
+											register={register}
+											label="postgraduate_graduation_date"
+											errors={errors}
+											values={getListOfYears()}
+											placeholder="Año de Graduación de Postgrado"
+										/>
+									</div>
+								)}
+							</div>
 						</>
 					)}
 
@@ -285,15 +348,14 @@ export default function RegisterPage() {
 						callback={handleSubmit(async (values) => {
 							setIsLoading(true);
 
-							if (values.user.is_currently_enrolled) {
-								values.graduate_year = undefined;
+							if (values.is_currently_enrolled) {
+								values.undergraduate_graduation_date = undefined;
+								values.postgraduate_graduation_date = undefined;
 							}
 
 							try {
-								if (isUnderGraduate) {
-									await registerUndergraduateStudent(values);
-								} else if (isPostGraduate) {
-									await registerPostGraduateStudent(values);
+								if (isUnderGraduate || isPostGraduate) {
+									await registerStudent(values);
 								} else if (isTeacher) {
 									await registerTeacher(values);
 								}
