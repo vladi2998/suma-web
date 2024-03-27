@@ -295,7 +295,7 @@ export default function RegisterPage() {
 								label="postgraduate_program"
 								errors={errors}
 								values={postgraduates_carreers}
-								placeholder="Carrera de Postgrado"
+								placeholder="Área de Postgrado"
 							/>
 							<div className="w-full flex justify-around items-center">
 								<div className="flex items-center justify-around w-1/2">
