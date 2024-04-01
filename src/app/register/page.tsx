@@ -20,6 +20,7 @@ import { get } from 'http';
 import { set } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import Loader from '@/components/loader';
+import { useToast } from '@/components/ui/use-toast';
 
 type SelectChangeEvent = ChangeEvent<HTMLSelectElement>;
 
@@ -85,6 +86,8 @@ export default function RegisterPage() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const router = useRouter();
+
+	const { toast } = useToast();
 
 	useEffect(() => {
 		if (selectedType && selectedType.label === 'Postgrado') {
@@ -297,7 +300,16 @@ export default function RegisterPage() {
 								} else if (isTeacher) {
 									await registerTeacher(values);
 								}
-							} catch (error) {
+								toast({
+									title: "¡Registro exitoso!",
+									description: "Por favor inicia sesión para continuar navegando.",
+								})
+							} catch (error: any) {
+								toast({
+									variant: "destructive",
+									title: "Ocurrió un error al registrarte.",
+									description: `${error?.message}`,
+								})
 								return;
 							} finally {
 								setIsLoading(false);
