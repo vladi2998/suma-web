@@ -14,7 +14,7 @@ export default function ChargesSection() {
 		{
 			name: 'Guillermo Fariñas Contreras',
 			role: 'Rector y Presidente',
-			img: addingItemImg,
+			img: emptyAddingImg,
 		},
 		{
 			name: 'Alesia Santacroce',
@@ -24,7 +24,7 @@ export default function ChargesSection() {
 		{
 			name: 'José Antonio De Oliveira',
 			role: 'Vocal Nacional',
-			img: emptyAddingImg,
+			img: addingItemImg,
 		},
 		{
 			name: 'Marianna Moreno',
