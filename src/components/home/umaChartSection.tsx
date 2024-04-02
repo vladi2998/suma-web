@@ -30,7 +30,7 @@ export default function UmaChartSection({
 			stars: 4,
 			name: 'José De Oliveira',
 			position: 'Lic en Comunicación Social',
-			img: umaChartItemImg,
+			img: emptyAddingImg,
 			// master: 'Maestrando en Innovación Educativa',
 			role: 'Project Manager',
 			main: true,
