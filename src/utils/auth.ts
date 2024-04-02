@@ -14,28 +14,15 @@ export const getUser = async (data: any) => {
 	}
 };
 
-export const registerUndergraduateStudent = async (data: any) => {
+export const registerStudent = async (data: any) => {
 	try {
 		const request = await axiosConfigInstance.post(
-			'/register/undergraduate_student/',
+			'/register/student/',
 			data
 		);
 		return request;
 	} catch (err: any) {
 		console.log('error: ', err.response);
-		return Promise.reject(err.response.data);
-	}
-};
-
-export const registerPostGraduateStudent = async (data: any) => {
-	try {
-		const request = await axiosConfigInstance.post(
-			'/register/postgraduate_student/',
-			data
-		);
-		return request;
-	} catch (err: any) {
-		console.log('error: ', err);
 		return Promise.reject(err.response.data);
 	}
 };
