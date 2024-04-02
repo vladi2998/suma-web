@@ -8,38 +8,34 @@ import Image from 'next/image';
 import InputField from '../forms/inputField';
 import ForwardButton from '../buttons/forwardButton';
 import SelectField from '../forms/inputSelect';
+import { createJobOffer } from '@/utils/offerjobs';
 
 export function CreateOffertModal() {
 	const modalityValues = [
-		{ value: 0, label: 'Presencial' },
-		{ value: 1, label: 'Remoto' },
-		{ value: 2, label: 'Tiempo Completo' },
-		{ value: 3, label: 'Medio Tiempo' },
+		{ value: "P", label: 'Presencial' },
+		{ value: "R", label: 'Remoto' },
+		{ value: "F", label: 'Tiempo Completo' },
+		{ value: "T", label: 'Medio Tiempo' },
 	];
 
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
-			company_info: {
-				name: '',
-				location: '',
-				description: '',
-				contract_name: '',
-				phone: '',
-				email: '',
-			},
-			contract_info: {
-				position: '',
-				modality: '0',
-				description: '',
-				functions: '',
-				requirements: '',
-				extra_info: '',
-			},
+			company_name:'',
+			company_location:'',
+			company_description:'',
+			contact_name:'',
+			company_phone:'',
+			company_email:'',
+			job_description:'',
+			job_functions:'',
+			job_requirements:'',
+			mode:'',
+			job_title:'',
 		},
 	});
 
 	const handleCreateOffert = async (data: any) => {
-		console.log(data);
+		await createJobOffer(data);
 	};
 
 	return (
@@ -71,32 +67,32 @@ export function CreateOffertModal() {
 									</p>
 									<InputField
 										register={register}
-										label="company_info.name"
+										label="company_name"
 										placeholder="Nombre de la Empresa"
 									/>
 									<InputField
 										register={register}
-										label="company_info.location"
+										label="company_location"
 										placeholder="Ubicación de la Empresa"
 									/>
 									<InputField
 										register={register}
-										label="company_info.description"
+										label="company_description"
 										placeholder="Descripción de la Empresa"
 									/>
 									<InputField
 										register={register}
-										label="company_info.contract_name"
+										label="contact_name"
 										placeholder="Nombre del Contrato"
 									/>
 									<InputField
 										register={register}
-										label="company_info.phone"
+										label="company_phone"
 										placeholder="Teléfono de Contacto"
 									/>
 									<InputField
 										register={register}
-										label="company_info.email"
+										label="company_email"
 										placeholder="Correo de Contacto"
 									/>
 
@@ -105,33 +101,33 @@ export function CreateOffertModal() {
 									</p>
 									<InputField
 										register={register}
-										label="contract_info.position"
+										label="job_title"
 										placeholder="Posición"
 									/>
 									<SelectField
 										register={register}
-										label="contract_info.modality"
+										label="mode"
 										values={modalityValues}
 										placeholder="Modalidad"
 									/>
 									<InputField
 										register={register}
-										label="contract_info.description"
+										label="job_description"
 										placeholder="Descripción"
 									/>
 									<InputField
 										register={register}
-										label="contract_info.functions"
+										label="job_functions"
 										placeholder="Funciones"
 									/>
 									<InputField
 										register={register}
-										label="contract_info.requirements"
+										label="job_requirements"
 										placeholder="Requisitos"
 									/>
 									<InputField
 										register={register}
-										label="contract_info.extra_info"
+										label="extra_info"
 										placeholder="Información Extra"
 									/>
 									<div className="w-1/2">
