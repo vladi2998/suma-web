@@ -16,10 +16,7 @@ export const getUser = async (data: any) => {
 
 export const registerStudent = async (data: any) => {
 	try {
-		const request = await axiosConfigInstance.post(
-			'/register/student/',
-			data
-		);
+		const request = await axiosConfigInstance.post('/register/student/', data);
 		return request;
 	} catch (err: any) {
 		console.log('error: ', err.response);
