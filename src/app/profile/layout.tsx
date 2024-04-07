@@ -8,7 +8,7 @@ export default function ProfileLayout({
 }) {
 	return (
 		<PagesLayout>
-			<HeaderComponent selected_route={0} />
+			<HeaderComponent selected_route={6} />
 			{children}
 		</PagesLayout>
 	);

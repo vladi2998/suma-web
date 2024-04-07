@@ -2,24 +2,46 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import sumateLogo from '../../public/PNG/sumados-logo.png';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/16/solid';
+import {
+	Bars3Icon,
+	UserCircleIcon,
+	XMarkIcon,
+} from '@heroicons/react/16/solid';
 import { useEffect, useState } from 'react';
+import { Card } from './ui/card';
+import AuthContext from '@/context/AuthProvider';
+import { useContext } from 'react';
+import { clearAuthHeader } from '@/config/axiosCofig';
 
 export default function HeaderComponent({
 	selected_route,
 }: {
 	selected_route: number;
 }) {
+	const { auth, setAuth } = useContext(AuthContext) as any;
+
+	const isAuth = auth.accessToken ? true : false;
+
 	const defaultNavStyle =
 		'relative text-xxs text-center md:text-base w-fit block after:block after:content-full after:absolute after:h-[3px] after:bg-dark-green after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center';
 	const selectedNavSyle =
 		'block text-dark-green font-bold border-b-[3px] border-dark-green h-auto';
 	const [showHamburguerMenu, setshowHamburguerMenu] = useState<boolean>(false);
 
+	const [userMenuIsVisible, setUserMenuIsVisible] = useState(false);
+
 	const handleHamburguerMenu = () => setshowHamburguerMenu(!showHamburguerMenu);
 
 	const handleResize = () =>
 		window.innerWidth >= 768 ? setshowHamburguerMenu(false) : null;
+
+	const handleLogOut = () => {
+		setAuth({});
+		clearAuthHeader();
+		localStorage.setItem('accessToken', '');
+		localStorage.setItem('refreshToken', '');
+		localStorage.clear();
+	};
 
 	useEffect(() => {
 		window.addEventListener('resize', handleResize);
@@ -107,6 +129,48 @@ export default function HeaderComponent({
 					}`}>
 					Mi Ruta
 				</Link>
+				<UserCircleIcon
+					className="w-6 h-6 md:w-8 md:h-8 hover:cursor-pointer"
+					color="rgb(20 83 45)"
+					onClick={() => setUserMenuIsVisible(!userMenuIsVisible)}
+				/>
+				<Card
+					className={`${
+						userMenuIsVisible ? 'block' : 'hidden'
+					} absolute right-5 top-32 md:right-10 md:top-20 p-4`}>
+					<ul className="space-y-3 w-full">
+						<li>
+							{isAuth ? (
+								<Link
+									href="/profile/"
+									className={`${defaultNavStyle}`}>
+									Mi Perfil
+								</Link>
+							) : (
+								<Link
+									href="/register/"
+									className={`${defaultNavStyle}`}>
+									Registrarse
+								</Link>
+							)}
+						</li>
+						<li>
+							{isAuth ? (
+								<p
+									onClick={handleLogOut}
+									className={`${defaultNavStyle} hover:cursor-pointer`}>
+									Cerrar Sesión
+								</p>
+							) : (
+								<Link
+									href="/login/"
+									className={`${defaultNavStyle}`}>
+									Iniciar Sesión
+								</Link>
+							)}
+						</li>
+					</ul>
+				</Card>
 			</div>
 		</nav>
 	);

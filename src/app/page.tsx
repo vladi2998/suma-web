@@ -1,4 +1,3 @@
-'use client';
 import HeaderComponent from '@/components/header';
 import AddingSection from '@/components/home/addingSection';
 import BannerBackground from '@/components/home/bannerBackground';
