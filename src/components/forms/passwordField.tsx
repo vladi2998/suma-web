@@ -1,3 +1,4 @@
+'use client';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/16/solid';
 import { useState } from 'react';
 import { Path, RegisterOptions, UseFormRegister } from 'react-hook-form';
