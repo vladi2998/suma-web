@@ -6,11 +6,36 @@ import sumateLogo from '../../../public/PNG/sumados-logo.png';
 import ForwardButton from '@/components/buttons/forwardButton';
 import { useForm } from 'react-hook-form';
 import InputField from '@/components/forms/inputField';
-import { getUser } from '@/utils/auth';
 import PasswordField from '@/components/forms/passwordField';
+import AuthContext from '@/context/AuthProvider';
+import { useContext, useState } from 'react';
+import { getTokens } from '@/utils/tokens';
+import { toast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+	const router = useRouter();
 	const { register, handleSubmit } = useForm();
+	const [isLoading, setIsLoading] = useState(false);
+	const { setAuth } = useContext(AuthContext) as any;
+	const onSubmit = async (values: any) => {
+		setIsLoading(true);
+		try {
+			const resp = await getTokens(values);
+			setAuth({ accessToken: resp.access, refreshToken: resp.refresh });
+			localStorage.setItem('accessToken', resp.access);
+			localStorage.setItem('refreshToken', resp.refresh);
+			router.push('/profile');
+		} catch (error: any) {
+			toast({
+				variant: 'destructive',
+				title: 'Ocurrió un error al iniciar sesión.',
+				description: `${error.detail}`,
+			});
+		} finally {
+			setIsLoading(false);
+		}
+	};
 	return (
 		<>
 			<div
@@ -57,7 +82,8 @@ export default function LoginPage() {
 					/>
 					<ForwardButton
 						text="Iniciar Sesión"
-						callback={handleSubmit((values) => getUser(values))}
+						callback={handleSubmit((values) => onSubmit(values))}
+						isLoading={isLoading}
 					/>
 				</div>
 			</form>
