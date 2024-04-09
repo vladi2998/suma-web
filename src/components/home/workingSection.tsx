@@ -4,7 +4,6 @@ import Image from 'next/image';
 import H1 from '../H1';
 import WorkingSectionItem from './workingItem';
 import bgMountains from '../../../public/PNG/workingBackgroundFHD.png';
-import useWindowDimensions from '@/hooks/useWindowsDimensions';
 import { useEffect, useState } from 'react';
 
 type WorkingSectionProps = {
@@ -24,7 +23,7 @@ export default function WorkingSection({
 			description:
 				'Profesional responsable de construir y administrar la comunidad online y gestionar la identidad y la imagen de marca, creando y manteniendo relaciones estables y duraderas con sus clientes, sus fans en internet.',
 			extra_info:
-				'Responsabilidades: \n Elaborar y ejecutar la estrategia de contenidos sociales para las marcas, en colaboración con diferentes áreas internas (Creación) y con el cliente. Creación y documentación de planes de contenidos. Idear soluciones de contenido digital al momento que la agencia reciba un brief para campaña. Manejo de múltiples canales digitales Facebook, Twitter, blogs, YouTube, Instagram, foros, etc. Identificar los factores de influencia (influencers) de la industria de sus marcas a fin de establecer relaciones, sociedades y colaborar con ellos. Evaluar e interpretar las tendencias, ánimo y opiniones de las Comunidades y comunicarlo internamente a los distintos departamentos (RRPP, Marketing, Prensa, etc.) para crear una sinergia. Participar junto a los responsables de sus marcas, en la creación del plan de Comunidades en línea, incluyendo alcance conceptual y presupuesto. Construir y mantener redes de distribución de contenidos de sus marcas a través de canales de medios sociales. Participar en la definición de los mensajes creativos. Participar en filmaciones, grabaciones, etc., que apoyen la construcción del producto creativo. Manejar la buena relación con el cliente. \n Requisitos: \n Licenciado en Comunicación Social 1 año de experiencia en cargo similares Conocimientos en Redes Sociales, Páginas Web, Mailing, ADS, Banner, video y edición/producción de video básico, Redacción. Manejo de MS Office, MS Office Power Point, Básico de ADOBE, Programas de edición de video básico. Conocimientos de Inglés Medio en escritura, lectura y conversación. Capacidad de trabajo en equipo y bajo presión. Sexo indistinto. Manejo de equipos, organizado. Experiencia en manejo de trafico en agencias de Publicidad Disponibilidad de trabajo presencial \n Información Adicional: \n Salario Mensual proporcional al perfil y experiencia. Bono de Alimentación. Póliza de Seguro HCM. Excelente ambiente laboral',
+				'<strong>Responsabilidades:</strong> \n● &nbsp;Elaborar y ejecutar la estrategia de contenidos sociales para las marcas, en colaboraci&oacute;n con diferentes &aacute;reas internas (Creaci&oacute;n) y con el cliente. \n● &nbsp;Creaci&oacute;n y documentaci&oacute;n de planes de contenidos. \n● &nbsp;Idear soluciones de contenido digital al momento que la agencia reciba un brief para campa&ntilde;a. \n● &nbsp;Manejo de m&uacute;ltiples canales digitales: Facebook, Twitter, blogs, YouTube,Instagram, foros, etc.\n● &nbsp;Identificar los factores de influencia (influencers) de la industria de sus marcas a fin de establecer relaciones, sociedades y colaborar con ellos. \n● &nbsp;Evaluar e interpretar las tendencias, &aacute;nimo y opiniones de las Comunidades y comunicar internamente a los distintos departamentos (RRPP, Marketing,Prensa, etc.) para crear una sinergia. \n● &nbsp;Participar junto a los responsables de sus marcas, en la creaci&oacute;n del plan de Comunidades en l&iacute;nea, incluyendo alcance conceptual y presupuesto. \n● &nbsp;Construir y mantener redes de distribuci&oacute;n de contenidos de sus marcas a trav&eacute;s de canales de medios sociales. \n● &nbsp;Participar en la definici&oacute;n de los mensajes creativos. \n● &nbsp;Participar en filmaciones, grabaciones, etc., que apoyen la construcci&oacute;n del producto creativo. \n● &nbsp;Manejar la buena relaci&oacute;n con el cliente.',
 		},
 		{
 			title: 'Dirección de arte',
@@ -32,7 +31,7 @@ export default function WorkingSection({
 			agency: 'Gigi Studio',
 			iconColor: 'rgb(250 204 21)',
 			description:
-				'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi.',
+				'<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi.</p>',
 			extra_info: '',
 		},
 		{
@@ -41,7 +40,7 @@ export default function WorkingSection({
 			agency: 'Gigi Studio',
 			iconColor: 'rgb(3 105 161)',
 			description:
-				'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi.',
+				'<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi.</p>',
 			extra_info: '',
 		},
 		{
@@ -50,7 +49,7 @@ export default function WorkingSection({
 			agency: 'Gigi Studio',
 			iconColor: 'rgb(239 68 68)',
 			description:
-				'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi.',
+				'<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi.</p>',
 			extra_info: '',
 		},
 	];
@@ -63,7 +62,7 @@ export default function WorkingSection({
 		agency: string;
 		iconColor: string;
 		description: string;
-		extra_info: string
+		extra_info: string;
 	}) => {
 		setSelectedWork(work);
 	};

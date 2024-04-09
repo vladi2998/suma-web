@@ -1,9 +1,7 @@
 'use client';
 import { StarIcon } from '@heroicons/react/16/solid';
 import { Card, CardContent } from '../ui/card';
-import Link from 'next/link';
 import ForwardButton from '../buttons/forwardButton';
-import { useState } from 'react';
 
 type WorkingItemsProps = {
 	title: string;
@@ -49,17 +47,42 @@ export default function WorkingSectionItem({
 					<h1 className="w-full text-2xl font-bold text-light-green uppercase">
 						{title}
 					</h1>
-					{place && <p className="w-full text-xl">{place}</p>}
-					{agency && <p className="w-full text-xl">{agency}</p>}
-					<p className="w-full text-xl">{description}</p>
-					{showExtraInfo && <p className="w-full text-xl whitespace-break-spaces">{extra_info}</p>}
+					{place && (
+						<p
+							className="w-full text-xl"
+							dangerouslySetInnerHTML={{ __html: place }}
+						/>
+					)}
+					{agency && (
+						<p
+							className="w-full text-xl"
+							dangerouslySetInnerHTML={{ __html: agency }}
+						/>
+					)}
+					<p
+						className="w-full text-xl"
+						dangerouslySetInnerHTML={{ __html: description }}
+					/>
+					{showExtraInfo && (
+						<p
+							className="w-full text-xl whitespace-break-spaces"
+							dangerouslySetInnerHTML={{ __html: extra_info }}
+						/>
+					)}
 
 					<div className="w-full mx-auto">
 						{onSelectWork ? (
 							<ForwardButton
 								text="Ver más"
 								callback={() =>
-									onSelectWork({ title, place, agency, description, extra_info, iconColor })
+									onSelectWork({
+										title,
+										place,
+										agency,
+										description,
+										extra_info,
+										iconColor,
+									})
 								}
 							/>
 						) : (
