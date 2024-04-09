@@ -12,25 +12,29 @@ import { createJobOffer } from '@/utils/offerjobs';
 
 export function CreateOffertModal() {
 	const modalityValues = [
-		{ value: "P", label: 'Presencial' },
-		{ value: "R", label: 'Remoto' },
-		{ value: "F", label: 'Tiempo Completo' },
-		{ value: "T", label: 'Medio Tiempo' },
+		{ value: 'P', label: 'Presencial' },
+		{ value: 'R', label: 'Remoto' },
+	];
+
+	const dedicationValues = [
+		{ value: 'F', label: 'Tiempo Completo' },
+		{ value: 'T', label: 'Medio Tiempo' },
 	];
 
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
-			company_name:'',
-			company_location:'',
-			company_description:'',
-			contact_name:'',
-			company_phone:'',
-			company_email:'',
-			job_description:'',
-			job_functions:'',
-			job_requirements:'',
-			mode:'',
-			job_title:'',
+			company_name: '',
+			company_location: '',
+			company_description: '',
+			contact_name: '',
+			company_phone: '',
+			company_email: '',
+			job_description: '',
+			job_functions: '',
+			job_requirements: '',
+			mode: '',
+			contract_type: '',
+			job_title: '',
 		},
 	});
 
@@ -45,7 +49,7 @@ export function CreateOffertModal() {
 					variant="custom"
 					size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
-						Crear Oferta de Trabajo
+						Crear oferta de trabajo
 					</p>
 					<Image
 						className="bg-white rounded-full p-1 w-8 h-8"
@@ -61,7 +65,7 @@ export function CreateOffertModal() {
 							<form
 								className="w-full h-full flex items-center justify-center overflow-y-hidden"
 								onSubmit={(e) => e.preventDefault()}>
-								<div className="w-full h-auto my-4 flex flex-col items-center space-y-4">
+								<div className="w-full h-auto my-4 flex flex-col items-center space-y-4 px-2">
 									<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
 										Información de la Empresa
 									</p>
@@ -110,6 +114,12 @@ export function CreateOffertModal() {
 										values={modalityValues}
 										placeholder="Modalidad"
 									/>
+									<SelectField
+										register={register}
+										label="contract_type"
+										values={dedicationValues}
+										placeholder="Dedicación"
+									/>
 									<InputField
 										register={register}
 										label="job_description"
@@ -132,7 +142,7 @@ export function CreateOffertModal() {
 									/>
 									<div className="w-1/2">
 										<ForwardButton
-											text="Crear Oferta de Trabajo"
+											text="Crear oferta de trabajo"
 											callback={handleSubmit((values) =>
 												handleCreateOffert(values)
 											)}
