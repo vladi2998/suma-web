@@ -19,12 +19,10 @@ export default function AddingSection({
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		setIsLoading(true);
 		axiosConfigInstance
 			.get('/teachers')
 			.then((response) => {
 				console.log(response);
-
 				const data = response.data.map((teacher: any) => ({
 					name: teacher.user.first_name,
 					career: teacher.career,
@@ -34,11 +32,11 @@ export default function AddingSection({
 					img: teacher.img ?? addingItemImg,
 				}));
 				setAddingSectionList(data);
+				setIsLoading(false);
 			})
 			.catch((error) => {
 				console.error('There was an error!', error);
 			});
-		setIsLoading(false);
 	}, []);
 
 	return (
