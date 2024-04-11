@@ -6,11 +6,24 @@ import HstySectionImg from '../../../public/WEBP/historyImg.webp';
 import { Button } from '../ui/button';
 import H1 from '../H1';
 import ForwardButton from '../buttons/forwardButton';
+import AuthContext from '@/context/AuthProvider';
+import { useContext } from 'react';
+import { CreateMyRouteModal } from './createMyRouteModal';
 
 export default function ProfileSection() {
+	const { auth } = useContext(AuthContext) as any;
+	const isAuth = auth.accessToken ? true : false;
+
 	return (
-		<Card className='border-none'>
-			<H1 className='ml-8'>Mi Ruta</H1>
+		<Card className="border-none">
+			<div className="w-full flex flex-row items-center jusitfy-between">
+				<H1 className="ml-8">Mi Ruta</H1>
+				{isAuth && (
+					<div className="w-1/2">
+						<CreateMyRouteModal />
+					</div>
+				)}
+			</div>
 			<CardContent className="flex flex-col md:flex-row items-center justify-around h-auto py-20">
 				<div className="w-full mt-2 md:mt-0 md:w-1/3 flex items-center justify-center">
 					<Image
@@ -26,11 +39,11 @@ export default function ProfileSection() {
 							<h1 className="text-3xl font-bold">Carolina López</h1>
 							<h2 className="text-2xl">Abogado</h2>
 						</div>
-						<div className="w-full md:w-1/2">
+						{/* <div className="w-full md:w-1/2">
 							<Link href="/connect/">
 								<ForwardButton text="Editar mi ruta" />
 							</Link>
-						</div>
+						</div> */}
 					</div>
 					<p className="text-base md:text-2xl">
 						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
