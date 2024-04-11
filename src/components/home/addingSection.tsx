@@ -6,7 +6,9 @@ import H1 from '../H1';
 import ForwardButton from '../buttons/forwardButton';
 import axiosConfigInstance from '@/config/axiosCofig';
 import { useEffect, useState } from 'react';
-import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
+import profile_bg from '../../../public/PNG/profile_bg.png';
+import userMale from '../../../public/PNG/userMale.png';
+import userFemale from '../../../public/PNG/userFemale.png';
 import DotsLoader from '../loaders/dotsLoader';
 
 type AddingSectionProps = {
@@ -29,7 +31,7 @@ export default function AddingSection({
 					master: teacher.master,
 					specialist: teacher.specialist,
 					href: '/',
-					img: teacher.img ?? addingItemImg,
+					img: teacher.img ?? teacher?.user?.gender === "Masculino" ? userMale : teacher?.user?.gender === "Femenino" ? userFemale : profile_bg,
 				}));
 				setAddingSectionList(data);
 				setIsLoading(false);
