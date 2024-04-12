@@ -369,7 +369,9 @@ export default function RegisterPage() {
 								toast({
 									variant: 'destructive',
 									title: 'Ocurrió un error al registrarte.',
-									description: `${error?.message}`,
+									description: `${
+										error?.message ?? JSON.stringify(error?.user)
+									}`,
 								});
 								return;
 							} finally {
