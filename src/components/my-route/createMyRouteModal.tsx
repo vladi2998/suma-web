@@ -52,7 +52,7 @@ export function CreateMyRouteModal() {
 					variant="custom"
 					size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
-						Crear oferta de trabajo
+						Crear una ruta
 					</p>
 					<Image
 						className="bg-white rounded-full p-1 w-8 h-8"
