@@ -8,18 +8,16 @@ import Image from 'next/image';
 import InputField from '../forms/inputField';
 import ForwardButton from '../buttons/forwardButton';
 import { UploadFileModal } from './uploadFileModal';
-import { createLearningPath, createStep } from '@/utils/learning_paths';
+import {
+	createLearningPath,
+	createStep,
+	deleteStep,
+} from '@/utils/learning_paths';
+import { useState } from 'react';
 
 export function CreateMyRouteModal() {
-	const modalityValues = [
-		{ value: 'P', label: 'Presencial' },
-		{ value: 'R', label: 'Remoto' },
-	];
-
-	const dedicationValues = [
-		{ value: 'F', label: 'Tiempo Completo' },
-		{ value: 'T', label: 'Medio Tiempo' },
-	];
+	const [isOpen, setIsOpen] = useState(false);
+	const [learning_path_id, setLearningPathId] = useState<number | null>(null);
 
 	const { register, handleSubmit, setValue } = useForm({
 		defaultValues: {
@@ -33,31 +31,57 @@ export function CreateMyRouteModal() {
 	});
 
 	const handleCreateRoute = async (data: any) => {
-		const learningpath = await createLearningPath({
-			title: data.title,
-			description: data.description,
-		});
-
-		for (let i = 1; i <= 6; i++) {
-			await createStep({
-				title: data[`step_${i}_title`],
-				description: data[`step_${i}_description`],
-				learning_path: learningpath.id,
-				step_number: i,
+		let learningpath = null;
+		if (!learning_path_id)
+			learningpath = await createLearningPath({
+				title: data.title,
+				description: data.description,
 			});
+		else learningpath = { id: learning_path_id };
+		setLearningPathId(learningpath.id);
+
+		const createdSteps = [];
+		try {
+			for (let i = 1; i <= 6; i++) {
+				const formData = new FormData();
+				formData.append('title', data[`step_${i}_title`]);
+				formData.append('description', data[`step_${i}_description`]);
+				formData.append('learning_path', learningpath.id.toString());
+				formData.append('step_number', i.toString());
+				if (data[`step_${i}_content`]?.file) {
+					formData.append('file', data[`step_${i}_content`]?.file);
+				}
+				if (data[`step_${i}_content`]?.url) {
+					formData.append('url', data[`step_${i}_content`]?.url);
+				}
+
+				const step = await createStep(formData);
+				if (step) createdSteps.push(step.id);
+			}
+			setIsOpen(false);
+		} catch (error) {
+			console.error('Error creating step:', error);
+			// If an error occurred, delete all previously created steps
+			for (const stepId of createdSteps) {
+				await deleteStep(stepId);
+			}
 		}
 	};
 
 	const handleUpload = (data: any) => {
 		const { idx } = data;
+		let url = null;
+		let file = null;
+		if (data?.url) url = data.url;
+		if (data?.file) file = data.file?.[0];
 		const fieldName = `step_${idx}_content` as
 			| `${number}`
 			| `${number}.${string}`;
-		setValue(fieldName, data);
+		setValue(fieldName, { url, file });
 	};
 
 	return (
-		<Dialog>
+		<Dialog open={isOpen} onOpenChange={setIsOpen}>
 			<DialogTrigger asChild>
 				<Button variant="custom" size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
@@ -104,14 +128,17 @@ export function CreateMyRouteModal() {
 												<InputField
 													register={register}
 													label={`step_${idx + 1}_title`}
-													placeholder="Titulo del paso 1"
+													placeholder={`Titulo del paso ${idx + 1}`}
 												/>
 												<InputField
 													register={register}
 													label={`step_${idx + 1}_description`}
-													placeholder="Descripción del paso 1"
+													placeholder={`Descripción del paso ${idx + 1}`}
 												/>
-												<UploadFileModal onUpload={handleUpload} idx={idx} />
+												<UploadFileModal
+													onUpload={handleUpload}
+													idx={idx + 1}
+												/>
 											</div>
 										))}
 									</div>
