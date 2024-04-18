@@ -1,3 +1,4 @@
+import { refreshTokens } from '@/utils/tokens';
 import axios from 'axios';
 
 const axiosConfigInstance = axios.create({
@@ -12,7 +13,6 @@ axiosConfigInstance.interceptors.request.use(
 	(config) => {
 		// Modify the request config here (add headers, authentication tokens)
 		const accessToken = localStorage.getItem('accessToken');
-		const refreshToken = localStorage.getItem('refreshToken');
 
 		// If token is present add it to request's Authorization Header
 		if (accessToken) {
@@ -34,8 +34,17 @@ axiosConfigInstance.interceptors.response.use(
 		// Modify the response data here
 		return response;
 	},
-	(error) => {
-		// Handle response errors here
+	async (error) => {
+		const originalRequest = error.config;
+		if (error.response.status === 401 && !originalRequest._retry) {
+			console.log('Refreshing token');
+			
+			originalRequest._retry = true;
+			const refreshToken = localStorage.getItem('refreshToken');
+			const resp = await refreshTokens({ refresh: refreshToken });
+			localStorage.setItem('accessToken', resp.access);
+			return axiosConfigInstance(originalRequest);
+		}
 		return Promise.reject(error);
 	}
 );
