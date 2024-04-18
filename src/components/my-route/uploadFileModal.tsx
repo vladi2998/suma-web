@@ -8,17 +8,24 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FileOption from './fileOption';
 import { Button } from '../ui/button';
 import InputField from '../forms/inputField';
 import { useForm } from 'react-hook-form';
 
-export function UploadFileModal() {
+export interface UploadFileModalProps {
+	onUpload: (data: any) => void;
+	idx?: number;
+}
+
+export function UploadFileModal({ onUpload, idx }: UploadFileModalProps) {
+	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState({
 		value: 'link',
 		label: 'Link',
 	});
+	const [selectedContent, setSelectedContent] = useState(null);
 	const options = [
 		{
 			value: 'link',
@@ -26,16 +33,35 @@ export function UploadFileModal() {
 		},
 		{ value: 'file', label: 'Archivo' },
 	];
-	const { register, handleSubmit } = useForm({
+	const { register, handleSubmit, watch } = useForm({
 		defaultValues: {
 			content: null,
 		},
 	});
 
+	const handleUpload = (data: any, event: any) => {
+		if (selectedOption.value === 'link') {
+			onUpload({ url: data.url, idx });
+			setSelectedContent(data?.url);
+		} else {
+			onUpload({ file: data.file, idx });
+			setSelectedContent(data?.file?.[0]?.name);
+		}
+		setIsOpen(false);
+	};
+
+	const content = watch('content');
+
+	useEffect(() => {
+		setSelectedContent(content);
+	}, [content]);
+
 	return (
-		<Dialog>
+		<Dialog open={isOpen} onOpenChange={setIsOpen}>
 			<DialogTrigger asChild>
-				<Button variant="outline">Subir contenido</Button>
+				<Button variant="outline" onClick={() => setIsOpen(true)}>
+					{selectedContent || 'Subir contenido'}
+				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[480px]">
 				<DialogHeader>
@@ -68,13 +94,15 @@ export function UploadFileModal() {
 								register={register}
 								label="file"
 								placeholder="content.pdf"
-                                type="file"
+								type="file"
 							/>
 						)}
 					</div>
 				</div>
 				<DialogFooter>
-					<Button variant="outline">Subir</Button>
+					<Button variant="outline" onClick={handleSubmit(handleUpload)}>
+						Subir
+					</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

@@ -7,10 +7,8 @@ import plusIcon from '../../../public/PNG/plus-icon.png';
 import Image from 'next/image';
 import InputField from '../forms/inputField';
 import ForwardButton from '../buttons/forwardButton';
-import SelectField from '../forms/inputSelect';
-import { createJobOffer } from '@/utils/offerjobs';
-import { StepBack } from 'lucide-react';
 import { UploadFileModal } from './uploadFileModal';
+import { createLearningPath, createStep } from '@/utils/learning_paths';
 
 export function CreateMyRouteModal() {
 	const modalityValues = [
@@ -23,34 +21,45 @@ export function CreateMyRouteModal() {
 		{ value: 'T', label: 'Medio Tiempo' },
 	];
 
-	const { register, handleSubmit } = useForm({
+	const { register, handleSubmit, setValue } = useForm({
 		defaultValues: {
 			title: '',
-			step_1_title: '',
-			step_1_description: '',
-			step_2_title: '',
-			step_2_description: '',
-			step_3_title: '',
-			step_3_description: '',
-			step_4_title: '',
-			step_4_description: '',
-			step_5_title: '',
-			step_5_descrption: '',
-			step_6_title: '',
-			step_6_description: '',
+			description: '',
+			...Array.from({ length: 6 }, (_, i) => ({
+				[`step_${i + 1}_title`]: '',
+				[`step_${i + 1}_description`]: '',
+			})),
 		},
 	});
 
 	const handleCreateRoute = async (data: any) => {
-		console.log(data);
+		const learningpath = await createLearningPath({
+			title: data.title,
+			description: data.description,
+		});
+
+		for (let i = 1; i <= 6; i++) {
+			await createStep({
+				title: data[`step_${i}_title`],
+				description: data[`step_${i}_description`],
+				learning_path: learningpath.id,
+				step_number: i,
+			});
+		}
+	};
+
+	const handleUpload = (data: any) => {
+		const { idx } = data;
+		const fieldName = `step_${idx}_content` as
+			| `${number}`
+			| `${number}.${string}`;
+		setValue(fieldName, data);
 	};
 
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button
-					variant="custom"
-					size="custom">
+				<Button variant="custom" size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
 						Crear una ruta
 					</p>
@@ -67,7 +76,8 @@ export function CreateMyRouteModal() {
 						<div className="w-full flex flex-col items-start mb-2">
 							<form
 								className="w-full h-full flex items-center justify-center overflow-y-hidden"
-								onSubmit={(e) => e.preventDefault()}>
+								onSubmit={(e) => e.preventDefault()}
+							>
 								<div className="w-full h-auto my-4 flex flex-col items-center space-y-4 px-2">
 									<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
 										Información general de la ruta
@@ -76,103 +86,38 @@ export function CreateMyRouteModal() {
 										register={register}
 										label="title"
 										placeholder="Titulo de la ruta"
+									/>{' '}
+									<InputField
+										register={register}
+										label="description"
+										placeholder="Descipción de la ruta"
 									/>
-									<div className="w-full flex flex-row items-center justify-between">
-										<div className="w-1/2 space-y-4 px-1 flex flex-col">
-											<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
-												Paso 1
-											</p>
-											<InputField
-												register={register}
-												label="step_1_title"
-												placeholder="Titulo del paso 1"
-											/>
-											<InputField
-												register={register}
-												label="step_1_description"
-												placeholder="Descripción del paso 1"
-											/>
-											<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
-												Paso 2
-											</p>
-											<InputField
-												register={register}
-												label="step_2_title"
-												placeholder="Titulo del paso 2"
-											/>
-											<InputField
-												register={register}
-												label="step_2_description"
-												placeholder="Descripción del paso 2"
-											/>
-											<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
-												Paso 3
-											</p>
-											<InputField
-												register={register}
-												label="step_3_title"
-												placeholder="Titulo del paso 3"
-											/>
-											<InputField
-												register={register}
-												label="step_3_description"
-												placeholder="Descripción del paso 3"
-											/>
-										</div>
-										<div className="w-1/2 space-y-4 px-1 flex flex-col">
-											<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
-												Paso 4
-											</p>
-											<InputField
-												register={register}
-												label="step_4_title"
-												placeholder="Titulo del paso 4"
-											/>
-											<InputField
-												register={register}
-												label="step_4_description"
-												placeholder="Descripción del paso 4"
-											/>
-											<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
-												Paso 5
-											</p>
-											<InputField
-												register={register}
-												label="step_5_title"
-												placeholder="Titulo del paso 5"
-											/>
-											<InputField
-												register={register}
-												label="step_5_description"
-												placeholder="Descripción del paso 5"
-											/>
-											<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
-												Paso 6
-											</p>
-											<InputField
-												register={register}
-												label="step_6_title"
-												placeholder="Titulo del paso 6"
-											/>
-											<InputField
-												register={register}
-												label="step_6_description"
-												placeholder="Descripción del paso 6"
-											/>
-										</div>
+									<div className=" flex flex-row items-center justify-between flex-wrap w-full">
+										{[...Array(6)].map((_, idx) => (
+											<div
+												key={idx}
+												className="w-full md:w-[48%] m-2 flex flex-col gap-1"
+											>
+												<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
+													Paso {idx + 1}
+												</p>
+												<InputField
+													register={register}
+													label={`step_${idx + 1}_title`}
+													placeholder="Titulo del paso 1"
+												/>
+												<InputField
+													register={register}
+													label={`step_${idx + 1}_description`}
+													placeholder="Descripción del paso 1"
+												/>
+												<UploadFileModal onUpload={handleUpload} idx={idx} />
+											</div>
+										))}
 									</div>
-
-									<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
-										Archivos necesarios para esta ruta
-									</p>
-
-									<div className="w-full px-4 my-4">
-										<UploadFileModal />
-									</div>
-
 									<div className="w-1/2">
 										<ForwardButton
-											text="Crear oferta de trabajo"
+											text="Crear ruta"
 											callback={handleSubmit((values) =>
 												handleCreateRoute(values)
 											)}
