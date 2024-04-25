@@ -28,3 +28,16 @@ export const updateTeacher = async (data: any, id: number) => {
 	}
 };
 
+export const getProfileData = async () => {
+	try {
+		const request = await axiosConfigInstance.get(`/profile/`);
+		if (request.status === 200) {
+			return request.data;
+		} else {
+			return null;
+		}
+	} catch (err: any) {
+		console.log('error getting profile values: ', err.response);
+		return null;
+	}
+};
