@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from '@/context/AuthProvider';
+import { UserProvider } from '@/context/UserProvider';
 
 const inter = Montserrat({ subsets: ['latin'] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<AuthProvider>{children}</AuthProvider>
+				<AuthProvider>
+					<UserProvider>{children}</UserProvider>
+				</AuthProvider>
 				<Toaster />
 			</body>
 		</html>
