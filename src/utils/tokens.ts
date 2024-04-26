@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://sumate-backend.fly.dev/api';
+import { baseURL } from '@/config/axiosCofig';
 
 export const getTokens = async (data: any) => {
 	try {

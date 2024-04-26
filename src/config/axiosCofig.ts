@@ -1,8 +1,10 @@
 import { refreshTokens } from '@/utils/tokens';
 import axios from 'axios';
 
+export const baseURL = 'https://sumate-backend.fly.dev/api';
+
 const axiosConfigInstance = axios.create({
-	baseURL: 'https://sumate-backend.fly.dev/api',
+	baseURL: baseURL,
 	headers: {
 		'Content-Type': 'application/json',
 	},
