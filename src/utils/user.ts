@@ -41,3 +41,20 @@ export const getProfileData = async () => {
 		return null;
 	}
 };
+
+export const updatePassword = async (data: any) => {
+	try {
+		const request = await axiosConfigInstance.put(
+			`/profile/change-password/`,
+			data
+		);
+		if (request.status === 200) {
+			return request.data;
+		} else {
+			return null;
+		}
+	} catch (err: any) {
+		console.log('error updating password: ', err.response);
+		return null;
+	}
+};

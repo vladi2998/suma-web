@@ -11,10 +11,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ForwardButton from '../buttons/forwardButton';
 import { useForm } from 'react-hook-form';
 import InputField from '../forms/inputField';
-import { getProfileData, updateStudent, updateTeacher } from '@/utils/user';
+import {
+	getProfileData,
+	updatePassword,
+	updateStudent,
+	updateTeacher,
+} from '@/utils/user';
 import SelectField, { ItemValue } from '../forms/inputSelect';
 import CheckboxField from '../forms/checkboxField';
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import {
 	getPostgraduatesCareers,
 	getPregraduatesCareers,
@@ -22,6 +27,7 @@ import {
 import DotsLoader from '../loaders/dotsLoader';
 import H1 from '../H1';
 import UserContext from '@/context/UserProvider';
+import PasswordField from '../forms/passwordField';
 
 export function ProfileDataCard() {
 	const {
@@ -56,25 +62,11 @@ export function ProfileDataCard() {
 	const [isLoading, setIsLoading] = useState(false);
 	const { user, setUser } = useContext(UserContext) as any;
 
-	const [isPostGraduate, setIsPostGraduate] = useState(
-		// TODO
-		// user.is_postgraduate
-		true
-	);
-	const [isUnderGraduate, setIsUnderGraduate] = useState(
-		// TODO
-		// user.is_undergraduate
-		true
-	);
-	const [isTeacher, setIsTeacher] = useState(
-		// TODO
-		// user.is_teacher
-		false
-	);
+	const [isPostGraduate, setIsPostGraduate] = useState(user.is_postgraduate);
+	const [isUnderGraduate, setIsUnderGraduate] = useState(user.is_undergraduate);
+	const [isTeacher, setIsTeacher] = useState(user.is_teacher);
 	const [isCurrentlyEnrrolled, setIsCurrentlyEnrrolled] = useState(
-		// TODO
-		// user.is_currently_enrolled
-		false
+		user?.is_currently_enrolled
 	);
 
 	const [pregraduates_careers, setPregraduatesCareers] = useState<ItemValue[]>(
@@ -110,6 +102,10 @@ export function ProfileDataCard() {
 			setValue('postgraduate_too', resp.postgraduate_too);
 			setValue('coins', resp.coins);
 			setValue('faculty', resp.faculty);
+			setIsPostGraduate(resp.is_postgraduate);
+			setIsUnderGraduate(resp.is_undergraduate);
+			setIsTeacher(resp.is_teacher);
+			setIsCurrentlyEnrrolled(resp.is_currently_enrolled);
 		} catch (error) {
 			console.log('Error getting profile data: ', error);
 		} finally {
@@ -162,9 +158,15 @@ export function ProfileDataCard() {
 		handleSubmit: handleSubmitCredentials,
 	} = useForm({
 		defaultValues: {
-			email: 'example@example.com',
+			old_password: '',
+			new_password: '',
+			new_password_repeat: '',
 		},
 	});
+
+	const onSubmitCredentials = async (values: any) => {
+		await updatePassword(values);
+	};
 
 	const handleCheckboxChange = () =>
 		setIsCurrentlyEnrrolled(!getValues('is_currently_enrolled'));
@@ -184,16 +186,16 @@ export function ProfileDataCard() {
 		return years;
 	};
 
-	const onSubmitProfile = async (values: any) => {
-		console.log(values);
-		//  if(user.is_estudent) await updateStudent(values, 31);
-		//  else await updateTeacher(values, 3);
-	};
+	const onSubmitProfile = useCallback(
+		async (values: any) => {
+			if (user.is_student) await updateStudent(values, user?.user?.id);
+			else await updateTeacher(values, user?.user?.id);
+		},
+		[user]
+	);
 
 	return (
-		<Tabs
-			defaultValue="account"
-			className="relative w-full h-auto">
+		<Tabs defaultValue="account" className="relative w-full h-auto">
 			<TabsList className="grid w-full grid-cols-2">
 				<TabsTrigger value="account">Cuenta</TabsTrigger>
 				<TabsTrigger value="credentials">Credenciales</TabsTrigger>
@@ -277,7 +279,8 @@ export function ProfileDataCard() {
 											)}
 											{(!isCurrentlyEnrrolled || isPostGraduate) && (
 												<div
-													className={`w-1/2 ${isPostGraduate ? 'w-2/3' : ''}`}>
+													className={`w-1/2 ${isPostGraduate ? 'w-2/3' : ''}`}
+												>
 													<SelectField
 														register={register}
 														label="undergraduate_graduation_date"
@@ -376,27 +379,40 @@ export function ProfileDataCard() {
 							</CardHeader>
 							<CardContent className="space-y-4">
 								<div className="space-y-1">
-									<Label htmlFor="email">Correo Electrónico</Label>
-									<InputField
+									<Label htmlFor="old_password">Contraseña actual</Label>
+									<PasswordField
 										register={registerCredentials}
-										label="email"
-										placeholder="Nombre"
+										label="old_password"
+										placeholder="Contraseña actual"
+										errors={{}}
 									/>
 								</div>
 								<div className="space-y-1">
-									<Label htmlFor="password">Contraseña</Label>
-									<InputField
+									<Label htmlFor="new_password">Nueva contraseña</Label>
+									<PasswordField
 										register={registerCredentials}
-										label="password"
-										placeholder="Contraseña"
+										label="new_password"
+										placeholder="Nueva contraseña"
+										errors={{}}
+									/>
+								</div>
+								<div className="space-y-1">
+									<Label htmlFor="new_password_repeat">
+										Repite la nueva contraseña
+									</Label>
+									<PasswordField
+										register={registerCredentials}
+										label="new_password_repeat"
+										placeholder="Repite la nueva contraseña"
+										errors={{}}
 									/>
 								</div>
 							</CardContent>
 							<CardFooter>
 								<ForwardButton
 									text="Guardar Cambios"
-									callback={handleSubmitCredentials((values) =>
-										console.log(values)
+									callback={handleSubmitCredentials(
+										async (values) => await onSubmitCredentials(values)
 									)}
 								/>
 							</CardFooter>
