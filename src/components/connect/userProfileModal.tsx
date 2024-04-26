@@ -14,12 +14,8 @@ import thirdImgRoute from '../../../public/PNG/brainIcon.png';
 import fourthImgRoute from '../../../public/PNG/teamIcon.png';
 import fifthImgRoute from '../../../public/PNG/penIcon.png';
 import sixthImgRoute from '../../../public/PNG/paperIcon.png';
-import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from '../ui/hover-card';
 import plusIcon from '../../../public/PNG/plus-icon.png';
+import MyLearningRouteForModal from './MyLearningRouteForModal';
 
 export function UserProfileModal() {
 	const { register, handleSubmit } = useForm({
@@ -69,7 +65,9 @@ export function UserProfileModal() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant="custom" size="custom">
+				<Button
+					variant="custom"
+					size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
 						Sumemos
 					</p>
@@ -157,7 +155,8 @@ export function UserProfileModal() {
 					</Card>
 					<ForwardButton text="Mi ruta" />
 					<Card className="w-full h-auto p-4 rounded-4xl bg-transparent flex flex-col items-center justify-around border-none space-y-2">
-						<div className="w-full flex items-start mb-2">
+						<MyLearningRouteForModal imgList={defaultImageRoute} />
+						{/* <div className="w-full flex items-start mb-2">
 							<p className="text-xl font-semibold text-dark-green p-3 bg-white rounded-4xl">
 								Creación de contenido para redes sociales.
 							</p>
@@ -184,7 +183,7 @@ export function UserProfileModal() {
 									</HoverCardContent>
 								</HoverCard>
 							))}
-						</div>
+						</div> */}
 					</Card>
 				</div>
 			</DialogContent>
