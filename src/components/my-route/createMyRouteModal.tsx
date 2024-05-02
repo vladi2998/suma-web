@@ -14,6 +14,8 @@ import {
 	deleteStep,
 } from '@/utils/learning_paths';
 import { useState } from 'react';
+import { toast } from 'sonner';
+import ErrorParser from '@/utils/errorParser';
 
 export function CreateMyRouteModal() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -32,13 +34,21 @@ export function CreateMyRouteModal() {
 
 	const handleCreateRoute = async (data: any) => {
 		let learningpath = null;
-		if (!learning_path_id)
-			learningpath = await createLearningPath({
-				title: data.title,
-				description: data.description,
-			});
-		else learningpath = { id: learning_path_id };
-		setLearningPathId(learningpath.id);
+		try {
+			if (!learning_path_id)
+				learningpath = await createLearningPath({
+					title: data.title,
+					description: data.description,
+				});
+			else learningpath = { id: learning_path_id };
+			setLearningPathId(learningpath?.id);
+		} catch (error: any) {
+			ErrorParser(
+				error,
+				'Ocurrió un error al crear tu ruta.',
+				'Error desconocido'
+			);
+		}
 
 		const createdSteps = [];
 		try {
@@ -59,8 +69,10 @@ export function CreateMyRouteModal() {
 				if (step) createdSteps.push(step.id);
 			}
 			setIsOpen(false);
-		} catch (error) {
-			console.error('Error creating step:', error);
+		} catch (error: any) {
+			toast.error('Ocurrió al crear un paso de tu ruta.', {
+				description: `${error.detail ?? error}`,
+			});
 			// If an error occurred, delete all previously created steps
 			for (const stepId of createdSteps) {
 				await deleteStep(stepId);
@@ -81,9 +93,13 @@ export function CreateMyRouteModal() {
 	};
 
 	return (
-		<Dialog open={isOpen} onOpenChange={setIsOpen}>
+		<Dialog
+			open={isOpen}
+			onOpenChange={setIsOpen}>
 			<DialogTrigger asChild>
-				<Button variant="custom" size="custom">
+				<Button
+					variant="custom"
+					size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
 						Crear una ruta
 					</p>
@@ -100,8 +116,7 @@ export function CreateMyRouteModal() {
 						<div className="w-full flex flex-col items-start mb-2">
 							<form
 								className="w-full h-full flex items-center justify-center overflow-y-hidden"
-								onSubmit={(e) => e.preventDefault()}
-							>
+								onSubmit={(e) => e.preventDefault()}>
 								<div className="w-full h-auto my-4 flex flex-col items-center space-y-4 px-2">
 									<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
 										Información general de la ruta
@@ -120,8 +135,7 @@ export function CreateMyRouteModal() {
 										{[...Array(6)].map((_, idx) => (
 											<div
 												key={idx}
-												className="w-full md:w-[48%] m-2 flex flex-col gap-1"
-											>
+												className="w-full md:w-[48%] m-2 flex flex-col gap-1">
 												<p className="w-full text-xl font-semibold text-white bg-dark-green p-3 rounded-xl">
 													Paso {idx + 1}
 												</p>

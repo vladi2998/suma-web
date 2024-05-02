@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/context/AuthProvider';
 import { UserProvider } from '@/context/UserProvider';
 
@@ -23,7 +23,10 @@ export default function RootLayout({
 				<AuthProvider>
 					<UserProvider>{children}</UserProvider>
 				</AuthProvider>
-				<Toaster />
+				<Toaster
+					richColors
+					expand={true}
+				/>
 			</body>
 		</html>
 	);

@@ -10,14 +10,10 @@ import { registerStudent, registerTeacher } from '@/utils/auth';
 import PasswordField from '@/components/forms/passwordField';
 import SelectField, { ItemValue } from '@/components/forms/inputSelect';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { DateTimeField } from '@/components/forms/dateTimeField';
 import CheckboxField from '@/components/forms/checkboxField';
-import { get } from 'http';
-import { set } from 'date-fns';
 import { useRouter } from 'next/navigation';
-import Loader from '@/components/loader';
-import { useToast } from '@/components/ui/use-toast';
 import axiosConfigInstance from '@/config/axiosCofig';
+import { toast } from 'sonner';
 
 type SelectChangeEvent = ChangeEvent<HTMLSelectElement>;
 
@@ -115,8 +111,6 @@ export default function RegisterPage() {
 
 	const router = useRouter();
 
-	const { toast } = useToast();
-
 	useEffect(() => {
 		if (selectedType && selectedType.label === 'Postgrado') {
 			setIsPostGraduate(true);
@@ -167,8 +161,7 @@ export default function RegisterPage() {
 					position: 'fixed',
 					width: '100vw',
 					height: '100vh',
-				}}
-			>
+				}}>
 				<Image
 					src={bgImageLogin}
 					alt="image-bg"
@@ -186,8 +179,7 @@ export default function RegisterPage() {
 			</div>
 			<form
 				className="w-full h-auto flex items-center justify-center z-10 overflow-y-hidden"
-				onSubmit={(e) => e.preventDefault()}
-			>
+				onSubmit={(e) => e.preventDefault()}>
 				<div className="bg-white w-4/5 sm:w-1/2 md:w-2/3 xl:w-1/3 h-auto flex flex-col items-center justify-around py-12 px-6 md:px-12 2xl:px-18 rounded-8xl space-y-12">
 					<Image
 						src={sumateLogo}
@@ -380,15 +372,12 @@ export default function RegisterPage() {
 								} else if (isTeacher) {
 									await registerTeacher(values);
 								}
-								toast({
-									title: '¡Registro exitoso!',
+								toast.success('¡Registro exitoso!', {
 									description:
 										'Por favor inicia sesión para continuar navegando.',
 								});
 							} catch (error: any) {
-								toast({
-									variant: 'destructive',
-									title: 'Ocurrió un error al registrarte.',
+								toast.error('Ocurrió un error al registrarte.', {
 									description: `${
 										error?.message ?? JSON.stringify(error?.user)
 									}`,

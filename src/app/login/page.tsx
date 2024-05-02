@@ -10,8 +10,9 @@ import PasswordField from '@/components/forms/passwordField';
 import AuthContext from '@/context/AuthProvider';
 import { useContext, useState } from 'react';
 import { getTokens } from '@/utils/tokens';
-import { toast } from '@/components/ui/use-toast';
+
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export default function LoginPage() {
 	const router = useRouter();
@@ -27,9 +28,7 @@ export default function LoginPage() {
 			localStorage.setItem('refreshToken', resp.refresh);
 			router.push('/profile');
 		} catch (error: any) {
-			toast({
-				variant: 'destructive',
-				title: 'Ocurrió un error al iniciar sesión.',
+			toast.error('Ocurrió un error al iniciar sesión.', {
 				description: `${error.detail}`,
 			});
 		} finally {

@@ -9,8 +9,8 @@ export const createLearningPath = async (data: any) => {
 			return null;
 		}
 	} catch (err: any) {
-		console.log('error al crear la Ruta: ', err.response);
-		return null;
+		// console.log('Error al crear la Ruta: ', err.response);
+		throw err;
 	}
 };
 
@@ -23,7 +23,7 @@ export const createStep = async (data: any) => {
 		throw new Error('Error al crear el paso');
 	} catch (err: any) {
 		console.log('error al crear el paso: ', err.response);
-        throw err;
+		throw err;
 	}
 };
 
