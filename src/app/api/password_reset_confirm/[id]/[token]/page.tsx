@@ -1,41 +1,40 @@
 'use client';
 import Image from 'next/image';
-import bgImageLogin from '../../../public/img-bg.webp';
-import bgMountains from '../../../public/PNG/mountainsBackgroundFHD.png';
-import sumateLogo from '../../../public/PNG/sumados-logo.png';
+import bgImageLogin from '../../../../../../public/img-bg.webp';
+import bgMountains from '../../../../../../public/PNG/mountainsBackgroundFHD.png';
+import sumateLogo from '../../../../../../public/PNG/sumados-logo.png';
 import ForwardButton from '@/components/buttons/forwardButton';
 import { useForm } from 'react-hook-form';
-import InputField from '@/components/forms/inputField';
 import PasswordField from '@/components/forms/passwordField';
-import AuthContext from '@/context/AuthProvider';
-import { useContext, useState } from 'react';
-import { getTokens } from '@/utils/tokens';
+import { useState } from 'react';
+import { confirmPasswordReset } from '@/utils/tokens';
 
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import Link from 'next/link';
 
-export default function LoginPage() {
+const PasswordResetConfirm = ({ params }: { params: any }) => {
 	const router = useRouter();
 	const { register, handleSubmit } = useForm();
 	const [isLoading, setIsLoading] = useState(false);
-	const { setAuth } = useContext(AuthContext) as any;
+
 	const onSubmit = async (values: any) => {
 		setIsLoading(true);
 		try {
-			const resp = await getTokens(values);
-			setAuth({ accessToken: resp.access, refreshToken: resp.refresh });
-			localStorage.setItem('accessToken', resp.access);
-			localStorage.setItem('refreshToken', resp.refresh);
-			router.push('/profile');
+			const resp = await confirmPasswordReset({
+				...values,
+				uidb64: params.id,
+				token: params.token,
+			});
+			router.push('/login');
 		} catch (error: any) {
-			toast.error('Ocurrió un error al iniciar sesión.', {
-				description: `${error.detail}`,
+			toast.error('Ocurrió un error al cambiar la contraseña.', {
+				description: `${error.non_field_errors[0]}`,
 			});
 		} finally {
 			setIsLoading(false);
 		}
 	};
+
 	return (
 		<>
 			<div
@@ -70,35 +69,27 @@ export default function LoginPage() {
 						alt="Picture of the author"
 					/>
 
-					<InputField
+					<PasswordField
 						register={register}
-						label="email"
-						placeholder="Correo Electrónico"
+						label="new_password"
+						placeholder="Nueva contraseña"
+						errors={{}}
 					/>
 					<PasswordField
 						register={register}
-						label="password"
-						placeholder="Contraseña"
+						label="confirm_new_password"
+						placeholder="Repite la contraseña"
 						errors={{}}
 					/>
 					<ForwardButton
-						text="Iniciar Sesión"
+						text="Cambiar contraseña"
 						callback={handleSubmit((values) => onSubmit(values))}
 						isLoading={isLoading}
 					/>
-					<div className="flex flex-col items-center justify-center space-y-2">
-						<Link
-							href="/password-reset"
-							className="text-center text-green text-sm"
-						>
-							¿Olvidaste tu contraseña? Haz click aquí.
-						</Link>
-						<Link href="/register" className="text-center text-green text-sm">
-							¿No tienes cuenta? Regístrate aquí.
-						</Link>
-					</div>
 				</div>
 			</form>
 		</>
 	);
-}
+};
+
+export default PasswordResetConfirm;
