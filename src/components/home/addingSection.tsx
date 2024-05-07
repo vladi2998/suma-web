@@ -24,14 +24,18 @@ export default function AddingSection({
 		axiosConfigInstance
 			.get('/teachers')
 			.then((response) => {
-				console.log(response);
-				const data = response.data.map((teacher: any) => ({
+				const data = response.data.results.map((teacher: any) => ({
 					name: teacher.user.first_name,
 					career: teacher.career,
 					master: teacher.master,
 					specialist: teacher.specialist,
 					href: '/',
-					img: teacher.img ?? teacher?.user?.gender === "Masculino" ? userMale : teacher?.user?.gender === "Femenino" ? userFemale : profile_bg,
+					img:
+						teacher.img ?? teacher?.user?.gender === 'Masculino'
+							? userMale
+							: teacher?.user?.gender === 'Femenino'
+							? userFemale
+							: profile_bg,
 				}));
 				setAddingSectionList(data);
 				setIsLoading(false);
