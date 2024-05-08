@@ -21,7 +21,7 @@ const HoverComponent = ({
 		<HoverCard key={key}>
 			<HoverCardTrigger asChild>
 				<div
-					className="w-24 h-24 lg:w-40 lg:h-40 bg-white rounded-full flex flex-col w-auto items-center justify-center hover:cursor-pointer"
+					className="lg:w-24 lg:h-24 xl:w-48 xl:h-48 bg-white rounded-full flex flex-col w-auto items-center justify-center hover:cursor-pointer"
 					key={key}>
 					<Image
 						src={img}
@@ -41,7 +41,7 @@ export default function MyLearningRouteForModal({
 }) {
 	return (
 		<div className="relative w-full h-auto sm:h-72 md:h-96 lg:h-132 xl:h-screen md:flex items-start justify-center mt-2">
-			<div className="w-full hidden md:block">
+			<div className="w-full hidden xl:block">
 				<Image
 					src={learningRouteBgImg}
 					className="relative mt-0 md:mt-36 xl:mt-0"
@@ -62,7 +62,7 @@ export default function MyLearningRouteForModal({
 						/>
 					)}
 				</div>
-				<div className="w-24 lg:w-20 xl:w-32 h-auto rounded-full p-4 absolute md:left-28 md:bottom-0 lg:left-24 xl:left-32 lg:bottom-24 xl:bottom-1/3 2xl:left-36">
+				<div className="w-24 lg:w-20 xl:w-32 h-auto rounded-full p-4 absolute md:left-28 md:bottom-0 lg:left-24 xl:left-32 lg:bottom-24 xl:bottom-64 2xl:left-32 2xl:bottom-64">
 					{imgList[1] ? (
 						<HoverComponent
 							img={imgList[1].img}
@@ -76,7 +76,7 @@ export default function MyLearningRouteForModal({
 						/>
 					)}
 				</div>
-				<div className="w-24 lg:w-32 xl:w-32 2xl:w-36 h-auto rounded-full p-4 absolute md:left-52 md:bottom-24 lg:left-48 xl:left-64 lg:bottom-1/3 xl:top-1/4 2xl:left-64">
+				<div className="w-24 lg:w-32 xl:w-32 2xl:w-36 h-auto rounded-full p-4 absolute md:left-52 md:bottom-24 lg:left-48 xl:left-64 lg:bottom-1/3 xl:top-48 2xl:left-64">
 					{imgList[2] ? (
 						<HoverComponent
 							img={imgList[2].img}
@@ -104,7 +104,7 @@ export default function MyLearningRouteForModal({
 						/>
 					)}
 				</div>
-				<div className="w-12 md:w-24 lg:w-36 xl:w-48 2xl:w-64 h-auto rounded-full p-4 absolute md:right-80 md:bottom-24 lg:right-96 xl:right-96 lg:top-60 xl:top-24 2xl:right-96">
+				<div className="w-12 md:w-24 lg:w-36 xl:w-48 2xl:w-64 h-auto rounded-full p-4 absolute md:right-80 md:bottom-24 lg:right-96 xl:left-1/2 lg:top-60 xl:top-36 2xl:right-96 2xl:top-36">
 					{imgList[4] ? (
 						<HoverComponent
 							img={imgList[4].img}
@@ -118,7 +118,7 @@ export default function MyLearningRouteForModal({
 						/>
 					)}
 				</div>
-				<div className="w-12 md:w-32 lg:w-48 xl:w-64 2xl:w-72 h-auto rounded-full p-4 absolute md:right-16 md:bottom-16 lg:right-20 xl:right-16 lg:top-72 xl:top-36 2xl:right-10 2xl:top-48">
+				<div className="w-12 md:w-32 lg:w-48 xl:w-64 2xl:w-72 h-auto rounded-full p-4 absolute md:right-16 md:bottom-16 lg:right-20 xl:right-16 lg:top-72 xl:top-48 2xl:right-2 2xl:top-56">
 					{imgList[5] ? (
 						<HoverComponent
 							img={imgList[5].img}
@@ -133,7 +133,7 @@ export default function MyLearningRouteForModal({
 					)}
 				</div>
 			</div>
-			<div className="w-full md:hidden flex flex-wrap justify-around items-center">
+			<div className="w-full xl:hidden flex flex-wrap justify-around items-center">
 				{[1, 2, 3, 4, 5, 6].map((item, idx) => (
 					<div
 						className="flex flex-col w-auto items-center justify-center"

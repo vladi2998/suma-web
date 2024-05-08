@@ -154,36 +154,8 @@ export function UserProfileModal() {
 						</div>
 					</Card>
 					<ForwardButton text="Mi ruta" />
-					<Card className="w-full h-auto p-4 rounded-4xl bg-transparent flex flex-col items-center justify-around border-none space-y-2">
+					<Card className="w-full h-auto py-4 rounded-4xl bg-transparent flex flex-col items-center justify-around border-none space-y-2">
 						<MyLearningRouteForModal imgList={defaultImageRoute} />
-						{/* <div className="w-full flex items-start mb-2">
-							<p className="text-xl font-semibold text-dark-green p-3 bg-white rounded-4xl">
-								Creación de contenido para redes sociales.
-							</p>
-						</div>
-						<div className="w-full flex flex-wrap justify-around items-center">
-							{defaultImageRoute.map((item, idx) => (
-								<HoverCard key={idx}>
-									<HoverCardTrigger asChild>
-										<div
-											className="flex flex-col w-auto items-center justify-center hover:cursor-pointer"
-											key={idx}>
-											<Image
-												src={item.img}
-												alt={`img-${idx}`}
-												className="w-24 h-24 md:w-40 md:h-40 flex items-center justify-center border bg-white border-dark-gray rounded-full object-contain"
-											/>{' '}
-											<p className="text-lg font-bold text-white my-1">
-												Paso {idx + 1}
-											</p>
-										</div>
-									</HoverCardTrigger>
-									<HoverCardContent className="w-80">
-										{item.info}
-									</HoverCardContent>
-								</HoverCard>
-							))}
-						</div> */}
 					</Card>
 				</div>
 			</DialogContent>
