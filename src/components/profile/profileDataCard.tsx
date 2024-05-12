@@ -28,6 +28,8 @@ import DotsLoader from '../loaders/dotsLoader';
 import H1 from '../H1';
 import UserContext from '@/context/UserProvider';
 import PasswordField from '../forms/passwordField';
+import { UserCircleIcon } from '@heroicons/react/16/solid';
+import ImageField from '../forms/ImageField';
 
 export function ProfileDataCard() {
 	const {
@@ -44,6 +46,7 @@ export function ProfileDataCard() {
 				last_name: '',
 				document_id: '',
 				phone_number: '',
+				profile_img: '',
 			},
 			undergraduate_program: null,
 			postgraduate_program: null,
@@ -61,7 +64,7 @@ export function ProfileDataCard() {
 
 	const [isLoading, setIsLoading] = useState(false);
 	const { user, setUser } = useContext(UserContext) as any;
-
+	const [file, setFile] = useState({});
 	const [isPostGraduate, setIsPostGraduate] = useState(user.is_postgraduate);
 	const [isUnderGraduate, setIsUnderGraduate] = useState(user.is_undergraduate);
 	const [isTeacher, setIsTeacher] = useState(user.is_teacher);
@@ -80,6 +83,7 @@ export function ProfileDataCard() {
 		try {
 			const resp = await getProfileData();
 			setUser(resp);
+			setValue('user.profile_img', resp.user.profile_img);
 			setValue('user.email', resp.user.email);
 			setValue('user.first_name', resp.user.first_name);
 			setValue('user.last_name', resp.user.last_name);
@@ -186,8 +190,11 @@ export function ProfileDataCard() {
 		return years;
 	};
 
+	// revisar cuando enviemos imagenes por el form https://www.filestack.com/fileschool/react/react-file-upload/
 	const onSubmitProfile = useCallback(
 		async (values: any) => {
+			console.log(file);
+			values.user.profile_img = file;
 			if (user.is_student) await updateStudent(values, user?.user?.id);
 			else await updateTeacher(values, user?.user?.id);
 		},
@@ -195,7 +202,9 @@ export function ProfileDataCard() {
 	);
 
 	return (
-		<Tabs defaultValue="account" className="relative w-full h-auto">
+		<Tabs
+			defaultValue="account"
+			className="relative w-full h-auto">
 			<TabsList className="grid w-full grid-cols-2">
 				<TabsTrigger value="account">Cuenta</TabsTrigger>
 				<TabsTrigger value="credentials">Credenciales</TabsTrigger>
@@ -211,13 +220,30 @@ export function ProfileDataCard() {
 				<>
 					<TabsContent value="account">
 						<Card>
-							<CardHeader>
-								<CardTitle>Datos Personales</CardTitle>
-								<CardDescription>
-									Aqui podrás ver y cambiar los datos de tu cuenta.
-								</CardDescription>
+							<CardHeader className="w-full flex flex-row items-center justify-between">
+								<div className="flex flex-col">
+									<CardTitle>Datos Personales</CardTitle>
+									<CardDescription>
+										Aqui podrás ver y cambiar los datos de tu cuenta.
+									</CardDescription>
+								</div>
+								<div className="flex flex-col">
+									{/* TODO: Verificar si el usuario ya tiene image cargada y usar <img /> para ponerla */}
+									{user?.user?.profile_img ? (
+										<img src={user?.user?.profile_img} />
+									) : (
+										<UserCircleIcon className="w-24 h-24 text-dark-green" />
+									)}
+								</div>
 							</CardHeader>
 							<CardContent className="space-y-4">
+								<div className="space-y-1">
+									<Label htmlFor="name">Imagen de perfil</Label>
+									<ImageField
+										register={register}
+										label="user.profile_img"
+									/>
+								</div>
 								<div className="space-y-1">
 									<Label htmlFor="name">Nombre</Label>
 									<InputField
@@ -279,8 +305,7 @@ export function ProfileDataCard() {
 											)}
 											{(!isCurrentlyEnrrolled || isPostGraduate) && (
 												<div
-													className={`w-1/2 ${isPostGraduate ? 'w-2/3' : ''}`}
-												>
+													className={`w-1/2 ${isPostGraduate ? 'w-2/3' : ''}`}>
 													<SelectField
 														register={register}
 														label="undergraduate_graduation_date"
