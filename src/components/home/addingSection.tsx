@@ -6,9 +6,6 @@ import H1 from '../H1';
 import ForwardButton from '../buttons/forwardButton';
 import axiosConfigInstance from '@/config/axiosCofig';
 import { useEffect, useState } from 'react';
-import profile_bg from '../../../public/PNG/profile_bg.png';
-import userMale from '../../../public/PNG/userMale.png';
-import userFemale from '../../../public/PNG/userFemale.png';
 import DotsLoader from '../loaders/dotsLoader';
 
 type AddingSectionProps = {
@@ -22,21 +19,11 @@ export default function AddingSection({
 
 	useEffect(() => {
 		axiosConfigInstance
-			.get('/teachers')
-			.then((response) => {
-				const data = response.data.results.map((teacher: any) => ({
-					name: teacher.user.first_name,
-					career: teacher.career,
-					master: teacher.master,
-					specialist: teacher.specialist,
-					href: '/',
-					img:
-						teacher.img ?? teacher?.user?.gender === 'Masculino'
-							? userMale
-							: teacher?.user?.gender === 'Femenino'
-							? userFemale
-							: profile_bg,
-				}));
+			.get('/users')
+			.then((response: any) => {
+				const data = response.data.results.filter(
+					(user: any) => user.is_student || user.is_teacher
+				);
 				setAddingSectionList(data);
 				setIsLoading(false);
 			})

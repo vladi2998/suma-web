@@ -1,41 +1,93 @@
 'use client';
 import Image from 'next/image';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { UserProfileModal } from '../connect/userProfileModal';
+import profile_bg from '../../../public/PNG/profile_bg.png';
+import userMale from '../../../public/PNG/userMale.png';
+import userFemale from '../../../public/PNG/userFemale.png';
+import { useEffect, useState } from 'react';
+import { getStudent, getTeacher } from '@/utils/user';
 
 type AddingProps = {
-	name: string;
-	career: string;
-	study_level?: string;
-	charge?: string;
-	href: string;
-	img: string | StaticImport;
+	id: number;
+	email: string;
+	first_name: string;
+	last_name: string;
+	document_id: string;
+	phone_number: string;
+	is_student: boolean;
+	is_teacher: boolean;
 };
 export default function AddingItem({
-	name,
-	career,
-	study_level,
-	charge,
-	href,
-	img
+	id,
+	email,
+	first_name,
+	last_name,
+	document_id,
+	phone_number,
+	is_student,
+	is_teacher,
 }: AddingProps) {
+	// TODO: Add description to the user endpoint
+	const defaultDescriptio =
+		'En la actualidad, me especializo en el ámbito del análisis y la estrategia de comunicación, desempeñando el papel de Analista de Mensaje en la Dirección de Marca de la Universidad Monteávila (UMA). Mi pasión por el orden, la estrategia y la producción se refleja en mis diversas responsabilidades, que incluyen la ejecución de activaciones en colegios, colaboraciones con distintas marcas, la creación de contenido adaptado a varias plataformas, el análisis de datos y el diseño de planes de comunicación eficaces. \n \n Paralelamente, mi entusiasmo por la educación y la pedagogía me ha llevado a cursar una maestría en Innovación Educativa mediada por TIC, consolidando mi compromiso con el avance educativo. Como miembro activo de la Asociación de Egresados (AEUMA), estoy abierto a escuchar nuevas ideas que contribuyan al crecimiento de nuestra institución. Si consideras que puedo ser de ayuda, te invito a contactarme; estoy dispuesto a colaborar y compartir mis conocimientos en pro del desarrollo universitario.';
+	//
+
+	const [userData, setUserData] = useState({} as any);
+
+	const getStudentById = async (id: number) => {
+		const student = await getStudent(id);
+		setUserData(student);
+	};
+
+	const getTeacherById = async (id: number) => {
+		const teacher = await getTeacher(id);
+		setUserData(teacher);
+	};
+	const img =
+		userData?.img ?? userData?.user?.gender === 'Masculino'
+			? userMale
+			: userData?.user?.gender === 'Femenino'
+			? userFemale
+			: profile_bg;
+
+	useEffect(() => {
+		if (is_student) {
+			getStudentById(id);
+		} else if (is_teacher) {
+			getTeacherById(id);
+		}
+	}, [id, is_student, is_teacher]);
+
 	return (
 		<div className="flex flex-col w-80 xl:w-96 h-auto space-y-12 mb-8">
 			<div className="w-full h-6/12 relative">
 				<Image
 					src={img}
-					alt={`adding-img-${name}`}
+					alt={`adding-img-${userData?.user?.id}`}
 					className="w-full h-full rounded-[8rem]"
 				/>
 			</div>
 			<div className="w-full h-5/12 flex flex-col items-start text-start">
-				<h1 className="text-2xl font-bold">{name}</h1>
-				<p>{career}</p>
-				<p>{study_level}</p>
-				<p>{charge}</p>
+				<h1 className="text-2xl font-bold">{first_name + ' ' + last_name}</h1>
+				{is_teacher && <p>{userData.career}</p>}
+				{is_teacher && <p>{userData.study_level}</p>}
+				{is_teacher && <p>{userData.charge}</p>}
+				{is_student && <p>Estudiante</p>}
 			</div>
 			<div className="w-full h-1/12 flex items-center justify-center">
-				<UserProfileModal />
+				<UserProfileModal
+					first_name={first_name}
+					last_name={last_name}
+					email={email}
+					img={img}
+					abstract={defaultDescriptio}
+					is_teacher={is_teacher}
+					is_student={is_student}
+					career={userData.career}
+					charge={userData.charge}
+					study_level={userData.study_level}
+					learning_path={userData.learning_path}
+				/>
 			</div>
 		</div>
 	);
