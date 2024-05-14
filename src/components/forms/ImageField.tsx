@@ -8,14 +8,15 @@ type InputProps = {
 	required?: boolean;
 	placeholder?: string;
 	type?: string;
+	setFile: (file: File | null) => void;
 };
 
-export default function ImageField({ label, register, required }: InputProps) {
-	const [file, setFile] = useState();
-
+export default function ImageField({ label, register, required, setFile }: InputProps) {
 	function handleChange(event: any) {
-		setFile(event.target.files[0]);
+		const selectedFile = event.target.files[0] || null;
+		setFile(selectedFile);
 	}
+
 	return (
 		<>
 			<input
@@ -23,6 +24,7 @@ export default function ImageField({ label, register, required }: InputProps) {
 				{...register(label, { required })}
 				onChange={handleChange}
 				type="file"
+				accept="image/*"
 			/>
 		</>
 	);

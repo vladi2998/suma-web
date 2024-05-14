@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {
 	Card,
 	CardContent,
@@ -16,6 +17,7 @@ import {
 	updatePassword,
 	updateStudent,
 	updateTeacher,
+	updateUserImage,
 } from '@/utils/user';
 import SelectField, { ItemValue } from '../forms/inputSelect';
 import CheckboxField from '../forms/checkboxField';
@@ -46,7 +48,7 @@ export function ProfileDataCard() {
 				last_name: '',
 				document_id: '',
 				phone_number: '',
-				profile_img: '',
+				image: '',
 			},
 			undergraduate_program: null,
 			postgraduate_program: null,
@@ -64,7 +66,7 @@ export function ProfileDataCard() {
 
 	const [isLoading, setIsLoading] = useState(false);
 	const { user, setUser } = useContext(UserContext) as any;
-	const [file, setFile] = useState({});
+	const [file, setFile]: any = useState(null);
 	const [isPostGraduate, setIsPostGraduate] = useState(user.is_postgraduate);
 	const [isUnderGraduate, setIsUnderGraduate] = useState(user.is_undergraduate);
 	const [isTeacher, setIsTeacher] = useState(user.is_teacher);
@@ -78,12 +80,13 @@ export function ProfileDataCard() {
 	const [postgraduates_carreers, setPostgraduates_carreers] = useState<
 		ItemValue[]
 	>([]);
+
 	const getProfile = async () => {
 		setIsLoading(true);
 		try {
 			const resp = await getProfileData();
 			setUser(resp);
-			setValue('user.profile_img', resp.user.profile_img);
+			setValue('user.image', resp.user.image);
 			setValue('user.email', resp.user.email);
 			setValue('user.first_name', resp.user.first_name);
 			setValue('user.last_name', resp.user.last_name);
@@ -193,18 +196,16 @@ export function ProfileDataCard() {
 	// revisar cuando enviemos imagenes por el form https://www.filestack.com/fileschool/react/react-file-upload/
 	const onSubmitProfile = useCallback(
 		async (values: any) => {
-			console.log(file);
-			values.user.profile_img = file;
+			values.user.image = file;
 			if (user.is_student) await updateStudent(values, user?.user?.id);
 			else await updateTeacher(values, user?.user?.id);
+			await updateUserImage(user?.user?.id, file);
 		},
-		[user]
+		[file, user]
 	);
 
 	return (
-		<Tabs
-			defaultValue="account"
-			className="relative w-full h-auto">
+		<Tabs defaultValue="account" className="relative w-full h-auto">
 			<TabsList className="grid w-full grid-cols-2">
 				<TabsTrigger value="account">Cuenta</TabsTrigger>
 				<TabsTrigger value="credentials">Credenciales</TabsTrigger>
@@ -229,8 +230,15 @@ export function ProfileDataCard() {
 								</div>
 								<div className="flex flex-col">
 									{/* TODO: Verificar si el usuario ya tiene image cargada y usar <img /> para ponerla */}
-									{user?.user?.profile_img ? (
-										<img src={user?.user?.profile_img} />
+									{user?.user?.image ? (
+										<div className="h-24 w-24 relative rounded-full overflow-hidden" >
+											<Image
+												src={user?.user?.image}
+												alt="profile-image"
+												layout="fill"
+												objectFit="contain"
+											/>
+										</div>
 									) : (
 										<UserCircleIcon className="w-24 h-24 text-dark-green" />
 									)}
@@ -241,7 +249,8 @@ export function ProfileDataCard() {
 									<Label htmlFor="name">Imagen de perfil</Label>
 									<ImageField
 										register={register}
-										label="user.profile_img"
+										label="user.image"
+										setFile={setFile}
 									/>
 								</div>
 								<div className="space-y-1">
@@ -305,7 +314,8 @@ export function ProfileDataCard() {
 											)}
 											{(!isCurrentlyEnrrolled || isPostGraduate) && (
 												<div
-													className={`w-1/2 ${isPostGraduate ? 'w-2/3' : ''}`}>
+													className={`w-1/2 ${isPostGraduate ? 'w-2/3' : ''}`}
+												>
 													<SelectField
 														register={register}
 														label="undergraduate_graduation_date"
