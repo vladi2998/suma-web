@@ -88,12 +88,12 @@ export const updatePassword = async (data: any) => {
 	}
 };
 
-export async function updateUserImage(userId: number, imageFile: File) {
+export async function addUserImage(userId: number, imageFile: File) {
   const formData = new FormData();
   formData.append('user', userId.toString());
   formData.append('image', imageFile);
 
-  const response = await axiosConfigInstance.put(`user-images/${userId}/`, formData, {
+  const response = await axiosConfigInstance.post(`user-images/`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

@@ -17,7 +17,7 @@ import {
 	updatePassword,
 	updateStudent,
 	updateTeacher,
-	updateUserImage,
+	addUserImage,
 } from '@/utils/user';
 import SelectField, { ItemValue } from '../forms/inputSelect';
 import CheckboxField from '../forms/checkboxField';
@@ -199,7 +199,7 @@ export function ProfileDataCard() {
 			values.user.image = file;
 			if (user.is_student) await updateStudent(values, user?.user?.id);
 			else await updateTeacher(values, user?.user?.id);
-			await updateUserImage(user?.user?.id, file);
+			await addUserImage(user?.user?.id, file);
 		},
 		[file, user]
 	);
