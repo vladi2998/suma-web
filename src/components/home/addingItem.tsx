@@ -43,6 +43,7 @@ export default function AddingItem({
 		const teacher = await getTeacher(id);
 		setUserData(teacher);
 	};
+	
 	const img =
 		userData?.img ?? userData?.user?.gender === 'Masculino'
 			? userMale

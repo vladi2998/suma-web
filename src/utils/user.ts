@@ -4,7 +4,6 @@ export const getStudent = async (id: number) => {
 	try {
 		const request = await axiosConfigInstance.get(`/students/${id}/`);
 		if (request.status === 200) {
-			console.log('request.data: ', request.data);
 			return request.data;
 		} else {
 			return null;
