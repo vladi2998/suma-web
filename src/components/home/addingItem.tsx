@@ -28,7 +28,7 @@ export default function AddingItem({
 	is_teacher,
 }: AddingProps) {
 	// TODO: Add description to the user endpoint
-	const defaultDescriptio =
+	const defaultDescription =
 		'En la actualidad, me especializo en el ámbito del análisis y la estrategia de comunicación, desempeñando el papel de Analista de Mensaje en la Dirección de Marca de la Universidad Monteávila (UMA). Mi pasión por el orden, la estrategia y la producción se refleja en mis diversas responsabilidades, que incluyen la ejecución de activaciones en colegios, colaboraciones con distintas marcas, la creación de contenido adaptado a varias plataformas, el análisis de datos y el diseño de planes de comunicación eficaces. \n \n Paralelamente, mi entusiasmo por la educación y la pedagogía me ha llevado a cursar una maestría en Innovación Educativa mediada por TIC, consolidando mi compromiso con el avance educativo. Como miembro activo de la Asociación de Egresados (AEUMA), estoy abierto a escuchar nuevas ideas que contribuyan al crecimiento de nuestra institución. Si consideras que puedo ser de ayuda, te invito a contactarme; estoy dispuesto a colaborar y compartir mis conocimientos en pro del desarrollo universitario.';
 	//
 
@@ -71,7 +71,7 @@ export default function AddingItem({
 					<Image
 						src={userImg}
 						alt={`adding-img-${userData?.user?.id}`}
-                        className="w-full h-full rounded-[8rem]"
+						className="w-full h-full rounded-[8rem]"
 						width={500}
 						height={500}
 					/>
@@ -90,7 +90,9 @@ export default function AddingItem({
 					last_name={last_name}
 					email={email}
 					img={userImg}
-					abstract={defaultDescriptio}
+					abstract={defaultDescription}
+					undergraduate_graduation_date={userData.undergraduate_graduation_date}
+					undergraduate_program={userData.undergraduate_program}
 					is_teacher={is_teacher}
 					is_student={is_student}
 					career={userData.career}

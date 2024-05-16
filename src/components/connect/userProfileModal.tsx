@@ -27,6 +27,9 @@ type UserProfileModalProps = {
 	learning_path?: any;
 	abstract: string;
 	email: string;
+	undergraduate_program?: string;
+	undergraduate_graduation_date?: string;
+	faculty?: string;
 	is_teacher: boolean;
 	is_student: boolean;
 };
@@ -89,6 +92,8 @@ export function UserProfileModal(props: UserProfileModalProps) {
 								src={props.img}
 								alt={`profile-img`}
 								className="w-auto h-96 rounded-5xl"
+								width={500}
+								height={500}
 							/>
 						</div>
 						<div className="w-full md:w-3/5 h-4/5 flex flex-col text-xl justify-around">
@@ -102,6 +107,18 @@ export function UserProfileModal(props: UserProfileModalProps) {
 									{props.study_level}
 								</p>
 							)}
+							{props.is_student && props.undergraduate_program && (
+								<p>
+									<strong>Carrera: </strong>
+									{props.undergraduate_program}
+								</p>
+							)}
+							{props.is_student && props.undergraduate_graduation_date && (
+								<p>
+									<strong>Año de graduación: </strong>
+									{props.undergraduate_graduation_date}
+								</p>
+							)}
 							{props.is_teacher && (
 								<p>
 									<strong>Cargo: </strong>
@@ -112,6 +129,12 @@ export function UserProfileModal(props: UserProfileModalProps) {
 								<p>
 									<strong>Carrera: </strong>
 									{props.career}
+								</p>
+							)}
+							{props.is_student && props.faculty && (
+								<p>
+									<strong>Facultad: </strong>
+									{props.faculty}
 								</p>
 							)}
 							<p>
