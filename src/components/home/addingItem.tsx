@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { UserProfileModal } from '../connect/userProfileModal';
 import profile_bg from '../../../public/PNG/profile_bg.png';
 import userMale from '../../../public/PNG/userMale.png';
@@ -33,6 +33,7 @@ export default function AddingItem({
 	//
 
 	const [userData, setUserData] = useState({} as any);
+	const [userImg, setUserImg] = useState<StaticImageData | string>('');
 
 	const getStudentById = async (id: number) => {
 		const student = await getStudent(id);
@@ -43,13 +44,17 @@ export default function AddingItem({
 		const teacher = await getTeacher(id);
 		setUserData(teacher);
 	};
-	
-	const img =
-		userData?.img ?? userData?.user?.gender === 'Masculino'
-			? userMale
-			: userData?.user?.gender === 'Femenino'
-			? userFemale
-			: profile_bg;
+
+	useEffect(() => {
+		const img: StaticImageData | string =
+			userData?.user?.image ??
+			(userData?.user?.gender === 'Masculino'
+				? userMale
+				: userData?.user?.gender === 'Femenino'
+				? userFemale
+				: profile_bg);
+		setUserImg(img);
+	}, [userData]);
 
 	useEffect(() => {
 		if (is_student) {
@@ -62,11 +67,15 @@ export default function AddingItem({
 	return (
 		<div className="flex flex-col w-80 xl:w-96 h-auto space-y-12 mb-8">
 			<div className="w-full h-6/12 relative">
-				<Image
-					src={img}
-					alt={`adding-img-${userData?.user?.id}`}
-					className="w-full h-full rounded-[8rem]"
-				/>
+				{userImg && (
+					<Image
+						src={userImg}
+						alt={`adding-img-${userData?.user?.id}`}
+                        className="w-full h-full rounded-[8rem]"
+						width={500}
+						height={500}
+					/>
+				)}
 			</div>
 			<div className="w-full h-5/12 flex flex-col items-start text-start">
 				<h1 className="text-2xl font-bold">{first_name + ' ' + last_name}</h1>
@@ -80,7 +89,7 @@ export default function AddingItem({
 					first_name={first_name}
 					last_name={last_name}
 					email={email}
-					img={img}
+					img={userImg}
 					abstract={defaultDescriptio}
 					is_teacher={is_teacher}
 					is_student={is_student}
