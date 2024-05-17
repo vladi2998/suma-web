@@ -14,6 +14,10 @@ import CheckboxField from '@/components/forms/checkboxField';
 import { useRouter } from 'next/navigation';
 import axiosConfigInstance from '@/config/axiosCofig';
 import { toast } from 'sonner';
+import {
+	getPostgraduatesCareers,
+	getPregraduatesCareers,
+} from '@/utils/careers';
 
 type SelectChangeEvent = ChangeEvent<HTMLSelectElement>;
 
@@ -51,10 +55,19 @@ export default function RegisterPage() {
 	];
 
 	const pregraduates_faculties: ItemValue[] = [
-		{ value: 0, label: 'Ciencias de la Comunicación e Información' },
-		{ value: 1, label: 'Ciencias de la Educación' },
-		{ value: 2, label: 'Ciencias Económicas y Administrativas' },
-		{ value: 3, label: 'Ciencias Jurídicas y Políticas' },
+		{
+			value: 'Ciencias de la Comunicación e Información',
+			label: 'Ciencias de la Comunicación e Información',
+		},
+		{ value: 'Ciencias de la Educación', label: 'Ciencias de la Educación' },
+		{
+			value: 'Ciencias Económicas y Administrativas',
+			label: 'Ciencias Económicas y Administrativas',
+		},
+		{
+			value: 'Ciencias Jurídicas y Políticas',
+			label: 'Ciencias Jurídicas y Políticas',
+		},
 	];
 
 	const [pregraduates_careers, setPregraduatesCareers] = useState<ItemValue[]>(
@@ -65,38 +78,26 @@ export default function RegisterPage() {
 	>([]);
 
 	useEffect(() => {
-		async function getPregraduatesCareers() {
+		const _getPregraduatesCareers = async () => {
 			try {
-				const response = await axiosConfigInstance.get(
-					'programs/undergraduate/'
-				);
-				const data: ItemValue[] = response.data.map((item: any) => ({
-					value: item.id,
-					label: item.name,
-				}));
-				setPregraduatesCareers(data);
+				const resp = await getPregraduatesCareers();
+				setPregraduatesCareers(resp);
 			} catch (error) {
-				console.error(error);
+				console.log('Error getting pregraduates careers: ', error);
 			}
-		}
+		};
 
-		async function getPostgraduatesCareers() {
+		const _getPostgraduatesCareers = async () => {
 			try {
-				const response = await axiosConfigInstance.get(
-					'programs/postgraduate/'
-				);
-				const data: ItemValue[] = response.data.map((item: any) => ({
-					value: item.id,
-					label: item.name,
-				}));
-				setPostgraduates_carreers(data);
+				const resp = await getPostgraduatesCareers();
+				setPostgraduates_carreers(resp);
 			} catch (error) {
-				console.error(error);
+				console.log('Error getting postgraduates careers: ', error);
 			}
-		}
+		};
 
-		getPregraduatesCareers();
-		getPostgraduatesCareers();
+		_getPregraduatesCareers();
+		_getPostgraduatesCareers();
 	}, []);
 
 	const [selectedType, setSelectedType] = useState<ItemValue | null>(
@@ -161,7 +162,8 @@ export default function RegisterPage() {
 					position: 'fixed',
 					width: '100vw',
 					height: '100vh',
-				}}>
+				}}
+			>
 				<Image
 					src={bgImageLogin}
 					alt="image-bg"
@@ -179,7 +181,8 @@ export default function RegisterPage() {
 			</div>
 			<form
 				className="w-full h-auto flex items-center justify-center z-10 overflow-y-hidden"
-				onSubmit={(e) => e.preventDefault()}>
+				onSubmit={(e) => e.preventDefault()}
+			>
 				<div className="bg-white w-4/5 sm:w-1/2 md:w-2/3 xl:w-1/3 h-auto flex flex-col items-center justify-around py-12 px-6 md:px-12 2xl:px-18 rounded-8xl space-y-12">
 					<Image
 						src={sumateLogo}

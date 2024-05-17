@@ -199,7 +199,7 @@ export function ProfileDataCard() {
 			values.user.image = file;
 			if (user.is_student) await updateStudent(values, user?.user?.id);
 			else await updateTeacher(values, user?.user?.id);
-			await addUserImage(user?.user?.id, file);
+			if (file) await addUserImage(user?.user?.id, file);
 		},
 		[file, user]
 	);

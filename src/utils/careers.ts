@@ -4,7 +4,7 @@ import { ItemValue } from '@/components/forms/inputSelect';
 export async function getPregraduatesCareers() {
 	try {
 		const response = await axiosConfigInstance.get('programs/undergraduate/');
-		const data: ItemValue[] = response.data.map((item: any) => ({
+		const data: ItemValue[] = response.data.results.map((item: any) => ({
 			value: item.id,
 			label: item.name,
 		}));
@@ -17,7 +17,7 @@ export async function getPregraduatesCareers() {
 export async function getPostgraduatesCareers() {
 	try {
 		const response = await axiosConfigInstance.get('programs/postgraduate/');
-		const data: ItemValue[] = response.data.map((item: any) => ({
+		const data: ItemValue[] = response.data.results.map((item: any) => ({
 			value: item.id,
 			label: item.name,
 		}));
