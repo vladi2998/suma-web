@@ -32,6 +32,7 @@ import UserContext from '@/context/UserProvider';
 import PasswordField from '../forms/passwordField';
 import { UserCircleIcon } from '@heroicons/react/16/solid';
 import ImageField from '../forms/ImageField';
+import TextAreaField from '../forms/textAreaField';
 
 export function ProfileDataCard() {
 	const {
@@ -49,6 +50,7 @@ export function ProfileDataCard() {
 				document_id: '',
 				phone_number: '',
 				image: '',
+				description: '',
 			},
 			undergraduate_program: null,
 			postgraduate_program: null,
@@ -81,45 +83,6 @@ export function ProfileDataCard() {
 		ItemValue[]
 	>([]);
 
-	const getProfile = async () => {
-		setIsLoading(true);
-		try {
-			const resp = await getProfileData();
-			setUser(resp);
-			setValue('user.image', resp.user.image);
-			setValue('user.email', resp.user.email);
-			setValue('user.first_name', resp.user.first_name);
-			setValue('user.last_name', resp.user.last_name);
-			setValue('user.document_id', resp.user.document_id);
-			setValue('user.phone_number', resp.user.phone_number);
-			setValue('undergraduate_program', resp.undergraduate_program);
-			setValue('postgraduate_program', resp.postgraduate_program);
-			setValue(
-				'undergraduate_graduation_date',
-				resp.undergraduate_graduation_date
-			);
-			setValue(
-				'postgraduate_graduation_date',
-				resp.postgraduate_graduation_date
-			);
-			setValue('career', resp.career);
-			setValue('charge', resp.charge);
-			setValue('study_level', resp.study_level);
-			setValue('is_currently_enrolled', resp.is_currently_enrolled);
-			setValue('postgraduate_too', resp.postgraduate_too);
-			setValue('coins', resp.coins);
-			setValue('faculty', resp.faculty);
-			setIsPostGraduate(resp.is_postgraduate);
-			setIsUnderGraduate(resp.is_undergraduate);
-			setIsTeacher(resp.is_teacher);
-			setIsCurrentlyEnrrolled(resp.is_currently_enrolled);
-		} catch (error) {
-			console.log('Error getting profile data: ', error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
 	const _getPregraduatesCareers = async () => {
 		try {
 			const resp = await getPregraduatesCareers();
@@ -139,10 +102,49 @@ export function ProfileDataCard() {
 	};
 
 	useEffect(() => {
+		const getProfile = async () => {
+			setIsLoading(true);
+			try {
+				const resp = await getProfileData();
+				setUser(resp);
+				setValue('user.image', resp.user.image);
+				setValue('user.email', resp.user.email);
+				setValue('user.first_name', resp.user.first_name);
+				setValue('user.last_name', resp.user.last_name);
+				setValue('user.document_id', resp.user.document_id);
+				setValue('user.phone_number', resp.user.phone_number);
+				setValue('undergraduate_program', resp.undergraduate_program);
+				setValue('postgraduate_program', resp.postgraduate_program);
+				setValue(
+					'undergraduate_graduation_date',
+					resp.undergraduate_graduation_date
+				);
+				setValue(
+					'postgraduate_graduation_date',
+					resp.postgraduate_graduation_date
+				);
+				setValue('career', resp.career);
+				setValue('charge', resp.charge);
+				setValue('study_level', resp.study_level);
+				setValue('is_currently_enrolled', resp.is_currently_enrolled);
+				setValue('postgraduate_too', resp.postgraduate_too);
+				setValue('coins', resp.coins);
+				setValue('faculty', resp.faculty);
+				setIsPostGraduate(resp.is_postgraduate);
+				setIsUnderGraduate(resp.is_undergraduate);
+				setIsTeacher(resp.is_teacher);
+				setIsCurrentlyEnrrolled(resp.is_currently_enrolled);
+			} catch (error) {
+				console.log('Error getting profile data: ', error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+
 		getProfile();
 		_getPregraduatesCareers();
 		_getPostgraduatesCareers();
-	}, [getValues, isPostGraduate]);
+	}, [getValues, isPostGraduate, setValue, setUser	]);
 
 	const pregraduates_faculties: ItemValue[] = [
 		{
@@ -231,7 +233,7 @@ export function ProfileDataCard() {
 								<div className="flex flex-col">
 									{/* TODO: Verificar si el usuario ya tiene image cargada y usar <img /> para ponerla */}
 									{user?.user?.image ? (
-										<div className="h-24 w-24 relative rounded-full overflow-hidden" >
+										<div className="h-24 w-24 relative rounded-full overflow-hidden">
 											<Image
 												src={user?.user?.image}
 												alt="profile-image"
@@ -270,11 +272,19 @@ export function ProfileDataCard() {
 									/>
 								</div>
 								<div className="space-y-1">
-									<Label htmlFor="phone">Telefono</Label>
+									<Label htmlFor="phone">Teléfono</Label>
 									<InputField
 										register={register}
 										label="user.phone_number"
 										placeholder="Ex: 04121234567"
+									/>
+								</div>
+								<div className="space-y-1">
+									<Label htmlFor="description">Descripción</Label>
+									<TextAreaField
+										register={register}
+										label="user.description"
+										placeholder="descipción"
 									/>
 								</div>
 

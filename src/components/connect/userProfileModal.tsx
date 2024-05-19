@@ -16,6 +16,7 @@ import fifthImgRoute from '../../../public/PNG/penIcon.png';
 import sixthImgRoute from '../../../public/PNG/paperIcon.png';
 import plusIcon from '../../../public/PNG/plus-icon.png';
 import MyLearningRouteForModal from './MyLearningRouteForModal';
+import React from 'react';
 
 type UserProfileModalProps = {
 	first_name: string;
@@ -25,7 +26,7 @@ type UserProfileModalProps = {
 	study_level?: string;
 	img: any;
 	learning_path?: any;
-	abstract: string;
+	description: string;
 	email: string;
 	undergraduate_program?: string;
 	undergraduate_graduation_date?: string;
@@ -71,9 +72,7 @@ export function UserProfileModal(props: UserProfileModalProps) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button
-					variant="custom"
-					size="custom">
+				<Button variant="custom" size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
 						Sumemos
 					</p>
@@ -141,16 +140,21 @@ export function UserProfileModal(props: UserProfileModalProps) {
 								<strong>Tipo de usuario: </strong>
 								{props.is_teacher ? 'Profesor' : 'Estudiante'}
 							</p>
-							<Link
-								href="/"
-								className="w-full md:w-1/2">
+							<Link href="/" className="w-full md:w-1/2">
 								<ForwardButton text="¡Ver mi portafolio!" />
 							</Link>
 						</div>
 					</Card>
-					<Card className="w-full h-auto p-4 bg-dark-green rounded-4xl text-xl text-white font-semibold whitespace-break-spaces">
-						{props.abstract}
-					</Card>
+					{props.description && (
+						<Card className="w-full h-auto p-4 bg-dark-green rounded-4xl text-xl text-white font-semibold whitespace-break-spaces">
+							{props.description.split('\n').map((line, index) => (
+								<React.Fragment key={index}>
+									{line}
+									<br />
+								</React.Fragment>
+							))}
+						</Card>
+					)}
 					<Card className="w-full h-auto p-4 rounded-4xl bg-transparent flex flex-col md:flex-row items-center justify-around border-none">
 						<div className="w-full md:w-1/2 flex flex-col space-y-2 px-1">
 							<InputField
