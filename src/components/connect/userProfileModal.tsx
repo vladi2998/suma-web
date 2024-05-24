@@ -8,12 +8,18 @@ import ForwardButton from '../buttons/forwardButton';
 import Link from 'next/link';
 import InputField from '../forms/inputField';
 import { useForm } from 'react-hook-form';
-import firstImgRoute from '../../../public/PNG/folderIcon.png';
-import secondImgRoute from '../../../public/PNG/zoomIcon.png';
-import thirdImgRoute from '../../../public/PNG/brainIcon.png';
-import fourthImgRoute from '../../../public/PNG/teamIcon.png';
-import fifthImgRoute from '../../../public/PNG/penIcon.png';
-import sixthImgRoute from '../../../public/PNG/paperIcon.png';
+import firstImgRoute from '../../../public/PNG/paperIcon2.png';
+import secondImgRoute from '../../../public/PNG/penIcon2.png';
+import thirdImgRoute from '../../../public/PNG/teamIcon2.png';
+import fourthImgRoute from '../../../public/PNG/brainIcon2.png';
+import fifthImgRoute from '../../../public/PNG/zoomIcon2.png';
+import sixthImgRoute from '../../../public/PNG/folderIcon2.png';
+import firstArrow from '../../../public/PNG/firstArrow.png';
+import secondArrow from '../../../public/PNG/secondArrow.png';
+import thirdArrow from '../../../public/PNG/thirdArrow.png';
+import fourthArrow from '../../../public/PNG/fourthArrow.png';
+import fifthArrow from '../../../public/PNG/fifthArrow.png';
+import sixArrow from '../../../public/PNG/sixArrow.png';
 import plusIcon from '../../../public/PNG/plus-icon.png';
 import MyLearningRouteForModal from './MyLearningRouteForModal';
 import React from 'react';
@@ -45,34 +51,54 @@ export function UserProfileModal(props: UserProfileModalProps) {
 	const defaultImageRoute = [
 		{
 			img: firstImgRoute,
+			arrowImg: firstArrow,
 			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			style: 'ml-36',
+			arrowStyle: 'top-28 ml-8',
 		},
 		{
 			img: secondImgRoute,
+			arrowImg: secondArrow,
 			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			style: 'ml-16',
+			arrowStyle: 'top-12 ml-8',
 		},
 		{
 			img: thirdImgRoute,
+			arrowImg: thirdArrow,
 			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			style: '',
+			arrowStyle: 'bottom-4 ml-8',
 		},
 		{
 			img: fourthImgRoute,
+			arrowImg: fourthArrow,
 			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			style: '',
+			arrowStyle: 'bottom-6 ml-8',
 		},
 		{
 			img: fifthImgRoute,
+			arrowImg: fifthArrow,
 			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			style: 'ml-16',
+			arrowStyle: 'bottom-28 ml-8',
 		},
 		{
 			img: sixthImgRoute,
+			arrowImg: sixArrow,
 			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			style: 'ml-36',
+			arrowStyle: 'bottom-56 ml-8',
 		},
 	];
 
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant="custom" size="custom">
+				<Button
+					variant="custom"
+					size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
 						Sumemos
 					</p>
@@ -140,7 +166,9 @@ export function UserProfileModal(props: UserProfileModalProps) {
 								<strong>Tipo de usuario: </strong>
 								{props.is_teacher ? 'Profesor' : 'Estudiante'}
 							</p>
-							<Link href="/" className="w-full md:w-1/2">
+							<Link
+								href="/"
+								className="w-full md:w-1/2">
 								<ForwardButton text="¡Ver mi portafolio!" />
 							</Link>
 						</div>
@@ -187,6 +215,7 @@ export function UserProfileModal(props: UserProfileModalProps) {
 							<Card className="w-full h-auto py-4 rounded-4xl bg-transparent flex flex-col items-center justify-around border-none space-y-2">
 								<MyLearningRouteForModal imgList={defaultImageRoute} />
 							</Card>
+							<div className="my-36" />
 						</>
 					) : (
 						<div className="py-4 w-full" />
