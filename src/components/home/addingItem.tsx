@@ -60,7 +60,7 @@ export default function AddingItem({
 	}, [id, is_student, is_teacher]);
 
 	return (
-		<div className="flex flex-col w-80 xl:w-96 h-auto space-y-12 mb-8">
+		<div className="flex flex-col w-80 xl:w-96 h-auto md:h-140 justify-between mb-8">
 			<div className="w-full h-6/12 relative">
 				{userImg && (
 					<Image

@@ -88,6 +88,7 @@ const config = {
 			spacing: {
 				'128': '32rem',
 				'132': '42rem',
+				'140': '44rem',
 				'160': '46rem',
 			},
 			fontSize: {
