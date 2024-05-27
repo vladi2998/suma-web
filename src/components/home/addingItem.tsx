@@ -77,7 +77,15 @@ export default function AddingItem({
 				{is_teacher && <p>{userData.career}</p>}
 				{is_teacher && <p>{userData.study_level}</p>}
 				{is_teacher && <p>{userData.charge}</p>}
-				{is_student && <p>Estudiante</p>}
+				{is_student && userData.faculty && (
+					<p>{userData.faculty}</p>
+				)}
+				{is_student && userData.undergraduate_program && (
+					<p>{userData.undergraduate_program}</p>
+				)}
+				{is_student && userData.postgraduate_program && (
+					<p>{userData.postgraduate_program}</p>
+				)}
 			</div>
 			<div className="w-full h-1/12 flex items-center justify-center">
 				<UserProfileModal
@@ -94,6 +102,8 @@ export default function AddingItem({
 					charge={userData.charge}
 					study_level={userData.study_level}
 					learning_path={userData.learning_path}
+					faculty={userData.faculty}
+					postgraduate_program={userData.postgraduate_program}
 				/>
 			</div>
 		</div>

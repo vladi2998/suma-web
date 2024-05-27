@@ -39,6 +39,7 @@ type UserProfileModalProps = {
 	faculty?: string;
 	is_teacher: boolean;
 	is_student: boolean;
+	postgraduate_program?: string;
 };
 
 export function UserProfileModal(props: UserProfileModalProps) {
@@ -156,16 +157,22 @@ export function UserProfileModal(props: UserProfileModalProps) {
 									{props.career}
 								</p>
 							)}
+							{props.is_student && props.postgraduate_program && (
+								<p>
+									<strong>Carrera de postgrado: </strong>
+									{props.postgraduate_program}
+								</p>
+							)}
 							{props.is_student && props.faculty && (
 								<p>
 									<strong>Facultad: </strong>
 									{props.faculty}
 								</p>
 							)}
-							<p>
+							{/* <p>
 								<strong>Tipo de usuario: </strong>
 								{props.is_teacher ? 'Profesor' : 'Estudiante'}
-							</p>
+							</p> */}
 							<Link
 								href="/"
 								className="w-full md:w-1/2">
