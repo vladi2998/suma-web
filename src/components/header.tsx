@@ -12,6 +12,7 @@ import { Card } from './ui/card';
 import AuthContext from '@/context/AuthProvider';
 import { useContext } from 'react';
 import { clearAuthHeader } from '@/config/axiosCofig';
+import { redirect } from 'next/navigation';
 
 export default function HeaderComponent({
 	selected_route,
@@ -21,6 +22,10 @@ export default function HeaderComponent({
 	const { auth, setAuth } = useContext(AuthContext) as any;
 
 	const isAuth = auth.accessToken ? true : false;
+
+	if (!isAuth) {
+		redirect('/login');
+	}
 
 	const defaultNavStyle =
 		'relative text-xxs text-center md:text-base w-fit block after:block after:content-full after:absolute after:h-[3px] after:bg-dark-green after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center';
