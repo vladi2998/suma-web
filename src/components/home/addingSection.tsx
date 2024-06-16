@@ -16,6 +16,7 @@ export default function AddingSection({
 }: AddingSectionProps) {
 	const [addingSectionList, setAddingSectionList] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [specialLearningPaths, setSpecialLearningPaths] = useState<any[]>([]);
 
 	useEffect(() => {
 		axiosConfigInstance
@@ -30,6 +31,14 @@ export default function AddingSection({
 			.catch((error) => {
 				console.error('There was an error!', error);
 			});
+		axiosConfigInstance
+			.get('/learning_paths?is_special=true')
+			.then((response: any) => {
+				setSpecialLearningPaths(response.data.results);
+			})
+			.catch((error) => {
+				console.error('There was an error!', error);
+			});
 	}, []);
 
 	return (
@@ -40,10 +49,7 @@ export default function AddingSection({
 					<>
 						<div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 place-items-center">
 							{addingSectionList.map((item, idx) => (
-								<AddingItem
-									{...item}
-									key={idx}
-								/>
+								<AddingItem {...item} key={idx} />
 							))}
 						</div>
 
@@ -51,7 +57,8 @@ export default function AddingSection({
 							<div className="w-full flex justify-end my-2">
 								<Link
 									href="/connect/"
-									className="w-96 flex items-center justify-center">
+									className="w-96 flex items-center justify-center"
+								>
 									<ForwardButton text="Ver más" />
 								</Link>
 							</div>
