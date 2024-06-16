@@ -69,9 +69,9 @@ export function ProfileDataCard() {
 	const [isLoading, setIsLoading] = useState(false);
 	const { user, setUser } = useContext(UserContext) as any;
 	const [file, setFile]: any = useState(null);
-	const [isPostGraduate, setIsPostGraduate] = useState(user.is_postgraduate);
-	const [isUnderGraduate, setIsUnderGraduate] = useState(user.is_undergraduate);
-	const [isTeacher, setIsTeacher] = useState(user.is_teacher);
+	const [isPostGraduate, setIsPostGraduate] = useState(user?.is_postgraduate);
+	const [isUnderGraduate, setIsUnderGraduate] = useState(user?.is_undergraduate);
+	const [isTeacher, setIsTeacher] = useState(user?.is_teacher);
 	const [isCurrentlyEnrrolled, setIsCurrentlyEnrrolled] = useState(
 		user?.is_currently_enrolled
 	);

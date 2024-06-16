@@ -43,6 +43,7 @@ type UserProfileModalProps = {
 };
 
 export function UserProfileModal(props: UserProfileModalProps) {
+	const {learning_path} = props;
 	const { register, handleSubmit } = useForm({
 		defaultValues: {
 			content: null,
@@ -53,42 +54,42 @@ export function UserProfileModal(props: UserProfileModalProps) {
 		{
 			img: firstImgRoute,
 			arrowImg: firstArrow,
-			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			info: learning_path?.steps?.[0]?.description,
 			style: 'ml-36',
 			arrowStyle: 'top-28 ml-8',
 		},
 		{
 			img: secondImgRoute,
 			arrowImg: secondArrow,
-			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			info: learning_path?.steps?.[1]?.description,
 			style: 'ml-16',
 			arrowStyle: 'top-12 ml-8',
 		},
 		{
 			img: thirdImgRoute,
 			arrowImg: thirdArrow,
-			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			info: learning_path?.steps?.[2]?.description,
 			style: '',
 			arrowStyle: 'bottom-4 ml-8',
 		},
 		{
 			img: fourthImgRoute,
 			arrowImg: fourthArrow,
-			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			info: learning_path?.steps?.[3]?.description,
 			style: '',
 			arrowStyle: 'bottom-6 ml-8',
 		},
 		{
 			img: fifthImgRoute,
 			arrowImg: fifthArrow,
-			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			info: learning_path?.steps?.[4]?.description,
 			style: 'ml-16',
 			arrowStyle: 'bottom-28 ml-8',
 		},
 		{
 			img: sixthImgRoute,
 			arrowImg: sixArrow,
-			info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan turpis tortor, sed luctus mi varius quis. Donec fermentum placerat quam id interdum. Praesent sagittis venenatis ornare. Proin lobortis rhoncus ex, non tincidunt ligula pellentesque ultricies. Nam dapibus urna ut rhoncus accumsan. Vestibulum accumsan dapibus nulla. Morbi sagittis quis nisi sed elementum. Duis laoreet urna metus, scelerisque lacinia ligula molestie quis.',
+			info: learning_path?.steps?.[5]?.description,
 			style: 'ml-36',
 			arrowStyle: 'bottom-56 ml-8',
 		},
