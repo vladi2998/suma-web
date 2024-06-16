@@ -132,7 +132,7 @@ export default function HeaderComponent({
 					className={`${defaultNavStyle} ${
 						selected_route === 5 ? selectedNavSyle : ''
 					}`}>
-					Mi Ruta
+					Ruta
 				</Link>
 				<UserCircleIcon
 					className="w-6 h-6 md:w-8 md:h-8 hover:cursor-pointer"

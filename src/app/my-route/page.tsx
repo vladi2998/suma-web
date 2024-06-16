@@ -9,7 +9,9 @@ export default function MyRoutePage() {
 			<div className="w-full px-4 my-4">
 				<ProfileSection />
 			</div>
-			<div className="w-full px-12 my-4">
+			<div
+				id="routes-section"
+				className="w-full px-12 my-4">
 				<BrandingSection />
 			</div>
 			<div className="w-full px-4 my-4">
