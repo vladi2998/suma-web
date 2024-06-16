@@ -15,9 +15,9 @@ export default function MyRoutePage() {
 				className="w-full px-12 my-4">
 				<RoutesSection />
 			</div>
-			<div className="w-full px-4 my-4">
+			{/* <div className="w-full px-4 my-4">
 				<MyLearningRouteSection />
-			</div>
+			</div> */}
 		</div>
 	);
 }

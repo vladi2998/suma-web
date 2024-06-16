@@ -2,7 +2,7 @@ import Image, { StaticImageData } from 'next/image';
 import bgMountains from '../../../public/PNG/mountains-fhd.png';
 import imgLogo from '../../../public/PNG/sumados-logo.png';
 import H1 from '../H1';
-import ForwardButton from '../buttons/forwardButton';
+import RouteModal from './RouteModal';
 export default function RouteComponent({
 	title,
 	details,
@@ -36,7 +36,13 @@ export default function RouteComponent({
 					<H1 className="text-white">{title}</H1>
 					<div className="w-full h-full flex items-start justify-start">
 						<div className="min-w-96">
-							<ForwardButton text="RUTA" />
+							<RouteModal
+								title={title}
+								details={details}
+								highlight={highlight}
+								img={img}
+								bg={bg}
+							/>
 						</div>
 					</div>
 				</div>

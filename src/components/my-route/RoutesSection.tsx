@@ -10,7 +10,7 @@ export default function RoutesSection() {
 		{
 			title: 'LIDERAZGO Educativo',
 			details:
-				'Descrubre cómo inspirar y guias a tus estudiantes hacia el éxito, fomentando un ambiente de respeto y colaboración',
+				'Descrubre cómo inspirar y guiar a tus estudiantes hacia el éxito, fomentando un ambiente de respeto y colaboración',
 			highlight:
 				'Aprende técnicas para ser un modelo a seguir y un líder educativo',
 			bg: 'bg-green-300',
