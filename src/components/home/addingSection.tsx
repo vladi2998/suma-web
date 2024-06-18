@@ -16,7 +16,6 @@ export default function AddingSection({
 }: AddingSectionProps) {
 	const [addingSectionList, setAddingSectionList] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [specialLearningPaths, setSpecialLearningPaths] = useState<any[]>([]);
 
 	useEffect(() => {
 		axiosConfigInstance
@@ -27,14 +26,6 @@ export default function AddingSection({
 				);
 				setAddingSectionList(data);
 				setIsLoading(false);
-			})
-			.catch((error) => {
-				console.error('There was an error!', error);
-			});
-		axiosConfigInstance
-			.get('/learning_paths?is_special=true')
-			.then((response: any) => {
-				setSpecialLearningPaths(response.data.results);
 			})
 			.catch((error) => {
 				console.error('There was an error!', error);

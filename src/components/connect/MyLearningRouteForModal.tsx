@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import H1 from '../H1';
 import learningRouteTitleImg from '../../../public/PNG/LearningRoutetitle.png';
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
 } from '../ui/hover-card';
+import { ImgListType } from '../my-route/RouteModal';
 
 const HoverComponent = ({
 	img,
@@ -24,6 +24,7 @@ const HoverComponent = ({
 }) => {
 	return (
 		<HoverCard key={key}>
+			{/* CHANGE TO H-36 TO MAKE ALL THE SAME, BUT IT WILL NEED TO UPDATE ARROWS STYLES */}
 			<div className="flex w-full h-auto items-center">
 				<HoverCardTrigger asChild>
 					<Image
@@ -45,11 +46,11 @@ const HoverComponent = ({
 export default function MyLearningRouteForModal({
 	imgList,
 }: {
-	imgList: any[];
+	imgList: ImgListType[];
 }) {
 	return (
 		<div className="hidden lg:flex relative w-full items-center justify-center bg-white/50 rounded-4xl">
-			<div className="w-1/2 h-auto flex flex-col space-y-2 opacity-100">
+			<div className="ml-4 w-1/2 h-auto flex flex-col space-y-2 opacity-100">
 				{imgList.map((item, idx) => (
 					<HoverComponent
 						key={idx}
