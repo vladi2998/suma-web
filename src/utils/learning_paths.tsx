@@ -40,3 +40,20 @@ export const deleteStep = async (id: number) => {
 		return false;
 	}
 };
+
+export const updateLearningPath = async (id: number, data: any) => {
+	try {
+		const request = await axiosConfigInstance.put(
+			`/learning_paths/${id}/`,
+			data
+		);
+		if (request.status === 200) {
+			return request.data;
+		} else {
+			return null;
+		}
+	} catch (err: any) {
+		console.log('Error al actualizar la Ruta: ', err.response);
+		throw err;
+	}
+};

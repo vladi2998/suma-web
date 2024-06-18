@@ -10,13 +10,23 @@ import AuthContext from '@/context/AuthProvider';
 import { useContext } from 'react';
 import { CreateMyRouteModal } from './createMyRouteModal';
 import RouteSummarySection from './RouteSummarySection';
+import UserContext from '@/context/UserProvider';
 
 export default function ProfileSection() {
 	const { auth } = useContext(AuthContext) as any;
+	const { user } = useContext(UserContext) as any;
 	const isAuth = auth.accessToken ? true : false;
 
 	return (
 		<Card className="border-none">
+			<div className="w-full flex flex-row items-center jusitfy-between">
+				<H1 className="ml-8">Mi Ruta</H1>
+				{isAuth && user?.is_teacher && (
+					<div className="w-1/2">
+						<CreateMyRouteModal />
+					</div>
+				)}
+			</div>
 			<RouteSummarySection />
 		</Card>
 	);

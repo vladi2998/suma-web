@@ -12,6 +12,7 @@ import {
 	createLearningPath,
 	createStep,
 	deleteStep,
+	updateLearningPath,
 } from '@/utils/learning_paths';
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -114,13 +115,31 @@ export function CreateMyRouteModal() {
 
 	const handleCreateRoute = async (data: any) => {
 		let learningpath = null;
+
+		const steps = [];
 		try {
+			for (let i = 1; i <= 6; i++) {
+				steps.push({
+					title: data[`step_${i}_title`],
+					description: data[`step_${i}_description`],
+					step_number: i,
+					file: data[`step_${i}_content`]?.file,
+					url: data[`step_${i}_content`]?.url,
+				});
+			}
+
 			if (!learning_path_id)
 				learningpath = await createLearningPath({
 					title: data.title,
 					description: data.description,
+					steps: steps,
 				});
-			else learningpath = { id: learning_path_id };
+			else
+				learningpath = await updateLearningPath(learning_path_id, {
+					title: data.title,
+					description: data.description,
+					steps: steps,
+				});
 			setLearningPathId(learningpath?.id);
 		} catch (error: any) {
 			ErrorParser(
@@ -128,35 +147,6 @@ export function CreateMyRouteModal() {
 				'Ocurrió un error al crear tu ruta.',
 				'Error desconocido'
 			);
-		}
-
-		const createdSteps = [];
-		try {
-			for (let i = 1; i <= 6; i++) {
-				const formData = new FormData();
-				formData.append('title', data[`step_${i}_title`]);
-				formData.append('description', data[`step_${i}_description`]);
-				formData.append('learning_path', learningpath.id.toString());
-				formData.append('step_number', i.toString());
-				if (data[`step_${i}_content`]?.file) {
-					formData.append('file', data[`step_${i}_content`]?.file);
-				}
-				if (data[`step_${i}_content`]?.url) {
-					formData.append('url', data[`step_${i}_content`]?.url);
-				}
-
-				const step = await createStep(formData);
-				if (step) createdSteps.push(step.id);
-			}
-			setIsOpen(false);
-		} catch (error: any) {
-			toast.error('Ocurrió al crear un paso de tu ruta.', {
-				description: `${error.detail ?? error}`,
-			});
-			// If an error occurred, delete all previously created steps
-			for (const stepId of createdSteps) {
-				await deleteStep(stepId);
-			}
 		}
 	};
 
@@ -175,7 +165,7 @@ export function CreateMyRouteModal() {
 			<DialogTrigger asChild>
 				<Button variant="custom" size="custom">
 					<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
-						Crear una ruta
+						{learning_path_id ? 'Editar ruta' : 'Crear una ruta'}
 					</p>
 					<Image
 						className="bg-white rounded-full p-1 w-8 h-8"
@@ -234,7 +224,7 @@ export function CreateMyRouteModal() {
 									</div>
 									<div className="w-1/2">
 										<ForwardButton
-											text="Crear ruta"
+											text={learning_path_id ? 'Editar ruta' : 'Crear una ruta'}
 											callback={handleSubmit((values) =>
 												handleCreateRoute(values)
 											)}
