@@ -55,6 +55,7 @@ type FormFields = {
 	step_6_content: { url: string; file: File };
 };
 
+{/* AQUI ES DONDE TENDRIAS QUE RECIBIR LA RUTA POR PARAMETRO */}
 export function CreateMyRouteModal() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [learning_path_id, setLearningPathId] = useState<number | null>(null);
@@ -78,6 +79,11 @@ export function CreateMyRouteModal() {
 			setUserData(student);
 		};
 
+		{/* AQUI ES DONDE TENDRIAS QUE CAMBIAR LA LOGICA PARA QUE
+			SE USE LA RUTA QUE SE PASE POR PARAMETRO ASI
+			Y CAPAZ ESTA TENDRIAS QUE SACARLA AL COMPONENTE PROFILESECTION
+			PARA QUE ALLI OBTENGAR LA RUTA Y LA PASE POR PARAMETRO
+		*/}
 		const getTeacherById = async () => {
 			const teacher = await getTeacher(user?.user?.id);
 			setUserData(teacher);

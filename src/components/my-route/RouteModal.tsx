@@ -93,6 +93,7 @@ export default function RouteModal({
 				</DialogContent>
 			</Dialog>
 
+				{/* AQUI ES DONDE TENDRIAS QUE PASAR LA RUTA POR PARAMETRO */}
 			{user?.is_teacher && user?.user?.is_staff && <CreateMyRouteModal />}
 		</div>
 	);
