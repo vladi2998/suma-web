@@ -12,7 +12,11 @@ export default function RoutesSection() {
 
 	useEffect(() => {
 		const images = [GreenBoy, YellowGirl, BlueBoy];
-		const backgroundColors = ['bg-green-300', 'bg-orange-400', 'bg-indigo-900'];
+		const backgroundColors = [
+			'bg-super-light-green',
+			'bg-orange-400',
+			'bg-indigo-900',
+		];
 
 		axiosConfigInstance
 			.get('/learning_paths?is_special=true')
@@ -39,7 +43,10 @@ export default function RoutesSection() {
 		<Card className="border-none">
 			<CardContent className="flex flex-col items-center justify-around h-auto py-20 space-y-8 rounded-8xl">
 				{specialLearningPaths.map((route, index) => (
-					<RouteComponent key={index} {...route} />
+					<RouteComponent
+						key={index}
+						{...route}
+					/>
 				))}
 			</CardContent>
 		</Card>

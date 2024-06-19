@@ -54,6 +54,7 @@ const config = {
 				},
 				'dark-green': 'rgb(20 83 45)',
 				'light-green': 'rgb(54 110 20)',
+				'super-light-green': 'rgba(113,193,119,255)',
 				'dark-gray': 'rgb(51 65 85)',
 				'light-gray': 'rgb(226 232 240)',
 				'light-purple': 'rgb(165 180 252)',
