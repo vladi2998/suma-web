@@ -7,7 +7,7 @@ import imgLogo from '../../../public/PNG/sumados-logo.png';
 import H1 from '../H1';
 import MyLearningRouteForModal from '../connect/MyLearningRouteForModal';
 import { Card } from '../ui/card';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import UserContext from '@/context/UserProvider';
 import { CreateMyRouteModal } from './createMyRouteModal';
 import { RouteType, StepType } from './RouteComponent';
@@ -39,7 +39,9 @@ export default function RouteModal({
 		<div className="flex w-full">
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button variant="custom" size="custom">
+					<Button
+						variant="custom"
+						size="custom">
 						<p className="pl-2 w-3/4 font-bold text-white text-start md:text-xl">
 							RUTA
 						</p>
@@ -50,14 +52,13 @@ export default function RouteModal({
 						/>
 					</Button>
 				</DialogTrigger>
-				<DialogContent className="sm:max-w-[1080px] max-h-screen bg-transparent border-none">
+				<DialogContent className="sm:max-w-[1280px] max-h-screen bg-transparent border-none">
 					<div className="flex flex-col w-full h-full overflow-y-scroll max-h-screen no-scrollbar space-y-4">
 						<div
-							className={`relative w-full h-full min-h-[720px] flex flex-col items-center py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}
-						>
+							className={`relative w-full h-full min-h-[820px] flex flex-col items-center py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}>
 							<Image
 								src={bgMountains}
-								className="hidden object-fill md:block mt-96"
+								className="hidden object-fill md:block mt-[30rem] -scale-x-100"
 								alt="image-mountains-bg"
 								layout="fill"
 							/>

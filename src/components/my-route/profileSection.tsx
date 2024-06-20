@@ -19,10 +19,10 @@ export default function ProfileSection() {
 
 	return (
 		<Card className="border-none">
-			<div className="w-full flex flex-row items-center jusitfy-between">
-				<H1 className="ml-8">Mi Ruta</H1>
+			<div className="w-full flex flex-row items-center justify-end my-4">
+				{/* <H1 className="ml-8">Mi Ruta</H1> */}
 				{isAuth && user?.is_teacher && (
-					<div className="w-1/2">
+					<div className="w-1/4 mr-8">
 						<CreateMyRouteModal learning_path={user?.learning_path} />
 					</div>
 				)}

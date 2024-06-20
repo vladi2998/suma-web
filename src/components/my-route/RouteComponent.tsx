@@ -67,9 +67,9 @@ export default function RouteComponent({
 		'top-28 ml-8',
 		'top-12 ml-8',
 		'bottom-4 ml-8',
-		'bottom-6 ml-8',
+		'bottom-4 ml-8',
 		'bottom-28 ml-8',
-		'bottom-56 ml-8 w-full',
+		'bottom-60 ml-8 w-full',
 	];
 	const imgStyle: string[] = ['ml-36', 'ml-16', '', '', 'ml-16', 'ml-36'];
 
@@ -85,8 +85,7 @@ export default function RouteComponent({
 
 	return (
 		<div
-			className={`relative w-full h-full min-h-96 flex flex-col items-center py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}
-		>
+			className={`relative w-full h-full min-h-96 flex flex-col items-center py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}>
 			<Image
 				src={bgMountains}
 				className="hidden object-fill md:block mt-64"

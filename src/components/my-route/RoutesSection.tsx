@@ -12,7 +12,11 @@ export default function RoutesSection() {
 
 	const fetchSpecialLearningPaths = () => {
 		const images = [GreenBoy, YellowGirl, BlueBoy];
-		const backgroundColors = ['bg-green-300', 'bg-orange-400', 'bg-indigo-900'];
+		const backgroundColors = [
+			'bg-super-light-green',
+			'bg-orange-400',
+			'bg-indigo-900',
+		];
 
 		axiosConfigInstance
 			.get('/learning_paths?is_special=true')
