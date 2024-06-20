@@ -18,27 +18,34 @@ import sixArrow from '../../../public/PNG/sixArrow.png';
 
 export type StepType = {
 	description: string;
-	img: StaticImageData;
-	arrowImg: StaticImageData;
-	style: string;
-	arrowStyle: string;
+	file: string;
+	id: number;
+	learning_path: number;
+	step_number: number;
+	title: string;
+	url: string;
+};
+
+export type RouteType = {
+	title: string;
+	description: string;
+	highlight: string;
+	id: number;
+	is_special: boolean;
+	steps: StepType[];
 };
 
 export default function RouteComponent({
-	title,
-	details,
-	highlight,
+	route,
 	bg,
 	img,
-	steps,
+	fetchSpecialLearningPaths,
 }: {
-	title: string;
-	details: string;
-	highlight: string;
+	route: RouteType;
 	img: StaticImageData;
 	bg: string;
 	key: number;
-	steps: StepType[];
+	fetchSpecialLearningPaths?: () => void;
 }) {
 	const imagesRoutes: StaticImageData[] = [
 		firstImgRoute,
@@ -66,7 +73,7 @@ export default function RouteComponent({
 	];
 	const imgStyle: string[] = ['ml-36', 'ml-16', '', '', 'ml-16', 'ml-36'];
 
-	const imgList: ImgListType[] = steps?.map((step, index) => {
+	const imgList: ImgListType[] = route?.steps?.map((step, index) => {
 		return {
 			img: imagesRoutes[index],
 			arrowImg: arrows[index],
@@ -93,16 +100,15 @@ export default function RouteComponent({
 			/>
 			<div className="flex flex-col md:flex-row items-center justify-around w-full h-full z-10">
 				<div className="w-full h-full md:h-full md:w-2/5 flex flex-col items-center justify-around space-y-12">
-					<H1 className="text-white">{title}</H1>
+					<H1 className="text-white">{route?.title}</H1>
 					<div className="w-full h-full flex items-start justify-start">
 						<div className="min-w-96">
 							<RouteModal
-								title={title}
-								details={details}
-								highlight={highlight}
+								route={route}
 								img={img}
 								bg={bg}
 								imgList={imgList}
+								fetchSpecialLearningPaths={fetchSpecialLearningPaths}
 							/>
 						</div>
 					</div>

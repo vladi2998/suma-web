@@ -19,6 +19,7 @@ import { toast } from 'sonner';
 import ErrorParser from '@/utils/errorParser';
 import UserContext from '@/context/UserProvider';
 import { getStudent, getTeacher } from '@/utils/user';
+import { RouteType } from './RouteComponent';
 
 type FormFields = {
 	title: string;
@@ -55,8 +56,16 @@ type FormFields = {
 	step_6_content: { url: string; file: File };
 };
 
-{/* AQUI ES DONDE TENDRIAS QUE RECIBIR LA RUTA POR PARAMETRO */}
-export function CreateMyRouteModal() {
+{
+	/* AQUI ES DONDE TENDRIAS QUE RECIBIR LA RUTA POR PARAMETRO */
+}
+export function CreateMyRouteModal({
+	learning_path,
+	fetchSpecialLearningPaths,
+}: {
+	learning_path: RouteType;
+	fetchSpecialLearningPaths?: () => void;
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [learning_path_id, setLearningPathId] = useState<number | null>(null);
 	const { user } = useContext(UserContext) as any;
@@ -79,19 +88,16 @@ export function CreateMyRouteModal() {
 			setUserData(student);
 		};
 
-		{/* AQUI ES DONDE TENDRIAS QUE CAMBIAR LA LOGICA PARA QUE
-			SE USE LA RUTA QUE SE PASE POR PARAMETRO ASI
-			Y CAPAZ ESTA TENDRIAS QUE SACARLA AL COMPONENTE PROFILESECTION
-			PARA QUE ALLI OBTENGAR LA RUTA Y LA PASE POR PARAMETRO
-		*/}
 		const getTeacherById = async () => {
 			const teacher = await getTeacher(user?.user?.id);
 			setUserData(teacher);
-			if (teacher?.learning_path) {
-				setLearningPathId(teacher?.learning_path?.id);
-				setValue('title', teacher.learning_path.title);
-				setValue('description', teacher.learning_path.description);
-				for (const step of teacher.learning_path.steps) {
+			if (learning_path) {
+				console.log('learning_path', learning_path);
+
+				setLearningPathId(learning_path?.id);
+				setValue('title', learning_path?.title);
+				setValue('description', learning_path?.description);
+				for (const step of learning_path?.steps) {
 					setValue(
 						`step_${step.step_number}_title` as keyof FormFields,
 						step.title
@@ -117,7 +123,7 @@ export function CreateMyRouteModal() {
 		} else if (user?.is_teacher) {
 			getTeacherById();
 		}
-	}, [user, setValue]);
+	}, [learning_path, setValue, user]);
 
 	const handleCreateRoute = async (data: any) => {
 		let learningpath = null;
@@ -134,18 +140,23 @@ export function CreateMyRouteModal() {
 				});
 			}
 
-			if (!learning_path_id)
+			if (!learning_path_id) {
 				learningpath = await createLearningPath({
 					title: data.title,
 					description: data.description,
 					steps: steps,
 				});
-			else
+				toast.success('Tu ruta ha sido creada exitosamente.');
+			} else {
 				learningpath = await updateLearningPath(learning_path_id, {
 					title: data.title,
 					description: data.description,
 					steps: steps,
 				});
+				toast.success('Tu ruta ha sido actualizada exitosamente.');
+			}
+			if (fetchSpecialLearningPaths) fetchSpecialLearningPaths();
+			setIsOpen(false);
 			setLearningPathId(learningpath?.id);
 		} catch (error: any) {
 			ErrorParser(

@@ -23,8 +23,7 @@ export default function ProfileSection() {
 				<H1 className="ml-8">Mi Ruta</H1>
 				{isAuth && user?.is_teacher && (
 					<div className="w-1/2">
-						{/* AQUI ES DONDE TENDRIAS QUE PASAR LA RUTA POR PARAMETRO */}
-						<CreateMyRouteModal />
+						<CreateMyRouteModal learning_path={user?.learning_path} />
 					</div>
 				)}
 			</div>

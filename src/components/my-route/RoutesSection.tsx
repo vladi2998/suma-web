@@ -10,7 +10,7 @@ import axiosConfigInstance from '@/config/axiosCofig';
 export default function RoutesSection() {
 	const [specialLearningPaths, setSpecialLearningPaths] = useState<any[]>([]);
 
-	useEffect(() => {
+	const fetchSpecialLearningPaths = () => {
 		const images = [GreenBoy, YellowGirl, BlueBoy];
 		const backgroundColors = ['bg-green-300', 'bg-orange-400', 'bg-indigo-900'];
 
@@ -22,10 +22,12 @@ export default function RoutesSection() {
 						return {
 							title: item.title,
 							details: item.description ?? '',
+							description: item.description ?? '',
 							highlight: item.highlight ?? '',
 							bg: backgroundColors[index],
 							img: images[index],
 							steps: item.steps,
+							id: item.id,
 						};
 					})
 				);
@@ -33,13 +35,23 @@ export default function RoutesSection() {
 			.catch((error) => {
 				console.error('There was an error!', error);
 			});
+	};
+
+	useEffect(() => {
+		fetchSpecialLearningPaths();
 	}, []);
 
 	return (
 		<Card className="border-none">
 			<CardContent className="flex flex-col items-center justify-around h-auto py-20 space-y-8 rounded-8xl">
 				{specialLearningPaths.map((route, index) => (
-					<RouteComponent key={index} {...route} />
+					<RouteComponent
+						key={index}
+						route={route}
+						bg={route.bg}
+						img={route.img}
+						fetchSpecialLearningPaths={fetchSpecialLearningPaths}
+					/>
 				))}
 			</CardContent>
 		</Card>

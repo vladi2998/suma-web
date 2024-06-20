@@ -10,6 +10,7 @@ import { Card } from '../ui/card';
 import { useContext, useEffect } from 'react';
 import UserContext from '@/context/UserProvider';
 import { CreateMyRouteModal } from './createMyRouteModal';
+import { RouteType, StepType } from './RouteComponent';
 
 export type ImgListType = {
 	img: StaticImageData;
@@ -20,19 +21,17 @@ export type ImgListType = {
 };
 
 export default function RouteModal({
-	title,
-	details,
-	highlight,
+	route,
 	bg,
 	img,
 	imgList,
+	fetchSpecialLearningPaths,
 }: {
-	title: string;
-	details: string;
-	highlight: string;
+	route: RouteType;
 	img: StaticImageData;
 	bg: string;
 	imgList?: ImgListType[];
+	fetchSpecialLearningPaths?: () => void;
 }) {
 	const { user } = useContext(UserContext) as any;
 
@@ -69,12 +68,12 @@ export default function RouteModal({
 							/>
 							<div className="flex flex-col md:flex-row items-center justify-around w-full h-full z-10">
 								<div className="w-full h-full md:h-full md:w-2/5 flex flex-col items-center justify-center space-y-12 py-12">
-									<H1 className="text-white">{title}</H1>
+									<H1 className="text-white">{route?.title}</H1>
 									<div className="w-full h-full flex items-start justify-start text-white text-2xl">
-										{details}
+										{route?.description}
 									</div>
 									<div className="w-full h-full flex items-start justify-start text-white text-2xl font-bold">
-										{highlight}
+										{route?.highlight}
 									</div>
 								</div>
 								<div className="hidden md:block w-full md:w-1/5 h-full flex flex-col justify-center items-center">
@@ -93,8 +92,12 @@ export default function RouteModal({
 				</DialogContent>
 			</Dialog>
 
-				{/* AQUI ES DONDE TENDRIAS QUE PASAR LA RUTA POR PARAMETRO */}
-			{user?.is_teacher && user?.user?.is_staff && <CreateMyRouteModal />}
+			{user?.is_teacher && user?.user?.is_staff && (
+				<CreateMyRouteModal
+					learning_path={route}
+					fetchSpecialLearningPaths={fetchSpecialLearningPaths}
+				/>
+			)}
 		</div>
 	);
 }
