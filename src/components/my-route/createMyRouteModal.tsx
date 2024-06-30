@@ -27,33 +27,33 @@ type FormFields = {
 	step_1_title: string;
 	step_1_description: string;
 	step_1_url: string;
-	step_1_file: File;
-	step_1_content: { url: string; file: File };
+	step_1_file: string;
+	step_1_content: { url: string; file: string };
 	step_2_title: string;
 	step_2_description: string;
 	step_2_url: string;
-	step_2_file: File;
-	step_2_content: { url: string; file: File };
+	step_2_file: string;
+	step_2_content: { url: string; file: string };
 	step_3_title: string;
 	step_3_description: string;
 	step_3_url: string;
-	step_3_file: File;
-	step_3_content: { url: string; file: File };
+	step_3_file: string;
+	step_3_content: { url: string; file: string };
 	step_4_title: string;
 	step_4_description: string;
 	step_4_url: string;
-	step_4_file: File;
-	step_4_content: { url: string; file: File };
+	step_4_file: string;
+	step_4_content: { url: string; file: string };
 	step_5_title: string;
 	step_5_description: string;
 	step_5_url: string;
-	step_5_file: File;
-	step_5_content: { url: string; file: File };
+	step_5_file: string;
+	step_5_content: { url: string; file: string };
 	step_6_title: string;
 	step_6_description: string;
 	step_6_url: string;
-	step_6_file: File;
-	step_6_content: { url: string; file: File };
+	step_6_file: string;
+	step_6_content: { url: string; file: string };
 };
 
 {
@@ -135,7 +135,10 @@ export function CreateMyRouteModal({
 					title: data[`step_${i}_title`],
 					description: data[`step_${i}_description`],
 					step_number: i,
-					file: data[`step_${i}_content`]?.file,
+					file:
+						data[`step_${i}_content`]?.file !== ''
+							? data[`step_${i}_content`]?.file
+							: null,
 					url: data[`step_${i}_content`]?.url,
 				});
 			}
@@ -167,12 +170,23 @@ export function CreateMyRouteModal({
 		}
 	};
 
-	const handleUpload = (data: any) => {
+	const convertToBase64 = (file: any) =>
+		new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (error) => reject(error);
+		});
+
+	const handleUpload = async (data: any) => {
 		const { idx } = data;
 		let url = null;
-		let file = null;
+		let file = '';
 		if (data?.url) url = data.url;
-		if (data?.file) file = data.file?.[0];
+		if (data?.file) {
+			const fileBase64 = (await convertToBase64(data.file?.[0])) as string;
+			file = fileBase64;
+		}
 		const fieldName = `step_${idx}_content` as keyof FormFields;
 		setValue(fieldName, { url, file });
 	};
