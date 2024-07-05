@@ -107,6 +107,13 @@ export default function HeaderComponent({
 					Nosotros
 				</Link>
 				<Link
+					href="/my-route/"
+					className={`${defaultNavStyle} ${
+						selected_route === 5 ? selectedNavSyle : ''
+					}`}>
+					Rutas
+				</Link>
+				<Link
 					href="/connect/"
 					className={`${defaultNavStyle} ${
 						selected_route === 2 ? selectedNavSyle : ''
@@ -126,13 +133,6 @@ export default function HeaderComponent({
 						selected_route === 4 ? selectedNavSyle : ''
 					}`}>
 					Cuadros UMA
-				</Link>
-				<Link
-					href="/my-route/"
-					className={`${defaultNavStyle} ${
-						selected_route === 5 ? selectedNavSyle : ''
-					}`}>
-					Ruta
 				</Link>
 				<UserCircleIcon
 					className="w-6 h-6 md:w-8 md:h-8 hover:cursor-pointer"

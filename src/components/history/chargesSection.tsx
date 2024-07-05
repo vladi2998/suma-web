@@ -1,13 +1,11 @@
 import Image from 'next/image';
 
-
 import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
 import emptyAddingImg from '../../../public/PNG/profile_bg.png';
 
 import bgMountainsTablet from '../../../public/PNG/mountainsBackgroundTablet.png';
 import bgMountainsMobile from '../../../public/PNG/mountainsBackgroundFHD.png';
 import ChargesItem from './chargesItem';
-
 
 export default function ChargesSection() {
 	const chargesSectionList = [
@@ -17,28 +15,38 @@ export default function ChargesSection() {
 			img: emptyAddingImg,
 		},
 		{
+			name: 'Orlando Pérez Caldera',
+			role: 'Tesorero',
+			img: emptyAddingImg,
+		},
+		{
+			name: 'Ana Beatriz Monteverde',
+			role: 'Secretaria General',
+			img: emptyAddingImg,
+		},
+		{
 			name: 'Alesia Santacroce',
-			role: 'Vicepresidente',
+			role: 'Directora Principal',
 			img: emptyAddingImg,
 		},
 		{
 			name: 'José Antonio De Oliveira',
-			role: 'Vocal Nacional',
+			role: 'Director Adjunto',
 			img: addingItemImg,
 		},
 		{
 			name: 'Marianna Moreno',
-			role: 'Vocal Internacional',
+			role: 'Director Adjunto',
 			img: emptyAddingImg,
 		},
 		{
 			name: 'Rodrigo Farías',
-			role: '',
+			role: 'Director Adjunto',
 			img: emptyAddingImg,
 		},
 		{
 			name: 'José Ignacio Arcaya',
-			role: '',
+			role: 'Director Adjunto',
 			img: emptyAddingImg,
 		},
 	];
