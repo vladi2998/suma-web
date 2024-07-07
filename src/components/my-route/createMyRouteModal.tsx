@@ -28,37 +28,28 @@ type FormFields = {
 	step_1_description: string;
 	step_1_url: string;
 	step_1_file: string;
-	step_1_content: { url: string; file: string };
 	step_2_title: string;
 	step_2_description: string;
 	step_2_url: string;
 	step_2_file: string;
-	step_2_content: { url: string; file: string };
 	step_3_title: string;
 	step_3_description: string;
 	step_3_url: string;
 	step_3_file: string;
-	step_3_content: { url: string; file: string };
 	step_4_title: string;
 	step_4_description: string;
 	step_4_url: string;
 	step_4_file: string;
-	step_4_content: { url: string; file: string };
 	step_5_title: string;
 	step_5_description: string;
 	step_5_url: string;
 	step_5_file: string;
-	step_5_content: { url: string; file: string };
 	step_6_title: string;
 	step_6_description: string;
 	step_6_url: string;
 	step_6_file: string;
-	step_6_content: { url: string; file: string };
 };
 
-{
-	/* AQUI ES DONDE TENDRIAS QUE RECIBIR LA RUTA POR PARAMETRO */
-}
 export function CreateMyRouteModal({
 	learning_path,
 	fetchSpecialLearningPaths,
@@ -135,11 +126,7 @@ export function CreateMyRouteModal({
 					title: data[`step_${i}_title`],
 					description: data[`step_${i}_description`],
 					step_number: i,
-					file:
-						data[`step_${i}_content`]?.file !== ''
-							? data[`step_${i}_content`]?.file
-							: null,
-					url: data[`step_${i}_content`]?.url,
+					url: data[`step_${i}_url`],
 				});
 			}
 
@@ -170,26 +157,26 @@ export function CreateMyRouteModal({
 		}
 	};
 
-	const convertToBase64 = (file: any) =>
-		new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result);
-			reader.onerror = (error) => reject(error);
-		});
+	// const convertToBase64 = (file: any) =>
+	// 	new Promise((resolve, reject) => {
+	// 		const reader = new FileReader();
+	// 		reader.readAsDataURL(file);
+	// 		reader.onload = () => resolve(reader.result);
+	// 		reader.onerror = (error) => reject(error);
+	// 	});
 
-	const handleUpload = async (data: any) => {
-		const { idx } = data;
-		let url = null;
-		let file = '';
-		if (data?.url) url = data.url;
-		if (data?.file) {
-			const fileBase64 = (await convertToBase64(data.file?.[0])) as string;
-			file = fileBase64;
-		}
-		const fieldName = `step_${idx}_content` as keyof FormFields;
-		setValue(fieldName, { url, file });
-	};
+	// const handleUpload = async (data: any) => {
+	// 	const { idx } = data;
+	// 	let url = null;
+	// 	let file = '';
+	// 	if (data?.url) url = data.url;
+	// 	if (data?.file) {
+	// 		const fileBase64 = (await convertToBase64(data.file?.[0])) as string;
+	// 		file = fileBase64;
+	// 	}
+	// 	const fieldName = `step_${idx}_content` as keyof FormFields;
+	// 	setValue(fieldName, { url, file });
+	// };
 
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -246,10 +233,17 @@ export function CreateMyRouteModal({
 													label={`step_${idx + 1}_description`}
 													placeholder={`Descripción del paso ${idx + 1}`}
 												/>
-												<UploadFileModal
+												<InputField
+													register={register}
+													label={`step_${idx + 1}_url`}
+													placeholder={`Dirección URL hacia el contenido del paso ${
+														idx + 1
+													}`}
+												/>
+												{/* <UploadFileModal
 													onUpload={handleUpload}
 													idx={idx + 1}
-												/>
+												/> */}
 											</div>
 										))}
 									</div>
