@@ -7,7 +7,6 @@ import plusIcon from '../../../public/PNG/plus-icon.png';
 import Image from 'next/image';
 import InputField from '../forms/inputField';
 import ForwardButton from '../buttons/forwardButton';
-import { UploadFileModal } from './uploadFileModal';
 import {
 	createLearningPath,
 	createStep,
@@ -17,9 +16,8 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import ErrorParser from '@/utils/errorParser';
-import UserContext from '@/context/UserProvider';
-import { getStudent, getTeacher } from '@/utils/user';
 import { RouteType } from './RouteComponent';
+import SelectField from '../forms/inputSelect';
 
 type FormFields = {
 	title: string;
@@ -28,26 +26,32 @@ type FormFields = {
 	step_1_description: string;
 	step_1_url: string;
 	step_1_file: string;
+	step_1_file_type: string;
 	step_2_title: string;
 	step_2_description: string;
 	step_2_url: string;
 	step_2_file: string;
+	step_2_file_type: string;
 	step_3_title: string;
 	step_3_description: string;
 	step_3_url: string;
 	step_3_file: string;
+	step_3_file_type: string;
 	step_4_title: string;
 	step_4_description: string;
 	step_4_url: string;
 	step_4_file: string;
+	step_4_file_type: string;
 	step_5_title: string;
 	step_5_description: string;
 	step_5_url: string;
 	step_5_file: string;
+	step_5_file_type: string;
 	step_6_title: string;
 	step_6_description: string;
 	step_6_url: string;
 	step_6_file: string;
+	step_6_file_type: string;
 };
 
 export function CreateMyRouteModal({
@@ -59,8 +63,6 @@ export function CreateMyRouteModal({
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [learning_path_id, setLearningPathId] = useState<number | null>(null);
-	const { user } = useContext(UserContext) as any;
-	const [userData, setUserData] = useState({} as any);
 
 	const { register, handleSubmit, setValue } = useForm<FormFields>({
 		defaultValues: {
@@ -74,47 +76,31 @@ export function CreateMyRouteModal({
 	});
 
 	useEffect(() => {
-		const getStudentById = async () => {
-			const student = await getStudent(user?.user?.id);
-			setUserData(student);
-		};
-
-		const getTeacherById = async () => {
-			const teacher = await getTeacher(user?.user?.id);
-			setUserData(teacher);
-			if (learning_path) {
-				console.log('learning_path', learning_path);
-
-				setLearningPathId(learning_path?.id);
-				setValue('title', learning_path?.title);
-				setValue('description', learning_path?.description);
-				for (const step of learning_path?.steps) {
-					setValue(
-						`step_${step.step_number}_title` as keyof FormFields,
-						step.title
-					);
-					setValue(
-						`step_${step.step_number}_description` as keyof FormFields,
-						step.description
-					);
-					setValue(
-						`step_${step.step_number}_file` as keyof FormFields,
-						step.file
-					);
-					setValue(
-						`step_${step.step_number}_url` as keyof FormFields,
-						step.url
-					);
-				}
+		if (learning_path) {
+			setLearningPathId(learning_path?.id);
+			setValue('title', learning_path?.title);
+			setValue('description', learning_path?.description);
+			for (const step of learning_path?.steps) {
+				setValue(
+					`step_${step.step_number}_title` as keyof FormFields,
+					step.title
+				);
+				setValue(
+					`step_${step.step_number}_description` as keyof FormFields,
+					step.description
+				);
+				setValue(
+					`step_${step.step_number}_file` as keyof FormFields,
+					step.file
+				);
+				setValue(`step_${step.step_number}_url` as keyof FormFields, step.url);
+				setValue(
+					`step_${step.step_number}_file_type` as keyof FormFields,
+					step.file_type
+				);
 			}
-		};
-
-		if (user?.is_student) {
-			getStudentById();
-		} else if (user?.is_teacher) {
-			getTeacherById();
 		}
-	}, [learning_path, setValue, user]);
+	}, [learning_path, setValue]);
 
 	const handleCreateRoute = async (data: any) => {
 		let learningpath = null;
@@ -127,6 +113,7 @@ export function CreateMyRouteModal({
 					description: data[`step_${i}_description`],
 					step_number: i,
 					url: data[`step_${i}_url`],
+					file_type: data[`step_${i}_file_type`],
 				});
 			}
 
@@ -239,6 +226,20 @@ export function CreateMyRouteModal({
 													placeholder={`Dirección URL hacia el contenido del paso ${
 														idx + 1
 													}`}
+												/>
+												<SelectField
+													register={register}
+													label={`step_${idx + 1}_file_type`}
+													placeholder={`Tipo de archivo del paso ${idx + 1}`}
+													values={[
+														{
+															value: '',
+															label: 'Selecciona un tipo de archivo',
+														},
+														{ value: 'video', label: 'Video' },
+														{ value: 'image', label: 'Imagen' },
+														{ value: 'otro', label: 'Otro' },
+													]}
 												/>
 												{/* <UploadFileModal
 													onUpload={handleUpload}
