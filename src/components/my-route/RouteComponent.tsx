@@ -24,6 +24,7 @@ export type StepType = {
 	step_number: number;
 	title: string;
 	url: string;
+	file_type: string;
 };
 
 export type RouteType = {

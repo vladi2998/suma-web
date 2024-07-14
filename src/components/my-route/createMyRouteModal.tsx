@@ -7,7 +7,6 @@ import plusIcon from '../../../public/PNG/plus-icon.png';
 import Image from 'next/image';
 import InputField from '../forms/inputField';
 import ForwardButton from '../buttons/forwardButton';
-import { UploadFileModal } from './uploadFileModal';
 import {
 	createLearningPath,
 	createStep,
@@ -17,9 +16,8 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import ErrorParser from '@/utils/errorParser';
-import UserContext from '@/context/UserProvider';
-import { getStudent, getTeacher } from '@/utils/user';
 import { RouteType } from './RouteComponent';
+import SelectField from '../forms/inputSelect';
 
 type FormFields = {
 	title: string;
@@ -28,37 +26,34 @@ type FormFields = {
 	step_1_description: string;
 	step_1_url: string;
 	step_1_file: string;
-	step_1_content: { url: string; file: string };
+	step_1_file_type: string;
 	step_2_title: string;
 	step_2_description: string;
 	step_2_url: string;
 	step_2_file: string;
-	step_2_content: { url: string; file: string };
+	step_2_file_type: string;
 	step_3_title: string;
 	step_3_description: string;
 	step_3_url: string;
 	step_3_file: string;
-	step_3_content: { url: string; file: string };
+	step_3_file_type: string;
 	step_4_title: string;
 	step_4_description: string;
 	step_4_url: string;
 	step_4_file: string;
-	step_4_content: { url: string; file: string };
+	step_4_file_type: string;
 	step_5_title: string;
 	step_5_description: string;
 	step_5_url: string;
 	step_5_file: string;
-	step_5_content: { url: string; file: string };
+	step_5_file_type: string;
 	step_6_title: string;
 	step_6_description: string;
 	step_6_url: string;
 	step_6_file: string;
-	step_6_content: { url: string; file: string };
+	step_6_file_type: string;
 };
 
-{
-	/* AQUI ES DONDE TENDRIAS QUE RECIBIR LA RUTA POR PARAMETRO */
-}
 export function CreateMyRouteModal({
 	learning_path,
 	fetchSpecialLearningPaths,
@@ -68,8 +63,6 @@ export function CreateMyRouteModal({
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [learning_path_id, setLearningPathId] = useState<number | null>(null);
-	const { user } = useContext(UserContext) as any;
-	const [userData, setUserData] = useState({} as any);
 
 	const { register, handleSubmit, setValue } = useForm<FormFields>({
 		defaultValues: {
@@ -83,47 +76,31 @@ export function CreateMyRouteModal({
 	});
 
 	useEffect(() => {
-		const getStudentById = async () => {
-			const student = await getStudent(user?.user?.id);
-			setUserData(student);
-		};
-
-		const getTeacherById = async () => {
-			const teacher = await getTeacher(user?.user?.id);
-			setUserData(teacher);
-			if (learning_path) {
-				console.log('learning_path', learning_path);
-
-				setLearningPathId(learning_path?.id);
-				setValue('title', learning_path?.title);
-				setValue('description', learning_path?.description);
-				for (const step of learning_path?.steps) {
-					setValue(
-						`step_${step.step_number}_title` as keyof FormFields,
-						step.title
-					);
-					setValue(
-						`step_${step.step_number}_description` as keyof FormFields,
-						step.description
-					);
-					setValue(
-						`step_${step.step_number}_file` as keyof FormFields,
-						step.file
-					);
-					setValue(
-						`step_${step.step_number}_url` as keyof FormFields,
-						step.url
-					);
-				}
+		if (learning_path) {
+			setLearningPathId(learning_path?.id);
+			setValue('title', learning_path?.title);
+			setValue('description', learning_path?.description);
+			for (const step of learning_path?.steps) {
+				setValue(
+					`step_${step.step_number}_title` as keyof FormFields,
+					step.title
+				);
+				setValue(
+					`step_${step.step_number}_description` as keyof FormFields,
+					step.description
+				);
+				setValue(
+					`step_${step.step_number}_file` as keyof FormFields,
+					step.file
+				);
+				setValue(`step_${step.step_number}_url` as keyof FormFields, step.url);
+				setValue(
+					`step_${step.step_number}_file_type` as keyof FormFields,
+					step.file_type
+				);
 			}
-		};
-
-		if (user?.is_student) {
-			getStudentById();
-		} else if (user?.is_teacher) {
-			getTeacherById();
 		}
-	}, [learning_path, setValue, user]);
+	}, [learning_path, setValue]);
 
 	const handleCreateRoute = async (data: any) => {
 		let learningpath = null;
@@ -135,11 +112,8 @@ export function CreateMyRouteModal({
 					title: data[`step_${i}_title`],
 					description: data[`step_${i}_description`],
 					step_number: i,
-					file:
-						data[`step_${i}_content`]?.file !== ''
-							? data[`step_${i}_content`]?.file
-							: null,
-					url: data[`step_${i}_content`]?.url,
+					url: data[`step_${i}_url`],
+					file_type: data[`step_${i}_file_type`],
 				});
 			}
 
@@ -170,26 +144,26 @@ export function CreateMyRouteModal({
 		}
 	};
 
-	const convertToBase64 = (file: any) =>
-		new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result);
-			reader.onerror = (error) => reject(error);
-		});
+	// const convertToBase64 = (file: any) =>
+	// 	new Promise((resolve, reject) => {
+	// 		const reader = new FileReader();
+	// 		reader.readAsDataURL(file);
+	// 		reader.onload = () => resolve(reader.result);
+	// 		reader.onerror = (error) => reject(error);
+	// 	});
 
-	const handleUpload = async (data: any) => {
-		const { idx } = data;
-		let url = null;
-		let file = '';
-		if (data?.url) url = data.url;
-		if (data?.file) {
-			const fileBase64 = (await convertToBase64(data.file?.[0])) as string;
-			file = fileBase64;
-		}
-		const fieldName = `step_${idx}_content` as keyof FormFields;
-		setValue(fieldName, { url, file });
-	};
+	// const handleUpload = async (data: any) => {
+	// 	const { idx } = data;
+	// 	let url = null;
+	// 	let file = '';
+	// 	if (data?.url) url = data.url;
+	// 	if (data?.file) {
+	// 		const fileBase64 = (await convertToBase64(data.file?.[0])) as string;
+	// 		file = fileBase64;
+	// 	}
+	// 	const fieldName = `step_${idx}_content` as keyof FormFields;
+	// 	setValue(fieldName, { url, file });
+	// };
 
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -246,10 +220,31 @@ export function CreateMyRouteModal({
 													label={`step_${idx + 1}_description`}
 													placeholder={`Descripción del paso ${idx + 1}`}
 												/>
-												<UploadFileModal
+												<InputField
+													register={register}
+													label={`step_${idx + 1}_url`}
+													placeholder={`Dirección URL hacia el contenido del paso ${
+														idx + 1
+													}`}
+												/>
+												<SelectField
+													register={register}
+													label={`step_${idx + 1}_file_type`}
+													placeholder={`Tipo de archivo del paso ${idx + 1}`}
+													values={[
+														{
+															value: '',
+															label: 'Selecciona un tipo de archivo',
+														},
+														{ value: 'video', label: 'Video' },
+														{ value: 'image', label: 'Imagen' },
+														{ value: 'otro', label: 'Otro' },
+													]}
+												/>
+												{/* <UploadFileModal
 													onUpload={handleUpload}
 													idx={idx + 1}
-												/>
+												/> */}
 											</div>
 										))}
 									</div>
