@@ -6,6 +6,7 @@ import {
 	HoverCardTrigger,
 } from '../ui/hover-card';
 import { ImgListType } from '../my-route/RouteModal';
+import Link from 'next/link';
 
 const HoverComponent = ({
 	img,
@@ -14,6 +15,7 @@ const HoverComponent = ({
 	key,
 	style,
 	arrowStyle,
+	routeId,
 }: {
 	img: any;
 	arrowImg: any;
@@ -21,18 +23,22 @@ const HoverComponent = ({
 	key: number;
 	style: string;
 	arrowStyle?: string;
+	routeId: number;
 }) => {
 	return (
 		<HoverCard key={key}>
 			{/* CHANGE TO H-36 TO MAKE ALL THE SAME, BUT IT WILL NEED TO UPDATE ARROWS STYLES */}
 			<div className="flex w-full h-auto items-center">
 				<HoverCardTrigger asChild>
-					<Image
-						src={img}
-						alt={`img-${key}`}
-						className={`${style} h-36 w-32 hover:cursor-pointer`}
-					/>
+					<Link href={`/my-route/${routeId}`}>
+						<Image
+							src={img}
+							alt={`img-${key}`}
+							className={`${style} h-36 w-32 hover:cursor-pointer`}
+						/>
+					</Link>
 				</HoverCardTrigger>
+
 				<Image
 					src={arrowImg}
 					alt={`arrow-img-${key}`}
@@ -45,8 +51,10 @@ const HoverComponent = ({
 };
 export default function MyLearningRouteForModal({
 	imgList,
+	routeId,
 }: {
 	imgList: ImgListType[];
+	routeId: number;
 }) {
 	return (
 		<div className="hidden lg:flex relative w-full items-center justify-center bg-white/50 rounded-4xl">
@@ -59,6 +67,7 @@ export default function MyLearningRouteForModal({
 						info={item.info}
 						style={item.style}
 						arrowStyle={item.arrowStyle}
+						routeId={routeId}
 					/>
 				))}
 			</div>

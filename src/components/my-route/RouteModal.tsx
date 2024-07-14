@@ -87,7 +87,12 @@ export default function RouteModal({
 							</div>
 						</div>
 						<Card className="w-full h-auto py-4 rounded-4xl bg-transparent flex flex-col items-center justify-around border-none space-y-2">
-							{imgList && <MyLearningRouteForModal imgList={imgList} />}
+							{imgList && (
+								<MyLearningRouteForModal
+									imgList={imgList}
+									routeId={route.id}
+								/>
+							)}
 						</Card>
 					</div>
 				</DialogContent>
