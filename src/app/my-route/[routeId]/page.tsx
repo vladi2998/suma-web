@@ -1,7 +1,8 @@
+'use client';
 import RouteStepSection from '@/components/my-route/RouteStepSection';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import bgMountains from '../../../../public/PNG/mountains-fhd.png';
-import Image from 'next/image';
+import { getLearningPathById } from '@/utils/learning_paths';
+import { useEffect } from 'react';
 
 type Step = {
 	value: string;
@@ -17,15 +18,25 @@ export default function RouteById({ params }: { params: { routeId: string } }) {
 		{ value: 'step-5', label: 'Paso 5' },
 		{ value: 'step-6', label: 'Paso 6' },
 	];
+
+	const getRouteData = async () => {
+		try {
+			const response = getLearningPathById(params.routeId);
+			console.log(response);
+		} catch (error) {
+			console.log('Error: ', error);
+		}
+	};
+
+	useEffect(() => {
+		getRouteData();
+	}, []);
+
 	return (
 		<div className="relative w-screen h-full md:h-screen flex flex-col items-center">
-			{/* <Image
-				src={bgMountains}
-				className="hidden object-fill md:block mt-128"
-				alt="image-mountains-bg"
-				layout="fill"
-			/> */}
-			Route: {params.routeId}
+			<div className="w-11/12 flex justify-end text-xl font-bold">
+				Route: {params.routeId}
+			</div>
 			<Tabs
 				defaultValue="account"
 				className="w-11/12 h-auto">

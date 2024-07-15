@@ -23,7 +23,7 @@ const HoverComponent = ({
 	key: number;
 	style: string;
 	arrowStyle?: string;
-	routeId: number;
+	routeId: number | undefined;
 }) => {
 	return (
 		<HoverCard key={key}>
@@ -54,7 +54,7 @@ export default function MyLearningRouteForModal({
 	routeId,
 }: {
 	imgList: ImgListType[];
-	routeId: number;
+	routeId?: number;
 }) {
 	return (
 		<div className="hidden lg:flex relative w-full items-center justify-center bg-white/50 rounded-4xl">

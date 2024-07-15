@@ -1,5 +1,19 @@
 import axiosConfigInstance from '@/config/axiosCofig';
 
+export const getLearningPathById = async (id: string) => {
+	try {
+		const request = await axiosConfigInstance.get(`/learning_paths/${id}/`);
+		if (request.status === 201) {
+			return request.data;
+		} else {
+			return null;
+		}
+	} catch (err: any) {
+		// console.log('Error al crear la Ruta: ', err.response);
+		throw err;
+	}
+};
+
 export const createLearningPath = async (data: any) => {
 	try {
 		const request = await axiosConfigInstance.post('/learning_paths/', data);
