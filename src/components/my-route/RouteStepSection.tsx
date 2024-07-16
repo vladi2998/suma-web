@@ -8,7 +8,12 @@ import RatingComponent from './RouteRating';
 
 export default function RouteStepSection({ step }: { step?: StepType }) {
 	const router = useRouter();
-	const bg = 'bg-blue';
+	const bg =
+		step?.file_type === 'video'
+			? 'bg-blue'
+			: step?.file_type === 'image'
+			? 'bg-yellow'
+			: 'bg-red';
 
 	return (
 		<div
@@ -48,7 +53,10 @@ export default function RouteStepSection({ step }: { step?: StepType }) {
 					<div className="w-full h-96 bg-white rounded-xl "></div>
 					<div className="w-full">
 						Si no puedes ver el material, haz{' '}
-						<a className="font-bold underline hover:cursor-pointer">
+						<a
+							href={step?.url}
+							target="_blank"
+							className="font-bold underline hover:cursor-pointer">
 							click aquí
 						</a>
 					</div>

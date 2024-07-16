@@ -6,13 +6,13 @@ import {
 	HoverCardTrigger,
 } from '../ui/hover-card';
 import { ImgListType } from '../my-route/RouteModal';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const HoverComponent = ({
 	img,
 	arrowImg,
 	info,
-	key,
+	id,
 	style,
 	arrowStyle,
 	routeId,
@@ -20,28 +20,34 @@ const HoverComponent = ({
 	img: any;
 	arrowImg: any;
 	info: string;
-	key: number;
+	id: number;
 	style: string;
 	arrowStyle?: string;
 	routeId: number | undefined;
 }) => {
+	const router = useRouter();
+	const handleNavigation = (step: number) => {
+		localStorage.setItem('selectedStep', step.toString());
+		router.push(`/my-route/${routeId}`);
+	};
+
 	return (
-		<HoverCard key={key}>
+		<HoverCard key={id}>
 			{/* CHANGE TO H-36 TO MAKE ALL THE SAME, BUT IT WILL NEED TO UPDATE ARROWS STYLES */}
 			<div className="flex w-full h-auto items-center">
 				<HoverCardTrigger asChild>
-					<Link href={`/my-route/${routeId}`}>
+					<div onClick={() => handleNavigation(id)}>
 						<Image
 							src={img}
-							alt={`img-${key}`}
+							alt={`img-${id}`}
 							className={`${style} h-36 w-32 hover:cursor-pointer`}
 						/>
-					</Link>
+					</div>
 				</HoverCardTrigger>
 
 				<Image
 					src={arrowImg}
-					alt={`arrow-img-${key}`}
+					alt={`arrow-img-${id}`}
 					className={`${arrowStyle} relative`}
 				/>
 			</div>
@@ -62,6 +68,7 @@ export default function MyLearningRouteForModal({
 				{imgList.map((item, idx) => (
 					<HoverComponent
 						key={idx}
+						id={idx}
 						img={item.img}
 						arrowImg={item.arrowImg}
 						info={item.info}

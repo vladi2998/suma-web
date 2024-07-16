@@ -3,7 +3,7 @@ import axiosConfigInstance from '@/config/axiosCofig';
 export const getLearningPathById = async (id: string) => {
 	try {
 		const request = await axiosConfigInstance.get(`/learning_paths/${id}/`);
-		if (request.status === 201) {
+		if (request.status === 200) {
 			return request.data;
 		} else {
 			return null;
