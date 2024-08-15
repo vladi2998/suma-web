@@ -1,5 +1,6 @@
 'use client';
-
+import { useEffect } from 'react';
+import Image from 'next/image';
 import H1 from '../H1';
 import { StepType } from './RouteComponent';
 import BackButton from '../buttons/backButton';
@@ -15,9 +16,36 @@ export default function RouteStepSection({ step }: { step?: StepType }) {
 			? 'bg-yellow'
 			: 'bg-red';
 
+	useEffect(() => {
+		if (step?.file_type === 'video' && step?.url) {
+			const script = document.createElement('script');
+			script.src = 'https://www.youtube.com/iframe_api';
+			script.async = true;
+			document.body.appendChild(script);
+
+			// Initialize YouTube player
+			(window as any).onYouTubeIframeAPIReady = () => {
+				new (window as any).YT.Player('youtube-player', {
+					height: '100%',
+					width: '100%',
+					videoId: extractVideoId(step.url),
+					events: {
+						onReady: (event: any) => event.target.playVideo(),
+					},
+				});
+			};
+		}
+	}, [step]);
+
+	const extractVideoId = (url: string) => {
+		const urlObj = new URL(url);
+		return urlObj.searchParams.get('v');
+	};
+
 	return (
 		<div
-			className={`relative w-full h-full xl:h-132 flex flex-col items-center px-4 md:px-0 py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}>
+			className={`relative w-full h-full xl:h-132 flex flex-col items-center px-4 md:px-0 py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}
+		>
 			<div className="flex flex-col md:flex-row items-center justify-around w-full h-full z-10 text-white ">
 				<div className="w-full h-full md:w-1/2 md:px-20 flex flex-col items-center justify-around space-y-12">
 					<div className="w-full">
@@ -37,26 +65,28 @@ export default function RouteStepSection({ step }: { step?: StepType }) {
 							'Descubre cómo inspirar y guiar a tus estudiantes hacia el éxito, fomentando un ambiente de respeto y colaboración. Aprende técnicas para ser un modelo a seguir y un líder educativo efectivo.'}
 					</div>
 					<div className="w-full flex items-start">
-						<RatingComponent
-							stars={4.1}
-							votes={1622}
-							students={2350}
-						/>
+						<RatingComponent stars={4.1} votes={1622} students={2350} />
 					</div>
 				</div>
 				<div className="w-full h-full md:w-1/2 md:px-20 flex flex-col justify-center items-center text-center mt-8 md:my-0">
-					{/* <Image
-						src={step?.img ?? }
-						className="w-2/3"
-						alt={`route-summary-section-img`}
-					/> */}
-					<div className="w-full h-96 bg-white rounded-xl "></div>
+					{step?.file_type === 'image' ? (
+						<img
+							width={500}
+							height={500}
+							src={step?.url}
+							alt={`route-summary-section-img`}
+							className="w-2/3"
+						/>
+					) : step?.file_type === 'video' ? (
+						<div id="youtube-player" className="w-full h-full"></div>
+					) : null}
 					<div className="w-full">
 						Si no puedes ver el material, haz{' '}
 						<a
 							href={step?.url}
 							target="_blank"
-							className="font-bold underline hover:cursor-pointer">
+							className="font-bold underline hover:cursor-pointer"
+						>
 							click aquí
 						</a>
 					</div>

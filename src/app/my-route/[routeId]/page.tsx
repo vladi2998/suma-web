@@ -48,7 +48,7 @@ export default function RouteById({ params }: { params: { routeId: string } }) {
 			{isLoading ? (
 				<DotsLoader />
 			) : (
-				<div className="relative w-screen h-full md:h-screen flex flex-col items-center">
+				<div className="relative w-screen h-full flex flex-col items-center">
 					<div className="w-11/12 my-4 flex justify-end text-4xl font-bold">
 						{routeTitle}
 					</div>
