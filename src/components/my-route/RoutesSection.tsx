@@ -1,8 +1,8 @@
 'use client';
 import { Card, CardContent } from '@/components/ui/card';
-import GreenBoy from '../../../public/PNG/GreenBoy.png';
-import YellowGirl from '../../../public/PNG/YellowGirl.png';
-import BlueBoy from '../../../public/PNG/BlueBoy.png';
+import CristobalLaptop from '../../../public/PNG/cristobal-laptop.png';
+import OlgaCelular from '../../../public/PNG/olga-celular.png';
+import AlexCelular from '../../../public/PNG/alex-celular.png';
 import RouteComponent from './RouteComponent';
 import { useEffect, useState } from 'react';
 import axiosConfigInstance from '@/config/axiosCofig';
@@ -11,12 +11,8 @@ export default function RoutesSection() {
 	const [specialLearningPaths, setSpecialLearningPaths] = useState<any[]>([]);
 
 	const fetchSpecialLearningPaths = () => {
-		const images = [GreenBoy, YellowGirl, BlueBoy];
-		const backgroundColors = [
-			'bg-super-light-green',
-			'bg-orange-400',
-			'bg-indigo-900',
-		];
+		const images = [CristobalLaptop, OlgaCelular, AlexCelular];
+		const backgroundColors = ['bg-super-light-green', 'bg-blue', 'bg-red'];
 
 		axiosConfigInstance
 			.get('/learning_paths?is_special=true')

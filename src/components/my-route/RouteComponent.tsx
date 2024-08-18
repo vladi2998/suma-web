@@ -99,8 +99,8 @@ export default function RouteComponent({
 				alt="logo-img"
 			/>
 			<div className="flex flex-col md:flex-row items-center justify-around w-full h-full z-10">
-				<div className="w-full h-full md:h-full md:w-2/5 flex flex-col items-center justify-around space-y-12">
-					<H1 className="text-white">{route?.title}</H1>
+				<div className="w-full h-full md:w-2/5 flex flex-col items-center justify-around space-y-12">
+					<H1 className="text-white w-full">{route?.title}</H1>
 					<div className="w-full h-full flex items-start justify-start">
 						<div className="min-w-96">
 							<RouteModal
@@ -113,10 +113,10 @@ export default function RouteComponent({
 						</div>
 					</div>
 				</div>
-				<div className="hidden md:block w-full md:w-1/5 h-full flex flex-col justify-center items-center">
+				<div className="hidden md:block w-full md:w-2/5 h-full flex flex-col justify-center items-center">
 					<Image
 						src={img}
-						className="w-2/3"
+						className="h-full ml-16"
 						alt={`route-summary-section-img`}
 					/>
 				</div>
