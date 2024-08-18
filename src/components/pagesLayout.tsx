@@ -9,7 +9,7 @@ export default function PagesLayout({
 }) {
 	return (
 		<main className="flex max-w-screen min-h-screen flex-col items-center justify-between space-y-4">
-			{children}
+			<div className="w-full h-auto">{children}</div>
 			{footer && <FooterComponent />}
 		</main>
 	);
