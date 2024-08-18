@@ -7,6 +7,7 @@ import BackButton from '../buttons/backButton';
 import { useRouter } from 'next/navigation';
 import RatingComponent from './RouteRating';
 import '@justinribeiro/lite-youtube';
+import capitalizeWords from '@/utils/capitalizeWords';
 
 export default function RouteStepSection({ step }: { step?: StepType }) {
 	const router = useRouter();
@@ -43,7 +44,9 @@ export default function RouteStepSection({ step }: { step?: StepType }) {
 							/>
 						</div>
 					</div>
-					<H1 className="text-white">{step?.title ?? 'Title of Step'}</H1>
+					<H1 className="text-white">
+						{capitalizeWords(step?.title as string) ?? 'Title of Step'}
+					</H1>
 					<div className="w-full">
 						<div className="border border-white w-1/2" />
 					</div>

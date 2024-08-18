@@ -11,6 +11,7 @@ import { useContext } from 'react';
 import UserContext from '@/context/UserProvider';
 import { CreateMyRouteModal } from './createMyRouteModal';
 import { RouteType, StepType } from './RouteComponent';
+import capitalizeWords from '@/utils/capitalizeWords';
 
 export type ImgListType = {
 	img: StaticImageData;
@@ -69,7 +70,9 @@ export default function RouteModal({
 							/>
 							<div className="flex flex-col md:flex-row items-center justify-around w-full h-full z-10">
 								<div className="w-full h-full md:h-full md:w-2/5 flex flex-col items-center justify-center space-y-12 py-12">
-									<H1 className="text-white">{route?.title}</H1>
+									<H1 className="text-white">
+										{capitalizeWords(route?.title)}
+									</H1>
 									<div className="w-full h-full flex items-start justify-start text-white text-2xl">
 										{route?.description}
 									</div>
@@ -77,10 +80,10 @@ export default function RouteModal({
 										{route?.highlight}
 									</div>
 								</div>
-								<div className="hidden md:block w-full md:w-1/5 h-full flex flex-col justify-center items-center">
+								<div className="hidden md:block w-full md:w-1/2 h-full flex flex-col justify-center items-center">
 									<Image
 										src={img}
-										className="w-full mt-16"
+										className="w-full mt-8"
 										alt={`route-summary-section-img`}
 									/>
 								</div>

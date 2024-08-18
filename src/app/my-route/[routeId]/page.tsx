@@ -3,6 +3,7 @@ import DotsLoader from '@/components/loaders/dotsLoader';
 import { StepType } from '@/components/my-route/RouteComponent';
 import RouteStepSection from '@/components/my-route/RouteStepSection';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import capitalizeWords from '@/utils/capitalizeWords';
 import { getLearningPathById } from '@/utils/learning_paths';
 import { useEffect, useState } from 'react';
 
@@ -52,7 +53,7 @@ export default function RouteById({ params }: { params: { routeId: string } }) {
 			) : (
 				<div className="relative w-screen h-full flex flex-col items-center">
 					<div className="w-11/12 my-4 flex justify-end text-4xl font-bold">
-						{routeTitle}
+						{capitalizeWords(routeTitle)}
 					</div>
 					<Tabs
 						defaultValue={selectedStep?.toString() ?? '0'}

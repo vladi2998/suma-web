@@ -15,6 +15,7 @@ import thirdArrow from '../../../public/PNG/thirdArrow.png';
 import fourthArrow from '../../../public/PNG/fourthArrow.png';
 import fifthArrow from '../../../public/PNG/fifthArrow.png';
 import sixArrow from '../../../public/PNG/sixArrow.png';
+import capitalizeWords from '@/utils/capitalizeWords';
 
 export type StepType = {
 	description: string;
@@ -100,7 +101,7 @@ export default function RouteComponent({
 			/>
 			<div className="flex flex-col md:flex-row items-center justify-around w-full h-full z-10">
 				<div className="w-full h-full md:w-2/5 flex flex-col items-center justify-around space-y-12">
-					<H1 className="text-white w-full">{route?.title}</H1>
+					<H1 className="text-white w-full">{capitalizeWords(route?.title)}</H1>
 					<div className="w-full h-full flex items-start justify-start">
 						<div className="min-w-96">
 							<RouteModal

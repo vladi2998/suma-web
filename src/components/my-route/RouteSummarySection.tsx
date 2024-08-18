@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { CardContent } from '../ui/card';
-import GreenBoy from '../../../public/PNG/GreenBoy.png';
+import CristobalLaptop from '../../../public/PNG/cristobal-laptop.png';
 import H1 from '../H1';
 import { ArrowDownCircle } from 'lucide-react';
 
@@ -20,9 +20,9 @@ export default function RouteSummarySection() {
 					</a>
 				</div>
 			</div>
-			<div className="w-full md:w-1/5 h-full flex flex-col justify-center items-center">
+			<div className="w-full md:w-2/5 h-full flex flex-col justify-center items-center">
 				<Image
-					src={GreenBoy}
+					src={CristobalLaptop}
 					className="w-2/3"
 					alt={`route-summary-section-img`}
 				/>
