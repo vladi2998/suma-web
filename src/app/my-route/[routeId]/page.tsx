@@ -45,7 +45,7 @@ export default function RouteById({ params }: { params: { routeId: string } }) {
 
 	return (
 		<>
-			{!isLoading ? (
+			{isLoading ? (
 				<div className="h-132 flex items-center justify-center">
 					<DotsLoader />
 				</div>
