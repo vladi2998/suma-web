@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import RatingComponent from './RouteRating';
 import '@justinribeiro/lite-youtube';
 import capitalizeWords from '@/utils/capitalizeWords';
+import CristobalLaptop from '../../../public/PNG/cristobal-laptop-2.png';
+import ForwardButton from '@/components/buttons/forwardButton';
 
 export default function RouteStepSection({ step }: { step?: StepType }) {
 	const router = useRouter();
@@ -33,7 +35,8 @@ export default function RouteStepSection({ step }: { step?: StepType }) {
 
 	return (
 		<div
-			className={`relative w-full h-full xl:h-132 flex flex-col items-center px-4 md:px-0 py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}>
+			className={`relative w-full h-full xl:h-132 flex flex-col items-center px-4 md:px-0 py-8 space-y-4 overflow-hidden rounded-4xl ${bg}`}
+		>
 			<div className="flex flex-col md:flex-row items-center justify-around w-full h-full z-10 text-white ">
 				<div className="w-full h-full md:w-1/2 md:px-20 flex flex-col items-center justify-around space-y-12">
 					<div className="w-full">
@@ -55,15 +58,12 @@ export default function RouteStepSection({ step }: { step?: StepType }) {
 							'Descubre cómo inspirar y guiar a tus estudiantes hacia el éxito, fomentando un ambiente de respeto y colaboración. Aprende técnicas para ser un modelo a seguir y un líder educativo efectivo.'}
 					</div>
 					<div className="w-full flex items-start">
-						<RatingComponent
-							stars={4.1}
-							votes={1622}
-							students={2350}
-						/>
+						<RatingComponent stars={4.1} votes={1622} students={2350} />
 					</div>
 				</div>
 				<div className="w-full h-full md:w-1/2 md:px-20 flex flex-col justify-center items-center text-center mt-8 md:my-0">
 					{step?.file_type === 'image' ? (
+						// eslint-disable-next-line @next/next/no-img-element
 						<img
 							width={500}
 							height={500}
@@ -73,14 +73,26 @@ export default function RouteStepSection({ step }: { step?: StepType }) {
 						/>
 					) : step?.file_type === 'video' ? (
 						<lite-youtube videoid={videoId}></lite-youtube>
-					) : null}
+					) : (
+						<div className="w-full flex justify-center align-center">
+							<Image
+								src={CristobalLaptop}
+								className="w-2/3"
+								alt={`route-summary-section-img`}
+							/>
+						</div>
+					)}
 					<div className="w-full">
-						Si no puedes ver el material, haz{' '}
+						{/* Si no puedes ver el material, haz{' '} */}
 						<a
 							href={step?.url}
 							target="_blank"
-							className="font-bold underline hover:cursor-pointer">
-							click aquí
+							className="font-bold hover:cursor-pointer"
+						>
+							
+					<ForwardButton
+						text="Ver recurso"
+					/>
 						</a>
 					</div>
 				</div>
