@@ -12,7 +12,7 @@ export default function MyRouteSection() {
 					Plataforma de Networking
 				</h1>
 				<p className="w-full text-start text-sm sm:text-xl">
-					para estudiantes y egresados de la universidad Monteávila
+					para profesores y egresados de la Universidad Monteávila
 				</p>
 			</div>
 			<Image

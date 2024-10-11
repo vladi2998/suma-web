@@ -2,6 +2,14 @@ import Image from 'next/image';
 
 import addingItemImg from '../../../public/WEBP/addingItemImg.webp';
 import emptyAddingImg from '../../../public/PNG/profile_bg.png';
+import GUILLERMO from '../../../public/History/GUILLERMO.png';
+import ORLANDO from '../../../public/History/ORLANDO.png';
+import ANA from '../../../public/History/ANA BEATRIZ.png';
+import ALESIA from '../../../public/History/ALESIA.png';
+import JOSE  from '../../../public/History/JOSE ANTONIO.png';
+import MARIANNA from '../../../public/History/MARIANNA.png';
+import RODRIGO from '../../../public/History/RODRIGO.png';
+import IGNACIO from '../../../public/History/JOSE IGNACIO.png';
 
 import bgMountainsTablet from '../../../public/PNG/mountainsBackgroundTablet.png';
 import bgMountainsMobile from '../../../public/PNG/mountainsBackgroundFHD.png';
@@ -12,42 +20,42 @@ export default function ChargesSection() {
 		{
 			name: 'Guillermo Fariñas Contreras',
 			role: 'Rector y Presidente',
-			img: emptyAddingImg,
+			img: GUILLERMO,
 		},
 		{
 			name: 'Orlando Pérez Caldera',
 			role: 'Tesorero',
-			img: emptyAddingImg,
+			img: ORLANDO,
 		},
 		{
 			name: 'Ana Beatriz Monteverde',
 			role: 'Secretaria General',
-			img: emptyAddingImg,
+			img: ANA,
 		},
 		{
 			name: 'Alesia Santacroce',
 			role: 'Directora Principal',
-			img: emptyAddingImg,
+			img: ALESIA,
 		},
 		{
 			name: 'José Antonio De Oliveira',
 			role: 'Director Adjunto',
-			img: addingItemImg,
+			img: JOSE,
 		},
 		{
 			name: 'Marianna Moreno',
 			role: 'Director Adjunto',
-			img: emptyAddingImg,
+			img: MARIANNA,
 		},
 		{
 			name: 'Rodrigo Farías',
 			role: 'Director Adjunto',
-			img: emptyAddingImg,
+			img: RODRIGO,
 		},
 		{
 			name: 'José Ignacio Arcaya',
 			role: 'Director Adjunto',
-			img: emptyAddingImg,
+			img: IGNACIO,
 		},
 	];
 
