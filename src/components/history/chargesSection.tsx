@@ -61,7 +61,7 @@ export default function ChargesSection() {
 
 	return (
 		<div className="relative w-screen h-auto bg-light-gray">
-			<Image
+			{/* <Image
 				src={bgMountainsMobile}
 				className="object-fill hidden lg:block"
 				alt="image-mountains-bg"
@@ -72,7 +72,7 @@ export default function ChargesSection() {
 				className="hidden object-fill md:block"
 				alt="image-mountains-bg"
 				layout="fill"
-			/>
+			/> */}
 			<div className="w-full h-full flex flex-col items-center py-8 space-y-4">
 				<h1 className="w-full text-4xl md:text-7xl font-bold text-center">
 					Junta Directiva

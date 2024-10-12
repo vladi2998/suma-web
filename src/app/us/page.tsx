@@ -1,7 +1,7 @@
 import BannerHistoryPage from '@/components/history/bannerHistoryPage';
 import ChargesSection from '@/components/history/chargesSection';
-import SocialMediaSection from '@/components/history/socialMediaSection';
-import SumadosInfoSection from '@/components/history/sumadosInfoSection';
+// import SocialMediaSection from '@/components/history/socialMediaSection';
+// import SumadosInfoSection from '@/components/history/sumadosInfoSection';
 import TestimonialsSection from '@/components/history/testimonialsSection';
 import UmaInfoSection from '@/components/history/umaInfoSection';
 
