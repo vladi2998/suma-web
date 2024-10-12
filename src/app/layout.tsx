@@ -8,7 +8,7 @@ import { UserProvider } from '@/context/UserProvider';
 const inter = Montserrat({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Sumemos - UMA',
+	title: 'Sumados - UMA',
 	description: 'Plataforma de networking para la Universidad Monteavila.',
 };
 
